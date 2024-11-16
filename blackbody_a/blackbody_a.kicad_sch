@@ -1,0 +1,265 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "1fc8ae43-742a-46b6-a93b-79253d0d0202")
+	(paper "A4")
+	(lib_symbols)
+	(text "ignore"
+		(exclude_from_sim no)
+		(at 42.926 32.004 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "dc8a53a2-ea46-49ab-8a65-638f752d69dc")
+	)
+	(sheet
+		(at 22.86 76.2)
+		(size 40.64 33.02)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "69f76ff6-244e-44eb-baf2-60be33aa25e9")
+		(property "Sheetname" "controller"
+			(at 22.86 75.4884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "controller.kicad_sch"
+			(at 22.86 109.8046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "blackbody_a"
+				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202"
+					(page "12")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 29.21)
+		(size 40.64 34.29)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "716754d4-861f-49a1-bc1f-b36ef311a118")
+		(property "Sheetname" "sensing_irr"
+			(at 88.9 28.4984 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sensing_irr.kicad_sch"
+			(at 88.9 64.0846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "blackbody_a"
+				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202"
+					(page "11")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 22.86 29.21)
+		(size 40.64 34.29)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "9710b9c6-b118-4270-82e0-572a55dfb639")
+		(property "Sheetname" "sensing_rtds"
+			(at 22.86 28.4984 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sensing_rtds.kicad_sch"
+			(at 22.86 64.0846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "CS" input
+			(at 63.5 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "e25c343d-5f15-4b9b-8cb8-0143f0a502aa")
+		)
+		(pin "MOSI" input
+			(at 63.5 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "4eb1a312-d8a3-4ee7-99f7-7f64e36f63cd")
+		)
+		(pin "SCLK" input
+			(at 63.5 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "67bd5aa6-51e5-48ba-a793-86cb44816d0d")
+		)
+		(pin "MISO" output
+			(at 63.5 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9d90fdb9-8a5d-4cca-a07a-271ec44c868a")
+		)
+		(pin "DRDY" output
+			(at 63.5 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9776f0e6-ae4c-47e6-bbc8-ed3268ed0009")
+		)
+		(pin "ENABLE" input
+			(at 63.5 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "2865bf7d-3aa9-4431-945d-1cc6e11bbc0c")
+		)
+		(pin "A" input
+			(at 63.5 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "e09092df-1fbf-4d0b-8fa7-f0d4fd71b888")
+		)
+		(pin "B" input
+			(at 63.5 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "03be90f7-3498-4956-8f0f-105b76040b0c")
+		)
+		(pin "C" input
+			(at 63.5 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "ea820547-fe94-443d-a6df-bb3882629863")
+		)
+		(instances
+			(project "blackbody_a"
+				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 76.2)
+		(size 40.64 33.02)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "e575802f-0653-47eb-a6a9-f4c3f26568d4")
+		(property "Sheetname" "som_arch"
+			(at 88.9 75.4884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "som_arch.kicad_sch"
+			(at 88.9 109.8046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "blackbody_a"
+				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202"
+					(page "13")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

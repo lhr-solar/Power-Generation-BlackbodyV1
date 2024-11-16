@@ -1,0 +1,89 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "15ea72e6-1a84-45bd-8e41-b7984e09a4da")
+	(paper "A4")
+	(lib_symbols)
+	(sheet
+		(at 31.75 82.55)
+		(size 38.1 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "10be3fef-40ae-4b25-9ee2-2c4996d0dc23")
+		(property "Sheetname" "temperature"
+			(at 31.75 81.8384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "temperature.kicad_sch"
+			(at 31.75 108.5346 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "blackbody_c"
+				(path "/15ea72e6-1a84-45bd-8e41-b7984e09a4da"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 31.75 38.1)
+		(size 38.1 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "ddefad2e-848c-4145-b4aa-774f2135e64c")
+		(property "Sheetname" "irradiance"
+			(at 31.75 37.3884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "irradiance.kicad_sch"
+			(at 31.75 64.0846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "blackbody_c"
+				(path "/15ea72e6-1a84-45bd-8e41-b7984e09a4da"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

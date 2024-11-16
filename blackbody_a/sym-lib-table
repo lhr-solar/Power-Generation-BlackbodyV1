@@ -1,0 +1,7 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "74VHC238FT")(type "KiCad")(uri "${KIPRJMOD}/symbols/74VHC238FT.kicad_sym")(options "")(descr ""))
+  (lib (name "43650-0427")(type "KiCad")(uri "${KIPRJMOD}/symbols/43650-0427.kicad_sym")(options "")(descr ""))
+  (lib (name "MAX31865AAP")(type "KiCad")(uri "${KIPRJMOD}/symbols/MAX31865AAP_T.kicad_sym")(options "")(descr ""))
+  (lib (name "MMFTN6001")(type "KiCad")(uri "${KIPRJMOD}/symbols/MMFTN6001.kicad_sym")(options "")(descr ""))
+)
