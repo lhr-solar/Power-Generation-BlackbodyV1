@@ -285,6 +285,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -387,52 +388,16 @@
       "Root"
     ],
     [
-      "9710b9c6-b118-4270-82e0-572a55dfb639",
-      "sensing_rtds"
+      "23416f09-d335-4c4f-b453-076ae86ec0b4",
+      "sensing"
     ],
     [
-      "87026b21-4451-41ce-882a-895daecd7795",
-      "RTD0"
-    ],
-    [
-      "1665eb33-1d9f-4dc6-b7c2-4faf9e25f32c",
-      "RTD7"
-    ],
-    [
-      "c3a75b6d-fab8-415f-a895-a4fbecaa7cfe",
-      "RTD1"
-    ],
-    [
-      "204d5519-6c7a-466f-b572-c90da1df1d69",
-      "RTD2"
-    ],
-    [
-      "47f42c24-a580-4643-81de-2c33c83e187f",
-      "RTD3"
-    ],
-    [
-      "508e8e95-67a1-46b0-99b7-e3144a9ab804",
-      "RTD4"
-    ],
-    [
-      "95afd737-36a4-46f5-9df0-1e0f1788c537",
-      "RTD5"
-    ],
-    [
-      "37248133-d921-40bd-9cf7-6104c0f4ff4b",
-      "RTD6"
-    ],
-    [
-      "716754d4-861f-49a1-bc1f-b36ef311a118",
-      "sensing_irr"
-    ],
-    [
-      "69f76ff6-244e-44eb-baf2-60be33aa25e9",
+      "f9bf57dd-4a71-43f1-9ea2-c0c5623cdce8",
       "controller"
     ],
     [
-      "e575802f-0653-47eb-a6a9-f4c3f26568d4",
-      "som_arch"
+      "e8013e1c-787d-463e-bc20-40bcc2f5c6f7",
+      "power_stepping"
     ]
   ],
   "text_variables": {}
