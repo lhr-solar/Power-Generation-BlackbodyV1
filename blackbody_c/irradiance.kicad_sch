@@ -954,6 +954,10 @@
 		(color 0 0 0 0)
 		(uuid "db97c909-4c63-4f41-bb92-081fdd2a10b7")
 	)
+	(no_connect
+		(at 134.62 86.36)
+		(uuid "f96ec569-bc2c-4697-98ad-383dbb6f75d2")
+	)
 	(wire
 		(pts
 			(xy 146.05 76.2) (xy 149.86 76.2)
@@ -1323,10 +1327,10 @@
 		)
 		(uuid "074ce2fa-6086-48ee-84b4-ad16b5b0939e")
 	)
-	(text_box "READY = open drain, pulled low when still translating\n"
+	(text_box "READY = signals when address translation is finished, leave open if unused\n"
 		(exclude_from_sim no)
-		(at 109.22 92.71 0)
-		(size 17.78 6.35)
+		(at 107.95 92.71 0)
+		(size 19.05 7.62)
 		(stroke
 			(width 0)
 			(type default)
@@ -1446,72 +1450,6 @@
 			(justify left)
 		)
 		(uuid "ee78f05b-68d3-4724-8967-ed34a934d47b")
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 134.62 86.36 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "02ced5f0-c917-4811-8517-d55f576c143e")
-		(property "Reference" "#PWR08"
-			(at 134.62 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 134.62 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 134.62 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 134.62 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 134.62 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d3b234aa-a2db-45cd-82f6-ef977c4412c5")
-		)
-		(instances
-			(project ""
-				(path "/15ea72e6-1a84-45bd-8e41-b7984e09a4da/ddefad2e-848c-4145-b4aa-774f2135e64c"
-					(reference "#PWR08")
-					(unit 1)
-				)
-			)
-		)
 	)
 	(symbol
 		(lib_id "Device:R_US")
@@ -1961,7 +1899,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "LTC4316IMS-PBF"
+		(property "Datasheet" "https://cdn-learn.adafruit.com/assets/assets/000/129/112/original/4316fa.pdf?1712063113"
 			(at 63.5 76.2 0)
 			(effects
 				(font
@@ -2235,7 +2173,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eef38652-1dba-4ced-82fa-6d2c5dc3c21a")
-		(property "Reference" "R7"
+		(property "Reference" "R4"
 			(at 49.53 93.9799 0)
 			(effects
 				(font
@@ -2289,7 +2227,7 @@
 		(instances
 			(project "blackbody_c"
 				(path "/15ea72e6-1a84-45bd-8e41-b7984e09a4da/ddefad2e-848c-4145-b4aa-774f2135e64c"
-					(reference "R7")
+					(reference "R4")
 					(unit 1)
 				)
 			)

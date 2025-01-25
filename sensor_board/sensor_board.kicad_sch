@@ -1122,10 +1122,10 @@
 		(uuid "ca96ff15-8569-49d8-b2d0-2d09301d86ff")
 	)
 	(junction
-		(at 152.4 100.33)
+		(at 152.4 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f2e16767-c831-4e32-ba91-c9fad994ecfc")
+		(uuid "cfddeee7-347c-40e7-b5f6-66b324c3f304")
 	)
 	(wire
 		(pts
@@ -1149,7 +1149,7 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 100.33) (xy 152.4 100.33)
+			(xy 99.06 99.06) (xy 152.4 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1189,23 +1189,13 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 92.71) (xy 99.06 100.33)
+			(xy 99.06 92.71) (xy 99.06 99.06)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "58e8271d-3497-48e5-8c20-a0f282eec301")
-	)
-	(wire
-		(pts
-			(xy 152.4 91.44) (xy 152.4 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5e6cdff7-57bf-42c0-87fe-6f79240ddefc")
 	)
 	(wire
 		(pts
@@ -1236,6 +1226,16 @@
 			(type default)
 		)
 		(uuid "c4985754-857f-4e26-bf20-1a96ef96bcb5")
+	)
+	(wire
+		(pts
+			(xy 152.4 97.79) (xy 152.4 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7302d13-96d6-40af-8230-d11c8186fffe")
 	)
 	(wire
 		(pts
@@ -1512,7 +1512,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 152.4 95.25 180)
+		(at 152.4 93.98 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1521,7 +1521,7 @@
 		(fields_autoplaced yes)
 		(uuid "5e488cf7-5666-4d58-b2fb-b32636d047d1")
 		(property "Reference" "C4"
-			(at 156.21 93.9799 0)
+			(at 156.21 92.7099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1530,7 +1530,7 @@
 			)
 		)
 		(property "Value" "0.1uF"
-			(at 156.21 96.5199 0)
+			(at 156.21 95.2499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1539,7 +1539,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 151.4348 91.44 0)
+			(at 151.4348 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1548,7 +1548,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 152.4 95.25 0)
+			(at 152.4 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1557,7 +1557,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 152.4 95.25 0)
+			(at 152.4 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1950,7 +1950,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "TSL25911FN"
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf"
 			(at 99.06 87.63 0)
 			(effects
 				(font

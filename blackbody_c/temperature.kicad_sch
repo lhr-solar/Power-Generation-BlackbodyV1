@@ -1264,6 +1264,12 @@
 		(uuid "bea71e2b-402f-4f7d-a29c-12203a13eef7")
 	)
 	(junction
+		(at 189.23 72.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dc042f55-4c94-4b95-b54c-91a55d7df49a")
+	)
+	(junction
 		(at 201.93 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1447,6 +1453,16 @@
 	)
 	(wire
 		(pts
+			(xy 189.23 72.39) (xy 189.23 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "55ba582c-2a82-4dc5-a742-9be60d7bc828")
+	)
+	(wire
+		(pts
 			(xy 153.67 106.68) (xy 149.86 106.68)
 		)
 		(stroke
@@ -1627,13 +1643,13 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 72.39) (xy 189.23 81.28)
+			(xy 189.23 72.39) (xy 191.77 72.39)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a635512f-0437-4231-8396-78e40fd10921")
+		(uuid "aab2fda4-3f6a-4fd1-bf29-47c92b9f5dca")
 	)
 	(wire
 		(pts
@@ -1817,7 +1833,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 72.39) (xy 191.77 72.39)
+			(xy 186.69 72.39) (xy 189.23 72.39)
 		)
 		(stroke
 			(width 0)
@@ -3310,7 +3326,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fd38280e-9f71-4410-aa10-21d1e7422768")
-		(property "Reference" "R6"
+		(property "Reference" "R7"
 			(at 127 111.7599 0)
 			(effects
 				(font
@@ -3364,7 +3380,7 @@
 		(instances
 			(project ""
 				(path "/15ea72e6-1a84-45bd-8e41-b7984e09a4da/254767e2-e3c5-4f70-9334-8d77e0460e5a"
-					(reference "R6")
+					(reference "R7")
 					(unit 1)
 				)
 			)
