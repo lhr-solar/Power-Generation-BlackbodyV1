@@ -390,6 +390,10 @@
     [
       "ddefad2e-848c-4145-b4aa-774f2135e64c",
       "irradiance"
+    ],
+    [
+      "254767e2-e3c5-4f70-9334-8d77e0460e5a",
+      "temperature"
     ]
   ],
   "text_variables": {}
