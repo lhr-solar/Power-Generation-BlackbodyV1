@@ -5,4 +5,6 @@
   (lib (name "MAX31865AAP")(type "KiCad")(uri "${KIPRJMOD}/symbols/MAX31865AAP_T.kicad_sym")(options "")(descr ""))
   (lib (name "MMFTN6001")(type "KiCad")(uri "${KIPRJMOD}/symbols/MMFTN6001.kicad_sym")(options "")(descr ""))
   (lib (name "LTC4311")(type "KiCad")(uri "${KIPRJMOD}/symbols/2025-01-18_17-15-35.kicad_sym")(options "")(descr ""))
+  (lib (name "ISO1044")(type "KiCad")(uri "${KIPRJMOD}/symbols/2025-02-08_21-59-34.kicad_sym")(options "")(descr ""))
+  (lib (name "CDSOT23-T24CAN")(type "KiCad")(uri "${KIPRJMOD}/symbols/CDSOT23-T24CAN.kicad_sym")(options "")(descr ""))
 )

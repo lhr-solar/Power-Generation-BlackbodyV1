@@ -54,8 +54,8 @@
 		(fill
 			(color 0 0 0 0.0000)
 		)
-		(uuid "e8013e1c-787d-463e-bc20-40bcc2f5c6f7")
-		(property "Sheetname" "power_stepping"
+		(uuid "4ab23797-193f-4d52-9392-152adca945ed")
+		(property "Sheetname" "power_dist"
 			(at 76.2 37.3884 0)
 			(effects
 				(font
@@ -64,7 +64,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "power_stepping.kicad_sch"
+		(property "Sheetfile" "power_dist.kicad_sch"
 			(at 76.2 64.0846 0)
 			(effects
 				(font
@@ -76,7 +76,7 @@
 		(instances
 			(project "blackbody_a"
 				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202"
-					(page "4")
+					(page "5")
 				)
 			)
 		)
@@ -115,6 +115,44 @@
 			(project "blackbody_a"
 				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202"
 					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.2 76.2)
+		(size 38.1 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "faa728f8-ddc6-4e3f-b104-4874b0828b62")
+		(property "Sheetname" "can_comm"
+			(at 76.2 75.4884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "can_comm.kicad_sch"
+			(at 76.2 102.1846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "blackbody_a"
+				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202"
+					(page "5")
 				)
 			)
 		)

@@ -396,8 +396,12 @@
       "controller"
     ],
     [
-      "e8013e1c-787d-463e-bc20-40bcc2f5c6f7",
-      "power_stepping"
+      "4ab23797-193f-4d52-9392-152adca945ed",
+      "power_dist"
+    ],
+    [
+      "faa728f8-ddc6-4e3f-b104-4874b0828b62",
+      "can_comm"
     ]
   ],
   "text_variables": {}
