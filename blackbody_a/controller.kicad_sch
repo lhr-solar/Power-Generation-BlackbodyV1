@@ -2171,12 +2171,6 @@
 		(uuid "0457b3d5-e1ee-4723-96fb-6258c290534b")
 	)
 	(junction
-		(at 109.22 139.7)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "173e7e86-05dc-479e-ba33-76a71cab810f")
-	)
-	(junction
 		(at 111.76 81.28)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2187,12 +2181,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "350023b3-616c-4a00-a38e-f21109fc87c6")
-	)
-	(junction
-		(at 83.82 139.7)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3940e33f-f126-4aad-a494-e2755553899b")
 	)
 	(junction
 		(at 224.79 80.01)
@@ -2285,12 +2273,6 @@
 		(uuid "c70d616b-4152-4994-b2b1-0febf13c1194")
 	)
 	(junction
-		(at 96.52 139.7)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d7ab23f3-377d-46b2-9aa7-23529b3a90b6")
-	)
-	(junction
 		(at 219.71 80.01)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2335,6 +2317,10 @@
 	(no_connect
 		(at 127 93.98)
 		(uuid "d6248dab-b446-4e05-9d5d-9ba093b290a0")
+	)
+	(no_connect
+		(at 152.4 109.22)
+		(uuid "f07d3407-0408-4513-8e08-2d96c00fedd4")
 	)
 	(wire
 		(pts
@@ -2505,16 +2491,6 @@
 			(type default)
 		)
 		(uuid "427d0fe8-23da-46a8-b7dd-90933abffb97")
-	)
-	(wire
-		(pts
-			(xy 71.12 139.7) (xy 83.82 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "481127eb-78ad-41af-8354-0fb0dc84ea92")
 	)
 	(wire
 		(pts
@@ -2948,26 +2924,6 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 139.7) (xy 120.65 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e9227454-aec6-48f8-86c5-6f70373cf4a6")
-	)
-	(wire
-		(pts
-			(xy 83.82 139.7) (xy 96.52 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e955e091-4a6a-4440-9fe2-48c4e5b91d6c")
-	)
-	(wire
-		(pts
 			(xy 109.22 160.02) (xy 109.22 165.1)
 		)
 		(stroke
@@ -3015,16 +2971,6 @@
 			(type default)
 		)
 		(uuid "f7e353c1-23fc-466e-88d6-3e6b96be4d40")
-	)
-	(wire
-		(pts
-			(xy 96.52 139.7) (xy 109.22 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fa55f954-b64f-4ad7-9516-0ff4e85bb13a")
 	)
 	(wire
 		(pts
@@ -3147,6 +3093,17 @@
 		)
 		(uuid "2bab2fe6-e51f-453b-a371-2b84c50a8939")
 	)
+	(label "CAN_TX"
+		(at 83.82 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2d4cc7c3-1cfd-41df-96d9-efb97d96f55f")
+	)
 	(label "Heartbeat"
 		(at 154.94 71.12 0)
 		(fields_autoplaced yes)
@@ -3180,6 +3137,28 @@
 		)
 		(uuid "3e7d057e-193b-4244-90bd-05a01beb374f")
 	)
+	(label "CAN_RX"
+		(at 96.52 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "81c155ae-ff6a-4d93-9c57-215fc6d782d8")
+	)
+	(label "Error"
+		(at 71.12 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8ac2d3e0-cda8-4068-a7a3-eab33c9e620a")
+	)
 	(label "SW_SLIDE"
 		(at 34.29 162.56 180)
 		(fields_autoplaced yes)
@@ -3201,6 +3180,28 @@
 			(justify left bottom)
 		)
 		(uuid "cdff5c14-ffde-4446-8b11-f35373c53c70")
+	)
+	(label "Heartbeat"
+		(at 120.65 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cfb9d883-ee6f-4c3e-bad3-fa79b15bce8e")
+	)
+	(label "I2C"
+		(at 109.22 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ef237d0e-2bd7-44e0-afcb-b8b2487bfec1")
 	)
 	(label "Error"
 		(at 154.94 73.66 0)
@@ -3873,72 +3874,6 @@
 			(project "blackbody_a"
 				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202/f9bf57dd-4a71-43f1-9ea2-c0c5623cdce8"
 					(reference "R18")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 96.52 139.7 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3a90f495-8bae-47ab-88f3-ac44acfa15d2")
-		(property "Reference" "#PWR041"
-			(at 96.52 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 96.52 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 96.52 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 96.52 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 96.52 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f88a155b-59dd-432c-896f-00311f8b896c")
-		)
-		(instances
-			(project "blackbody_a"
-				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202/f9bf57dd-4a71-43f1-9ea2-c0c5623cdce8"
-					(reference "#PWR041")
 					(unit 1)
 				)
 			)
