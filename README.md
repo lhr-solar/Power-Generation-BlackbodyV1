@@ -1,1 +1,1 @@
-# Power-Generation-BlackbodyV1
+# PowerGenerationBlackbody
