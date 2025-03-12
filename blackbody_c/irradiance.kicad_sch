@@ -1653,7 +1653,7 @@
 			(uuid "2f88d342-a197-4742-b3fc-c8373525561c")
 		)
 		(instances
-			(project ""
+			(project "blackbody_c"
 				(path "/15ea72e6-1a84-45bd-8e41-b7984e09a4da/ddefad2e-848c-4145-b4aa-774f2135e64c"
 					(reference "R1")
 					(unit 1)
