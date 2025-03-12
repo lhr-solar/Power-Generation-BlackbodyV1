@@ -392,20 +392,12 @@
       "sensing"
     ],
     [
-      "f9bf57dd-4a71-43f1-9ea2-c0c5623cdce8",
-      "controller"
-    ],
-    [
       "4ab23797-193f-4d52-9392-152adca945ed",
       "power_dist"
     ],
     [
       "faa728f8-ddc6-4e3f-b104-4874b0828b62",
       "can_comm"
-    ],
-    [
-      "10ae023c-a09f-413e-82f7-406c6cb11393",
-      "power_protection"
     ]
   ],
   "text_variables": {}

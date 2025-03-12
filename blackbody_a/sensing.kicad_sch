@@ -1410,7 +1410,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "LTC4311CSC6-TRPBF"
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/4311fa.pdf"
 			(at 83.82 59.69 0)
 			(effects
 				(font
