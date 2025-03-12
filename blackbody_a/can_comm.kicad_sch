@@ -1467,6 +1467,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 78.74) (xy 191.77 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c6fa331-257b-4616-ad32-bfc1a8d9af18")
+	)
+	(wire
+		(pts
 			(xy 154.94 90.17) (xy 152.4 90.17)
 		)
 		(stroke
@@ -1534,6 +1544,16 @@
 			(type default)
 		)
 		(uuid "b6584e56-73c2-4d28-9303-13cb36b08c63")
+	)
+	(wire
+		(pts
+			(xy 191.77 68.58) (xy 191.77 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b82d44b2-e1ec-4d16-bc43-f6ebfe1eea82")
 	)
 	(wire
 		(pts
@@ -1607,16 +1627,6 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 74.93) (xy 191.77 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fae0d8ac-9623-4d6a-b91c-93485e53ef3c")
-	)
-	(wire
-		(pts
 			(xy 154.94 92.71) (xy 149.86 92.71)
 		)
 		(stroke
@@ -1637,7 +1647,7 @@
 		(uuid "bbbd9975-3d9e-4232-af5b-dc65b1ec7b1b")
 	)
 	(label "Fault"
-		(at 191.77 74.93 0)
+		(at 191.77 68.58 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1756,6 +1766,75 @@
 			(project "blackbody_a"
 				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202/faa728f8-ddc6-4e3f-b104-4874b0828b62"
 					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 191.77 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2d44c501-00a1-4f88-8b14-1e7890579b1d")
+		(property "Reference" "R16"
+			(at 186.944 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10k"
+			(at 185.928 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 192.786 75.184 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 191.77 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 191.77 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "7cc59de1-b6d1-45dc-a83b-21d88753829a")
+		)
+		(pin "1"
+			(uuid "782afd6b-6328-4013-a1a2-c506a1f6be82")
+		)
+		(instances
+			(project "blackbody_a"
+				(path "/1fc8ae43-742a-46b6-a93b-79253d0d0202/faa728f8-ddc6-4e3f-b104-4874b0828b62"
+					(reference "R16")
 					(unit 1)
 				)
 			)
