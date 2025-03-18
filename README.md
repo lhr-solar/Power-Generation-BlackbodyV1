@@ -11,3 +11,5 @@ Can daisy-chain multiple Blackbody Cs to one blackbody A. Receives data from an 
 
 **Sensor Board**
 Holds the irradiance sensor. Placed on the top shell between solar modules and connected with wires to blackbody C. 
+
+
