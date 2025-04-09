@@ -1,18 +1,20 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "27e87528-6450-4a01-9549-346a953d818f")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_01x02"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "J"
-				(at 0 2.54 0)
+			(property "Reference" "J2"
+				(at 8.382 -2.54 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -20,14 +22,14 @@
 				)
 			)
 			(property "Value" "Conn_01x02"
-				(at 0 -5.08 0)
+				(at 8.382 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105309-xx02_1x02_P2.50mm_Vertical"
 				(at 0 0 0)
 				(effects
 					(font
@@ -74,14 +76,14 @@
 			)
 			(symbol "Conn_01x02_1_1"
 				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
 					(stroke
-						(width 0.1524)
+						(width 0.254)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
 				(rectangle
@@ -96,36 +98,18 @@
 					)
 				)
 				(rectangle
-					(start -1.27 1.27)
-					(end 1.27 -3.81)
+					(start -1.27 -2.413)
+					(end 0 -2.667)
 					(stroke
-						(width 0.254)
+						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type background)
+						(type none)
 					)
 				)
 				(pin passive line
 					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -2.54 0)
 					(length 3.81)
 					(name "Pin_2"
 						(effects
@@ -142,10 +126,31 @@
 						)
 					)
 				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -218,7 +223,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -230,7 +235,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -279,11 +284,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:D"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -381,10 +391,10 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 0) (xy -1.27 0)
+						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
 					)
 					(stroke
-						(width 0)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -393,10 +403,10 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+						(xy 1.27 0) (xy -1.27 0)
 					)
 					(stroke
-						(width 0.254)
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -442,9 +452,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:FerriteBead"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -515,7 +528,7 @@
 			(symbol "FerriteBead_0_1"
 				(polyline
 					(pts
-						(xy 0 -1.27) (xy 0 -1.2192)
+						(xy -2.7686 0.4064) (xy -1.7018 2.2606) (xy 2.7686 -0.3048) (xy 1.6764 -2.159) (xy -2.7686 0.4064)
 					)
 					(stroke
 						(width 0)
@@ -539,7 +552,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.7686 0.4064) (xy -1.7018 2.2606) (xy 2.7686 -0.3048) (xy 1.6764 -2.159) (xy -2.7686 0.4064)
+						(xy 0 -1.27) (xy 0 -1.2192)
 					)
 					(stroke
 						(width 0)
@@ -588,9 +601,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R_US"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -661,18 +677,6 @@
 			(symbol "R_US_0_1"
 				(polyline
 					(pts
-						(xy 0 -2.286) (xy 0 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 2.286) (xy 0 2.54)
 					)
 					(stroke
@@ -685,7 +689,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 -0.762) (xy 1.016 -1.143) (xy 0 -1.524) (xy -1.016 -1.905) (xy 0 -2.286)
+						(xy 0 2.286) (xy 1.016 1.905) (xy 0 1.524) (xy -1.016 1.143) (xy 0 0.762)
 					)
 					(stroke
 						(width 0)
@@ -709,7 +713,19 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.286) (xy 1.016 1.905) (xy 0 1.524) (xy -1.016 1.143) (xy 0 0.762)
+						(xy 0 -0.762) (xy 1.016 -1.143) (xy 0 -1.524) (xy -1.016 -1.905) (xy 0 -2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -2.286) (xy 0 -2.54)
 					)
 					(stroke
 						(width 0)
@@ -758,6 +774,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "MCP96L00:MCP96L00T-E_MX"
 			(exclude_from_sim no)
@@ -888,186 +905,6 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 20.32 -27.94 90)
-					(length 5.08)
-					(name "GND_8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 33.02 -10.16 180)
-					(length 5.08)
-					(name "ALERT_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 33.02 -7.62 180)
-					(length 5.08)
-					(name "ALERT_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 33.02 -5.08 180)
-					(length 5.08)
-					(name "GND_9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 33.02 -2.54 180)
-					(length 5.08)
-					(name "ALERT_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 33.02 0 180)
-					(length 5.08)
-					(name "ALERT_4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 17.78 270)
-					(length 5.08)
-					(name "ADDR"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 20.32 17.78 270)
-					(length 5.08)
-					(name "GND_10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 17.78 17.78 270)
-					(length 5.08)
-					(name "GND_11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 15.24 17.78 270)
-					(length 5.08)
-					(name "SCL"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin passive line
 					(at 0 -2.54 0)
 					(length 5.08)
@@ -1079,42 +916,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 12.7 17.78 270)
-					(length 5.08)
-					(name "SDA"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 10.16 17.78 270)
-					(length 5.08)
-					(name "EPAD"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1177,6 +978,24 @@
 					)
 				)
 				(pin passive line
+					(at 10.16 17.78 270)
+					(length 5.08)
+					(name "EPAD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
 					(at 10.16 -27.94 90)
 					(length 5.08)
 					(name "GND_4"
@@ -1187,6 +1006,24 @@
 						)
 					)
 					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 17.78 270)
+					(length 5.08)
+					(name "SDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1212,6 +1049,24 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 15.24 17.78 270)
+					(length 5.08)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin power_in line
 					(at 15.24 -27.94 90)
 					(length 5.08)
@@ -1223,6 +1078,24 @@
 						)
 					)
 					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 17.78 17.78 270)
+					(length 5.08)
+					(name "GND_11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1248,13 +1121,162 @@
 						)
 					)
 				)
+				(pin power_in line
+					(at 20.32 17.78 270)
+					(length 5.08)
+					(name "GND_10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 20.32 -27.94 90)
+					(length 5.08)
+					(name "GND_8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 17.78 270)
+					(length 5.08)
+					(name "ADDR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 33.02 0 180)
+					(length 5.08)
+					(name "ALERT_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 33.02 -2.54 180)
+					(length 5.08)
+					(name "ALERT_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 33.02 -5.08 180)
+					(length 5.08)
+					(name "GND_9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 33.02 -7.62 180)
+					(length 5.08)
+					(name "ALERT_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 33.02 -10.16 180)
+					(length 5.08)
+					(name "ALERT_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:+3V3"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1326,7 +1348,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -1338,7 +1360,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -1369,12 +1391,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1465,7 +1492,88 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(text_box "ESD protection\n"
+		(exclude_from_sim no)
+		(at 100.33 179.07 0)
+		(size 10.16 5.08)
+		(margins 0.762 0.762 0.762 0.762)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.016 1.016)
+			)
+			(justify left top)
+		)
+		(uuid "0da760eb-8380-44e7-8d77-76432487c2db")
+	)
+	(text_box "Connects to thermocouple"
+		(exclude_from_sim no)
+		(at 95.25 101.6 0)
+		(size 12.7 5.08)
+		(margins 0.762 0.762 0.762 0.762)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.016 1.016)
+			)
+			(justify left top)
+		)
+		(uuid "213d81c5-0fa1-4489-9546-388de03f8eb2")
+	)
+	(text_box "Vary Ra and Rb for up to 8 different I2C addresses"
+		(exclude_from_sim no)
+		(at 177.8 58.42 0)
+		(size 24.13 5.08)
+		(margins 0.762 0.762 0.762 0.762)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.016 1.016)
+			)
+			(justify left top)
+		)
+		(uuid "41923d51-1fbe-4652-afad-94593ab87321")
+	)
+	(text_box "Alert pins notify if certain temperature conditions are met. Can be configured through I2C or left unconnected."
+		(exclude_from_sim no)
+		(at 204.47 99.06 0)
+		(size 22.86 10.16)
+		(margins 0.762 0.762 0.762 0.762)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.016 1.016)
+			)
+			(justify left top)
+		)
+		(uuid "458ae571-bf55-4f8e-b8fa-ca2a8e269eea")
 	)
 	(junction
 		(at 124.46 107.95)
@@ -2318,8 +2426,8 @@
 		(uuid "fdae923a-840b-445e-993b-c900ce227d6d")
 	)
 	(image
-		(at 125.73 163.83)
-		(scale 0.369124)
+		(at 124.46 173.99)
+		(scale 0.30981)
 		(uuid "42edb333-5bd2-4589-9148-32efff8314c6")
 		(data "iVBORw0KGgoAAAANSUhEUgAAAiYAAAHHCAYAAACLPpP8AAAAAXNSR0IArs4c6QAAAARnQU1BAACx"
 			"jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAMAoSURBVHhe7N13VBRXGwbwZ7bQqwoqWFGxACrN"
@@ -3185,12 +3293,66 @@
 			"++xVpKhMYdPcHc2tNVTLAgCycf/KWZy/mQnTpu3Rxlb705RVGYk4fzYGt9MFmNq4orWLNbS9Knsx"
 			"DkwYY4wxVmVoCwAZY4wxxiodByaMMcYYqzI4MGGMMcZYlcGBCWOMMcaqDA5MGGOMMVZlcGDCGGOM"
 			"sSqDAxPGGGOMVRkcmDDGGGOsyuDAhDHGGGNVBgcmjDHGGKsyODBhjDHGWJXBgQljjDHGqgwOTBhj"
-			"jDFWZXBgwhhjjLEqgwMTxhhjjFUZHJgwxhhjrMr4fw5h7QeM9QzYAAAAAElFTkSuQmCC"
+			"jDFWZXBgwhhjjLEqgwMTxhhjjFUZHJgwxhhjrMr4fw5h7QeM9QzYAAAAAElFTkSuQmCCAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARJda"
+			"MABMBYAGAAAAEAAAAEDK6v//////AAAAAAAAAABal1gwAE0FgFZldCBDdXJzaWVmAAAAAAAAAAAA"
+			"AAAAAFiXRjAATgWABgAAABAAAADAxer//////wAAAAAAAAAAXpdEMABPBYAAAAAAAAAAAEXe+cgA"
+			"AAAA8HrbM24BAABcl0IwAFAFgAYAAAAQAAAAEL7q//////8AAAAAAAAAAFKXQDAAUQWAb2J5xI1l"
+			"am7DqQAAAAAAAAAAAAAAAAAAUJdOMABSBYBJdGFsaXF1ZQAAAAAAAAAAAAAAAAAAAABWl0wwAFMF"
+			"gFR1xI1uw6Ega3VyesOtdmEAAAAAAAAAAFSXSjAAVAWARmV0IEt1cnNpdgAAAAAAAAAAAAAAAAAA"
+			"KpdIMABVBYBHcmFzc2V0dG8AAAAAAAAAAAAAAAAAAAAolzYwAFYFgEbDqWxrw7Z2w6lyAAAAAAAA"
+			"AAAAAAAAAC6XNDAAVwWAS3JlcGtvIHBvxaFldm5vAAAAAAAAAAAALJcyMABYBYBDb3JkaWFVUEMA"
+			"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"
 		)
 	)
 	(image
-		(at 45.72 101.6)
-		(scale 0.303654)
+		(at 43.18 101.6)
+		(scale 0.258278)
 		(uuid "d8a8e7d5-2e9b-4835-b0ca-a743f752f10c")
 		(data "iVBORw0KGgoAAAANSUhEUgAAAmsAAAOcCAYAAAARrPbxAAAAAXNSR0IArs4c6QAAAARnQU1BAACx"
 			"jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAP+lSURBVHhe7J13eBVF98e/u7elV9JJQkuAEGoI"
@@ -6678,89 +6840,66 @@
 			"nTqgqdsVFkIIcT26foI1IYQQQoibkGsxgBBCCCGEKDMkWBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGE"
 			"KMMkWBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGEKMMk"
 			"WBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGEKMMkWBNCCCGEKMP+H+oL"
-			"DvfvayiGAAAAAElFTkSuQmCC"
+			"DvfvayiGAAAAAElFTkSuQmCCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAHQAdgBMAHAASgBpAHAAQwBlAEgASABFAEQAMgBWAGQAWgBMAHYAagBI"
+			"AEgASABXAGMAbABkAHoAYgBLAEIATQBTAFAANQA4AGEATQBrAGwANgB5AGQAUABmAFIAYQBYAEQA"
+			"dgBPAG4AQgBKAGsAaABrAHoAYgBlACsAaABWAGgANABUAG8AKwBFAFMAaABiAHIAYgByAG8AMAB6"
+			"ADkAbABiAHoAZABCAFMASAA0AGMALwBGAFcANgBkAFQAawBsAHgALwBoAE8AbgBEAHMARgBKAFAA"
+			"cQBPAEsARgAyAFYATABIAGYAVwBoAE0AYwBBAEwAcwB5ADAAeQBtAFcAWABNAG0AZABOAGIAcwBR"
+			"AEIATAAzADMATQBUAHoANwA1AHAATwBMAHYANAAvAGYANQA1AHMAdABUAE8AUwBJADIAbQBDADQA"
+			"QwBoAEoARABwAGYALwA5ADgAbgByAHkARgBNAFgAYwBVAFcAOAA1AGEANABhAGIASgBEAEoARgBC"
+			"AFYAZgBQAG4AbQBHAFMANQBRAEoAVwAzAGwAcABPAGEATgAyAEwAegBlAHgALwBsAFoANwBiAGYA"
+			"dgA1AFYAUgAzAGYAdgBrAHIAaAA3AEwAUQBCAG0AVQAvAEIALwBpAGsAawB2AFcATQB0AFYAbgBM"
+			"AGUAVQB3AGYANABtAFEAUQB6AGgAcABvADEAbQBQAC8AegBtAGYAZgBiAFEAZwBOAE4AMwA0AG8A"
+			"ZQBYAFQAdQBSADMAKwBuAE4AKwBIAFcAbwBDAGEAYgBoACsAYQByAFQAYgBvAG0AZgA1AHAAYgAr"
+			"AE0ARQA0AFQAZQBZAFgANgBWAGIAMwA2AHYAawAyAEQAdQBNAGMAeABlAEUANQBNAHMAUgB5AHgA"
+			"eQB4AEIARABYAGwAcgBKAEcARgBmADAAeABsAHEAQwB5AG8AagBuADcAVgBiAEgAVwBiAEoAQQB2"
+			"ADUAKwAxAFAAMwBVAEMANQA5AEkATABEAGwAcgBCAFcAcwA0AGIAaQBHAEUAZwBGAFEAZgBlACsA"
+			"YgBOAE0AMABMAHQAMABEAFAAdABQAC8AYwBSAHcAMQBBAEMARwBjACsAOABMAFcATgBCADQAaQBD"
+			"ADEAUgB6AGoATAAxAEYAbwB1AC8ATABkAHMAbABlAFAAagBuAEMAVgBTADQAWgA0AFUAUQBnAE4A"
+			"NAA5ADgALwBWAHoAWQB1AFMALwBiACsAawA1AEYAcQBVAE4AMQAyAE4AZwArAGEAMgBsAHgAeQA0"
+			"AEcAVwAyAFUAWQBOAHkAdwBEAGkAdQBLAGIAVQBmAHAAUwB2AHEAawBqADgAZgAvADkAbAA4AGEA"
+			"YQA3AGMAZQBSAEQAYQBUAGEANwBjAGUAUgBEAGEAVABuAHoARAA2AGsARQB2AGoAMgB1AGYAYQBF"
+			"AFEAWgBnAHAANwBEAHkAbQAyAFkASQA3AHAAWgA1AHEAdwBKAEwAVAB2AE8ATwBXAG8AMQBLAGUA"
+			"VwB0AEcAcwBPAEcARQBpAGcAOABoADMATwBaAEQAYgB0AG8AaABUADAAOQBMADUAdABrAEIAYgBX"
+			"AGQAMwBpAGgAegBGAHMAdgBJAFcAOABzAG4ARwBzAG0ARQA4AE8AUwB3AE0AZwBPAGMAeQA5AFYA"
+			"agBBAHkAbABEAG8AdgA5AEQAUwAyAGoAZABKAEQAMgB6AGwAZwA2AGoAdgB3AFQASwBJAFoATgBv"
+			"AFAAdAB4AHMAOAB5AGYAbgA5ADkARQBTADAATABEAGIAaAA3AFoARABkADEAUgBIADMAZwA3AFoA"
+			"LwB6AEoAbgBUAGQAQgBqAHcARQBKAGEAbQBXAFUAegBPAFcAawA2AHoAdQBIAFIAQwB1AHAAWgB3"
+			"AGsATwB6ADIAeABuAHIAcQBlAG4AQQAxAHkAMQBzAG0AeQA3ADEATABYAFoAVwBnADkARABFADgA"
+			"NwAxAHoAeABoAHMANwBOAG4AYwBVAGMATQBQAEUARQBNAG8AUQBkAEkAdAA3AGwAMgBhACsAcwB4"
+			"AEgAZABjAGIANwBaADIAWQBrAEMAYQBuAGEAWQBjADUAdwA2AGYAVABvAC8ANwBXADEAOABTAFAA"
+			"QQBiAC8AQgBXAHQAVABWAEkASgBqADcAMABUAFIAMwBjAEIAUwByADQAagBhAEQAUgBKAHQAdQBk"
+			"AGgAOAB6AHkAMwBjAHQAWgBVAG8AVQA5AHkAcgBhAFYANQBLADAAbgBtAHUAMwBGAHUARgBCAFgA"
+			"bQBYAEYAdABsADEAYgBCAHUAMgBYAEQAVwBxAGoAdQAzADEARABhADMAdABRAGYAWgBDAGwAVgBy"
+			"AGoAQgB3AFcAQgBUAFcAdgA0AC8AZgBsAHEAeQB1AEUAZwBzAGgAWgB2AHcAegByAEwAaABQAHEA"
+			"aQBLAEYANAB1AEsATgBwAGQANwBGAGIARAA3AHkAMgA4AFEARABPAFoATwB6AEUAdgA5AHAAYQBm"
+			"ADAAcQBtAHUAMQA0AE0AYQBnAEMAZwBHAE0AVwAzAEcANABiAEEAQgBrAFcANwAxADIASgB6AHAA"
+			"aAA1AFMALwBaADQAWQBPAGMAaABHAFkARQB6AEoARAAzADAASABkAFkAVwA3ADAATwBQAGkAMQBr"
+			"ADAANABaAFAAMABwAFcASgBXADQAcwBYAFUARABkAHUAWQBSAGMAcwBPAEIARwBEADgAMAB5AEwA"
+			"bwBjAFYAUQBUAEcAUAB0AA=="
 		)
-	)
-	(text_box "ESD protection\n"
-		(exclude_from_sim no)
-		(at 100.33 179.07 0)
-		(size 10.16 5.08)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(effects
-			(font
-				(size 1.016 1.016)
-			)
-			(justify left top)
-		)
-		(uuid "0da760eb-8380-44e7-8d77-76432487c2db")
-	)
-	(text_box "Connects to thermocouple"
-		(exclude_from_sim no)
-		(at 95.25 101.6 0)
-		(size 12.7 5.08)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(effects
-			(font
-				(size 1.016 1.016)
-			)
-			(justify left top)
-		)
-		(uuid "213d81c5-0fa1-4489-9546-388de03f8eb2")
-	)
-	(text_box "Vary Ra and Rb for up to 8 different I2C addresses"
-		(exclude_from_sim no)
-		(at 177.8 58.42 0)
-		(size 24.13 5.08)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(effects
-			(font
-				(size 1.016 1.016)
-			)
-			(justify left top)
-		)
-		(uuid "41923d51-1fbe-4652-afad-94593ab87321")
-	)
-	(text_box "Alert pins notify if certain temperature conditions are met. Can be configured through I2C or left unconnected."
-		(exclude_from_sim no)
-		(at 204.47 99.06 0)
-		(size 22.86 10.16)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(effects
-			(font
-				(size 1.016 1.016)
-			)
-			(justify left top)
-		)
-		(uuid "458ae571-bf55-4f8e-b8fa-ca2a8e269eea")
 	)
 	(hierarchical_label "SCL"
 		(shape input)
 		(at 168.91 81.28 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6772,7 +6911,6 @@
 	(hierarchical_label "SDA"
 		(shape input)
 		(at 166.37 81.28 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6806,7 +6944,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Inductor_SMD:L_0805_2012Metric"
 			(at 118.11 109.728 90)
 			(effects
 				(font
@@ -7073,7 +7211,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 129.286 101.346 90)
 			(effects
 				(font
@@ -7140,7 +7278,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 130.81 130.81 0)
 			(effects
 				(font
@@ -7226,7 +7364,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 195.834 71.374 90)
 			(effects
 				(font
@@ -7293,7 +7431,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 129.286 108.966 90)
 			(effects
 				(font
@@ -7360,7 +7498,7 @@
 				)
 			)
 		)
-		(property "Footprint" "QFN65P500X500X100-21N-D"
+		(property "Footprint" "blackbody_c:QFN65P500X500X100-21N-D"
 			(at 182.88 183.82 0)
 			(effects
 				(font
@@ -7603,7 +7741,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 183.134 71.374 90)
 			(effects
 				(font
@@ -7671,7 +7809,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Inductor_SMD:L_0805_2012Metric"
 			(at 118.11 102.108 90)
 			(effects
 				(font
@@ -7739,7 +7877,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 116.84 85.09 0)
 			(effects
 				(font
@@ -7827,7 +7965,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 135.5852 107.95 0)
 			(effects
 				(font
@@ -7895,7 +8033,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 130.81 85.09 0)
 			(effects
 				(font
@@ -7980,7 +8118,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105309-xx02_1x02_P2.50mm_Vertical"
 			(at 88.9 105.41 0)
 			(effects
 				(font
@@ -8116,7 +8254,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 117.094 73.914 90)
 			(effects
 				(font
@@ -8183,7 +8321,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 118.11 130.81 0)
 			(effects
 				(font
@@ -8468,7 +8606,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 187.6552 143.51 0)
 			(effects
 				(font
@@ -8536,7 +8674,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 131.064 73.914 90)
 			(effects
 				(font
@@ -8604,7 +8742,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 118.364 124.714 90)
 			(effects
 				(font

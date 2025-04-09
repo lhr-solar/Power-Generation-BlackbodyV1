@@ -1,13 +1,15 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "bcce3edf-0fa4-4326-9990-2be95d501905")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_01x04"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -74,19 +76,19 @@
 			)
 			(symbol "Conn_01x04_1_1"
 				(rectangle
-					(start -1.27 -4.953)
-					(end 0 -5.207)
+					(start -1.27 3.81)
+					(end 1.27 -6.35)
 					(stroke
-						(width 0.1524)
+						(width 0.254)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
 				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
+					(start -1.27 2.667)
+					(end 0 2.413)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -107,8 +109,8 @@
 					)
 				)
 				(rectangle
-					(start -1.27 2.667)
-					(end 0 2.413)
+					(start -1.27 -2.413)
+					(end 0 -2.667)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -118,14 +120,14 @@
 					)
 				)
 				(rectangle
-					(start -1.27 3.81)
-					(end 1.27 -6.35)
+					(start -1.27 -4.953)
+					(end 0 -5.207)
 					(stroke
-						(width 0.254)
+						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type background)
+						(type none)
 					)
 				)
 				(pin passive line
@@ -201,9 +203,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -276,7 +281,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -288,7 +293,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -337,9 +342,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R_US"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -410,18 +418,6 @@
 			(symbol "R_US_0_1"
 				(polyline
 					(pts
-						(xy 0 -2.286) (xy 0 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 2.286) (xy 0 2.54)
 					)
 					(stroke
@@ -434,7 +430,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 -0.762) (xy 1.016 -1.143) (xy 0 -1.524) (xy -1.016 -1.905) (xy 0 -2.286)
+						(xy 0 2.286) (xy 1.016 1.905) (xy 0 1.524) (xy -1.016 1.143) (xy 0 0.762)
 					)
 					(stroke
 						(width 0)
@@ -458,7 +454,19 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.286) (xy 1.016 1.905) (xy 0 1.524) (xy -1.016 1.143) (xy 0 0.762)
+						(xy 0 -0.762) (xy 1.016 -1.143) (xy 0 -1.524) (xy -1.016 -1.905) (xy 0 -2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -2.286) (xy 0 -2.54)
 					)
 					(stroke
 						(width 0)
@@ -507,6 +515,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "TSL25911:TSL25911FN"
 			(pin_names
@@ -589,18 +598,6 @@
 			(symbol "TSL25911FN_0_1"
 				(polyline
 					(pts
-						(xy 7.62 -10.16) (xy 33.02 -10.16)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 7.62 5.08) (xy 7.62 -10.16)
 					)
 					(stroke
@@ -613,7 +610,7 @@
 				)
 				(polyline
 					(pts
-						(xy 33.02 -10.16) (xy 33.02 5.08)
+						(xy 7.62 -10.16) (xy 33.02 -10.16)
 					)
 					(stroke
 						(width 0.127)
@@ -626,6 +623,18 @@
 				(polyline
 					(pts
 						(xy 33.02 5.08) (xy 7.62 5.08)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 33.02 -10.16) (xy 33.02 5.08)
 					)
 					(stroke
 						(width 0.127)
@@ -689,17 +698,17 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 40.64 -5.08 180)
+				(pin unspecified line
+					(at 40.64 0 180)
 					(length 7.62)
-					(name "NC"
+					(name "SDA"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "4"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -725,17 +734,17 @@
 						)
 					)
 				)
-				(pin unspecified line
-					(at 40.64 0 180)
+				(pin no_connect line
+					(at 40.64 -5.08 180)
 					(length 7.62)
-					(name "SDA"
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -744,12 +753,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:+3V3"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -821,7 +835,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -833,7 +847,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -864,12 +878,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -960,12 +979,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:PWR_FLAG"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1056,7 +1080,28 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(text_box "Connects to blackbody c, nanofit\n"
+		(exclude_from_sim no)
+		(at 134.62 113.03 0)
+		(size 13.97 6.35)
+		(margins 0.762 0.762 0.762 0.762)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.016 1.016)
+			)
+			(justify left top)
+		)
+		(uuid "dc9175de-1104-4ba6-9cbb-3af199737355")
 	)
 	(junction
 		(at 147.32 99.06)
@@ -1252,28 +1297,8 @@
 		)
 		(uuid "f5fbee86-b509-4913-8cd1-b78d79e1e548")
 	)
-	(text_box "Connects to blackbody c, nanofit\n"
-		(exclude_from_sim no)
-		(at 134.62 113.03 0)
-		(size 13.97 6.35)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(effects
-			(font
-				(size 1.016 1.016)
-			)
-			(justify left top)
-		)
-		(uuid "dc9175de-1104-4ba6-9cbb-3af199737355")
-	)
-	(label "SCL"
+	(label "SDA"
 		(at 107.95 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1284,7 +1309,6 @@
 	)
 	(label "SDA"
 		(at 139.7 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1293,9 +1317,8 @@
 		)
 		(uuid "40df0c44-cc68-4605-9d94-66645d79e51e")
 	)
-	(label "SDA"
+	(label "SCL"
 		(at 107.95 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1306,7 +1329,6 @@
 	)
 	(label "SCL"
 		(at 99.06 87.63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1476,7 +1498,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 146.3548 90.17 0)
 			(effects
 				(font
@@ -1744,7 +1766,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 88.646 85.344 90)
 			(effects
 				(font
@@ -1862,7 +1884,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d2c29302-69c6-4b96-b197-64928b2f7f91")
-		(property "Reference" "BlackbodyC"
+		(property "Reference" "BlackbodyC1"
 			(at 120.65 114.2999 0)
 			(effects
 				(font
@@ -1880,7 +1902,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "blackbodies:CONN_SD-105310-100_04_MOL"
 			(at 118.11 114.3 0)
 			(effects
 				(font
@@ -1922,7 +1944,7 @@
 		(instances
 			(project "sensor_board"
 				(path "/bcce3edf-0fa4-4326-9990-2be95d501905"
-					(reference "BlackbodyC")
+					(reference "BlackbodyC1")
 					(unit 1)
 				)
 			)
@@ -1954,7 +1976,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SON-06-FN_2000X2400_AMS"
+		(property "Footprint" ".pretty:SON-06-FN_2000X2400_AMS"
 			(at 99.06 87.63 0)
 			(effects
 				(font
@@ -2081,4 +2103,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )

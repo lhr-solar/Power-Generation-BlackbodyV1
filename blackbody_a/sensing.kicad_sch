@@ -1,12 +1,14 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "f803099b-aeb7-4241-9219-19337c0be432")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -79,7 +81,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -91,7 +93,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -140,9 +142,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R_US"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -213,18 +218,6 @@
 			(symbol "R_US_0_1"
 				(polyline
 					(pts
-						(xy 0 -2.286) (xy 0 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 2.286) (xy 0 2.54)
 					)
 					(stroke
@@ -237,7 +230,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 -0.762) (xy 1.016 -1.143) (xy 0 -1.524) (xy -1.016 -1.905) (xy 0 -2.286)
+						(xy 0 2.286) (xy 1.016 1.905) (xy 0 1.524) (xy -1.016 1.143) (xy 0 0.762)
 					)
 					(stroke
 						(width 0)
@@ -261,7 +254,19 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.286) (xy 1.016 1.905) (xy 0 1.524) (xy -1.016 1.143) (xy 0 0.762)
+						(xy 0 -0.762) (xy 1.016 -1.143) (xy 0 -1.524) (xy -1.016 -1.905) (xy 0 -2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -2.286) (xy 0 -2.54)
 					)
 					(stroke
 						(width 0)
@@ -310,6 +315,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "LTC4311:LTC4311CSC6-TRPBF"
 			(pin_names
@@ -392,18 +398,6 @@
 			(symbol "LTC4311CSC6-TRPBF_0_1"
 				(polyline
 					(pts
-						(xy 7.0993 -5.08) (xy 6.0579 -5.6007)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 7.0993 -5.08) (xy 6.0579 -4.5593)
 					)
 					(stroke
@@ -416,7 +410,7 @@
 				)
 				(polyline
 					(pts
-						(xy 7.62 -10.16) (xy 38.1 -10.16)
+						(xy 7.0993 -5.08) (xy 6.0579 -5.6007)
 					)
 					(stroke
 						(width 0.127)
@@ -440,7 +434,7 @@
 				)
 				(polyline
 					(pts
-						(xy 38.1 -10.16) (xy 38.1 5.08)
+						(xy 7.62 -10.16) (xy 38.1 -10.16)
 					)
 					(stroke
 						(width 0.127)
@@ -453,6 +447,18 @@
 				(polyline
 					(pts
 						(xy 38.1 5.08) (xy 7.62 5.08)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 38.1 -10.16) (xy 38.1 5.08)
 					)
 					(stroke
 						(width 0.127)
@@ -517,16 +523,16 @@
 					)
 				)
 				(pin unspecified line
-					(at 45.72 -5.08 180)
+					(at 45.72 0 180)
 					(length 7.62)
-					(name "BUS2"
+					(name "BUS1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "4"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -553,16 +559,16 @@
 					)
 				)
 				(pin unspecified line
-					(at 45.72 0 180)
+					(at 45.72 -5.08 180)
 					(length 7.62)
-					(name "BUS1"
+					(name "BUS2"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -571,12 +577,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:+3V3"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -648,7 +659,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -660,7 +671,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -691,12 +702,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -787,7 +803,28 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(text_box "If ENABLE < 0.4V, can be used for low current shut down to save power"
+		(exclude_from_sim no)
+		(at 85.09 71.12 0)
+		(size 21.59 6.35)
+		(margins 0.762 0.762 0.762 0.762)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.016 1.016)
+			)
+			(justify left top)
+		)
+		(uuid "1dcbaf2a-3ec0-48ad-8005-952b49680d3e")
 	)
 	(junction
 		(at 81.28 52.07)
@@ -1065,29 +1102,9 @@
 		)
 		(uuid "fa12f58a-84c9-4934-bfc8-ba6e3725c2cc")
 	)
-	(text_box "If ENABLE < 0.4V, can be used for low current shut down to save power"
-		(exclude_from_sim no)
-		(at 85.09 71.12 0)
-		(size 21.59 6.35)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(effects
-			(font
-				(size 1.016 1.016)
-			)
-			(justify left top)
-		)
-		(uuid "1dcbaf2a-3ec0-48ad-8005-952b49680d3e")
-	)
 	(hierarchical_label "SCL"
 		(shape output)
 		(at 110.49 100.33 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1099,7 +1116,6 @@
 	(hierarchical_label "SDA"
 		(shape output)
 		(at 110.49 97.79 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1135,7 +1151,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 115.316 92.964 90)
 			(effects
 				(font
@@ -1400,7 +1416,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOT-6_SC_LIT"
+		(property "Footprint" "blackbody_a:SOT-6_SC_LIT"
 			(at 83.82 59.69 0)
 			(effects
 				(font
@@ -1550,7 +1566,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 122.936 89.154 90)
 			(effects
 				(font
@@ -1619,7 +1635,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 75.2348 53.34 0)
 			(effects
 				(font
