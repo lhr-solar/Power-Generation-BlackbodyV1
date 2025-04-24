@@ -1,4 +1,4 @@
-24894043242861582
+24899278831503549
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -100072,12 +100072,33 @@ Varistor VF
 2
 2
 blackbodies
+CONN_SD-105309-100_02_MOL
+
+1053091102 
+0
+2
+2
+blackbodies
 CONN_SD-105310-100_04_MOL
 
 1053101104 
 0
 4
 4
+blackbodies
+CONN_SD-105429-001_04_MOL
+
+1054291204 
+0
+6
+6
+blackbodies
+D0008A_N
+
+TPS5403DR 
+0
+8
+8
 blackbodies
 MOLEX_1053091104
 

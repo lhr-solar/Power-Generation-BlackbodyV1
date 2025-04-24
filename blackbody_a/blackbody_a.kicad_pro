@@ -188,7 +188,8 @@
       ],
       "track_widths": [
         0.0,
-        0.2
+        0.2,
+        0.7
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -496,9 +497,7 @@
     "meta": {
       "version": 4
     },
-    "net_colors": {
-      "GND": "rgb(236, 255, 44)"
-    },
+    "net_colors": null,
     "netclass_assignments": null,
     "netclass_patterns": []
   },
