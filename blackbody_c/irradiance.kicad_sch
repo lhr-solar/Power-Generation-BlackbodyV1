@@ -1546,6 +1546,14 @@
 				(hide yes)
 			)
 		)
+		(property "PN" "RT0805FRE0710KL "
+			(at 55.88 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "bcf7b3b9-42df-42dc-b42a-b5ca138bff3d")
 		)
@@ -1614,6 +1622,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "PN" ""
+			(at 38.1 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -1686,6 +1702,14 @@
 				(hide yes)
 			)
 		)
+		(property "PN" ""
+			(at 46.99 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "20ab72d2-565d-4d74-aac8-7df6ecb4fba9")
 		)
@@ -1754,6 +1778,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "PN" ""
+			(at 38.1 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -1892,6 +1924,14 @@
 				(hide yes)
 			)
 		)
+		(property "PN" "RT0805FRE074K7L "
+			(at 138.43 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "83ac261e-01a6-40c1-96da-dc270a37ae11")
 		)
@@ -2028,6 +2068,14 @@
 				(hide yes)
 			)
 		)
+		(property "PN" "LTC4316IMS-PBF"
+			(at 63.5 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "8"
 			(uuid "53e5a53a-5ccf-46f5-87f1-fd400f9d2d88")
 		)
@@ -2120,6 +2168,14 @@
 				(hide yes)
 			)
 		)
+		(property "PN" ""
+			(at 63.5 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "aa9a499a-6c57-40b2-8a06-ceb64d82b458")
 		)
@@ -2190,6 +2246,14 @@
 				(hide yes)
 			)
 		)
+		(property "PN" "RT0805FRE074K7L "
+			(at 146.05 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7b4346c4-6ff0-447c-a849-181bff653415")
 		)
@@ -2258,6 +2322,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "PN" ""
+			(at 46.99 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"

@@ -15,5 +15,5 @@
   (lib (name "utsvt-misc")(type "KiCad")(uri "C:/Users/tanya/Documents/LHR/blackbodies v1/UTSVT-KiCadLibraries/utsvt-misc.kicad_sym")(options "")(descr ""))
   (lib (name "utsvt-power-regulators")(type "KiCad")(uri "C:/Users/tanya/Documents/LHR/blackbodies v1/UTSVT-KiCadLibraries/utsvt-power-regulators.kicad_sym")(options "")(descr ""))
   (lib (name "TCAN337DCNR")(type "KiCad")(uri "${KIPRJMOD}/symbols/TCAN337DCNR.kicad_sym")(options "")(descr ""))
-  (lib (name "2025-04-15_23-22-41")(type "KiCad")(uri "${KIPRJMOD}/symbols/2025-04-15_23-22-41.kicad_sym")(options "")(descr ""))
+  (lib (name "MSS1038-153MLC")(type "KiCad")(uri "${KIPRJMOD}/symbols/MSS1038-153MLC.kicad_sym")(options "")(descr ""))
 )

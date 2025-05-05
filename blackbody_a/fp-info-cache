@@ -1,4 +1,4 @@
-24899278831503549
+24906263306891149
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -100072,6 +100072,13 @@ Varistor VF
 2
 2
 blackbodies
+1054051104
+105405-1104-2
+Connector
+0
+6
+6
+blackbodies
 CONN_SD-105309-100_02_MOL
 
 1053091102 
@@ -100100,12 +100107,26 @@ TPS5403DR
 8
 8
 blackbodies
+DS04254101BKSMT
+DS04-254-1-01BK-SMT-2
+Integrated Circuit
+0
+2
+2
+blackbodies
 MOLEX_1053091104
 
 
 0
 4
 4
+blackbodies
+SMA_DIO
+
+B230A-13-F 
+0
+2
+2
 blackbody_a
 43650-04YY_272829
 43650-04YY_272829
@@ -100113,6 +100134,13 @@ Connector
 0
 4
 4
+blackbody_a
+INDPM102100X400N
+MSS1038-153MLC-1
+Inductor
+0
+2
+2
 blackbody_a
 LM76202QPWPRQ1
 HTSSOP16
