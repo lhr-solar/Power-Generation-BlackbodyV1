@@ -1883,7 +1883,7 @@
 			(uuid "992072d8-85c2-4c3a-bd2b-7c0f79f34e0b")
 		)
 		(embedded_fonts no)
-		(model "MCP96L00T-E_MX.stp"
+		(model "${KIPRJMOD}/models/MCP96L00T-E_MX.stp"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1891,7 +1891,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -0 -0 -0)
 			)
 		)
 	)
@@ -7682,6 +7682,17 @@
 			(uuid "83435a27-dd53-44b8-bdcb-4b1029fe4eea")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/models/MSOP-10_MS_LIT.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Capacitor_SMD:C_0805_2012Metric"
 		(layer "F.Cu")

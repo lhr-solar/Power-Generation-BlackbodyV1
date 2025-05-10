@@ -2577,7 +2577,7 @@
 				)
 			)
 		)
-		(property "Footprint" "UTSVT_ICs:SOP65P640X120-16N"
+		(property "Footprint" "blackbody_a:SOT65P280X145-8N"
 			(at 115.57 95.25 0)
 			(effects
 				(font
@@ -2613,7 +2613,7 @@
 				)
 			)
 		)
-		(property "PN" "CDSOT23-T24CAN"
+		(property "PN" "TCAN337DCNR"
 			(at 113.03 93.98 0)
 			(effects
 				(font
