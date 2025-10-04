@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MCP96L00T-E_MX
+D MICROCHIP - MCP96L00T-E/MX - TEMPERATURE SENSOR, 6DEG C, MQFN
+K
+F https://datasheet.datasheetarchive.com/originals/distributors/DKDS41/DSANUWW0026539.pdf
+$ENDCMP
+#
+#End Doc Library

@@ -1,4 +1,4 @@
-26638127138238764
+26682089157673425
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -384,6 +384,13 @@ battery CR-3032 coin cell vertical
 0
 2
 2
+Blackbody Footprint
+QFN65P500X500X100-21N-D
+(NU) 20-Lead [MQFN]
+Integrated Circuit
+0
+21
+21
 Button_Switch_Keyboard
 SW_Cherry_MX_1.00u_PCB
 Cherry MX keyswitch, 1.00u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
@@ -105482,6 +105489,174 @@ igbt diode module
 0
 25
 25
+UTSVT Controls Lighting PCB
+757574160
+75757-4160-1
+Connector
+0
+16
+16
+UTSVT_Connectors
+105313-2102
+Molex Nano-Fit Power Connectors, 105313-xx02, 2 Pins per row (http://www.molex.com/pdm_docs/sd/1053131208_sd.pdf), generated with kicad-footprint-generator
+connector Molex Nano-Fit top entry
+0
+2
+2
+UTSVT_Connectors
+524652470
+52465-2470-1
+Connector
+0
+24
+24
+UTSVT_Connectors
+AMASS_XT30PW-M_1x02_P2.50mm_Horizontal
+Connector XT30 Horizontal PCB Male, https://www.tme.eu/en/Document/ce4077e36b79046da520ca73227e15de/XT30PW%20SPEC.pdf
+RC Connector XT30
+0
+4
+2
+UTSVT_Connectors
+Banana_Jack_1_Pin_4mm
+
+
+0
+1
+1
+UTSVT_Connectors
+CONN_SFH11-xxxC-D05-ST-XX_SUL
+
+SFH11-PBPC-D05-ST-BK 
+0
+10
+10
+UTSVT_Connectors
+CUI_UJ31-CH-G2-SMT-TR
+
+
+0
+28
+28
+UTSVT_Connectors
+Molex2x10_horizontal
+
+
+0
+22
+20
+UTSVT_Connectors
+Molex_Micro-Fit_3.0_43045-1800_2x09_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-1800 (alternative finishes: 43045-180x), 9 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+18
+18
+UTSVT_Connectors
+Molex_MicroFit3.0_1x2xP3.00mm_PolarizingPeg_Vertical
+
+
+0
+2
+2
+UTSVT_Connectors
+Molex_MicroFit3.0_1x3xP3.00mm_PolarizingPeg_Vertical
+
+
+0
+3
+3
+UTSVT_Connectors
+Molex_MicroFit3.0_1x4xP3.00mm_PolarizingPeg_Vertical
+
+
+0
+4
+4
+UTSVT_Connectors
+Molex_MicroFit3.0_2x4xP3.00mm_PolarizingPeg_Vertical
+Molex Micro-Fit 3.0 Connector System, 43045-0812 (compatible alternatives: 43045-0813, 43045-0824), 4 Pins per row (http://www.molex.com/pdm_docs/sd/430450212_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 side entry
+0
+8
+8
+UTSVT_Connectors
+Molex_MicroFit3.0_2x6xP3.00mm_PolarizingPeg_Vertical
+Molex Micro-Fit 3.0 Connector System, 43045-1212 (compatible alternatives: 43045-1213, 43045-1224), 6 Pins per row (http://www.molex.com/pdm_docs/sd/430450212_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 side entry
+0
+12
+12
+UTSVT_Connectors
+Molex_MicroFit_01x06_Horizontal
+
+
+0
+8
+6
+UTSVT_Connectors
+Molex_MicroFit_01x07_Horizontal
+
+
+0
+9
+7
+UTSVT_Connectors
+Molex_Microfit3.0_02x03_6-Pin-Vertical-PCB-Receptacle_447690601
+
+447690601 
+0
+6
+6
+UTSVT_Connectors
+Molex_Microfit3.0_02x07_14-Pin-Horizontal-PCB-Receptacle_447641401
+
+447641401 
+0
+14
+14
+UTSVT_Connectors
+Molex_Microfit3.0_02x07_14-Pin-Vertical-PCB-Receptacle_447691401
+
+447691401 
+0
+14
+14
+UTSVT_Connectors
+Molex_Nano-Fit_105309-xx02_1x02_P2.50mm_Vertical
+Molex Nano-Fit Power Connectors, 105309-xx02, 2 Pins per row (http://www.molex.com/pdm_docs/sd/1053091203_sd.pdf), generated with kicad-footprint-generator
+connector Molex Nano-Fit side entry
+0
+2
+2
+UTSVT_Connectors
+Molex_Nano-Fit_105309-xx04_1x04_P2.50mm_Vertical
+
+
+0
+4
+4
+UTSVT_Connectors
+Molex_Nano-Fit_105313-xx07_1x07_P2.50mm_Horizontal
+Molex Nano-Fit Power Connectors, 105313-xx07, 7 Pins per row (http://www.molex.com/pdm_docs/sd/1053131208_sd.pdf), generated with kicad-footprint-generator
+connector Molex Nano-Fit top entry
+0
+7
+7
+UTSVT_Connectors
+PeripheralSOM
+
+
+0
+36
+28
+UTSVT_Connectors
+USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal
+USB 2.0 Type C Receptacle, GCT, 16P, top mounted, horizontal, 5A: https://gct.co/files/drawings/usb4105.pdf
+USB C Type-C Receptacle SMD USB 2.0 16P 16C USB4105-15-A USB4105-15-A-060 USB4105-15-A-120 USB4105-GF-A USB4105-GF-A-060 USB4105-GF-A-120
+0
+20
+17
 Valve
 Valve_ECC-83-1
 Valve ECC-83-1 round pins
