@@ -5705,22 +5705,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "0e253e35-bf08-46ca-b6c0-65e6d4dfaca0")
-		(property "Reference" "D1"
-			(at 57.15 138.7475 0)
+		(property "Reference" "DB_1"
+			(at 58.674 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "LED"
-			(at 59.69 138.7475 0)
+			(at 60.706 136.398 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
@@ -5768,7 +5769,7 @@
 		(instances
 			(project "Black Body"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "D1")
+					(reference "DB_1")
 					(unit 1)
 				)
 			)
@@ -6190,10 +6191,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "335bf24e-cbab-4e30-a710-2494e86058b1")
-		(property "Reference" "D2"
-			(at 45.72 138.7475 0)
+		(property "Reference" "Heartbeat1"
+			(at 45.974 139.446 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6253,7 +6253,7 @@
 		(instances
 			(project "Black Body"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "D2")
+					(reference "Heartbeat1")
 					(unit 1)
 				)
 			)
@@ -6343,22 +6343,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "446292ef-ac63-4109-a327-3467ea24c85f")
 		(property "Reference" "R7"
-			(at 68.58 128.27 90)
+			(at 70.866 129.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Value" "R"
-			(at 71.12 128.27 90)
+		(property "Value" "1k"
+			(at 72.644 129.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
@@ -6835,22 +6836,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "5efe2ebb-e102-4924-86de-6dbabeb480d3")
-		(property "Reference" "D5"
-			(at 80.01 138.7475 0)
+		(property "Reference" "DB_3"
+			(at 80.518 135.636 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "LED"
-			(at 82.55 138.7475 0)
+			(at 83.058 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
@@ -6898,7 +6900,7 @@
 		(instances
 			(project "Black Body"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "D5")
+					(reference "DB_3")
 					(unit 1)
 				)
 			)
@@ -7728,22 +7730,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "7b0533c3-fbfd-410e-b3da-4657245eb175")
 		(property "Reference" "R9"
-			(at 34.29 128.27 90)
+			(at 36.322 129.794 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Value" "R"
-			(at 36.83 128.27 90)
+		(property "Value" "1k"
+			(at 38.354 129.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
@@ -7796,22 +7799,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "814dc938-7d9b-46ef-82d6-e965cfe898ce")
-		(property "Reference" "D4"
-			(at 68.58 138.7475 0)
+		(property "Reference" "DB_2"
+			(at 69.088 135.636 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "LED"
-			(at 71.12 138.7475 0)
+			(at 71.628 136.144 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
@@ -7859,7 +7863,7 @@
 		(instances
 			(project "Black Body"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "D4")
+					(reference "DB_2")
 					(unit 1)
 				)
 			)
@@ -7939,22 +7943,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "8a78a635-d13c-4897-97c6-ee659b177586")
 		(property "Reference" "R10"
-			(at 80.01 128.27 90)
+			(at 82.296 130.048 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Value" "R"
-			(at 82.55 128.27 90)
+		(property "Value" "1k"
+			(at 84.328 129.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
@@ -8981,22 +8986,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "bbdabec3-8fd6-4bf6-832b-ee865f487898")
 		(property "Reference" "R8"
-			(at 45.72 128.27 90)
+			(at 48.26 129.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Value" "R"
-			(at 48.26 128.27 90)
+		(property "Value" "1k"
+			(at 50.038 129.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
@@ -9380,22 +9386,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "d2be1168-919d-45ea-9e7f-1632125237af")
 		(property "Reference" "R4"
-			(at 57.15 128.27 90)
+			(at 59.69 129.794 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Value" "R"
-			(at 59.69 128.27 90)
+		(property "Value" "1k"
+			(at 61.468 129.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
@@ -9862,22 +9869,23 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "ed0fbe27-ba9d-4d92-91b5-d0baf20e7ae5")
-		(property "Reference" "D3"
-			(at 34.29 138.7475 0)
+		(property "Reference" "TP_SCL1"
+			(at 34.544 134.112 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "LED"
-			(at 36.83 138.7475 0)
+			(at 37.338 135.636 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
@@ -9925,7 +9933,7 @@
 		(instances
 			(project "Black Body"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "D3")
+					(reference "TP_SCL1")
 					(unit 1)
 				)
 			)
@@ -9957,7 +9965,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Blackbody Footprint:CONN_SD-75900-001_2X08_MOL"
+		(property "Footprint" "UTSVT_Connectors:CONN_SD-75900-001_2X08_MOL"
 			(at 135.89 132.08 0)
 			(effects
 				(font
