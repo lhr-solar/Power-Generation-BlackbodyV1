@@ -3,4 +3,6 @@
   (lib (name "Blackbody Footprint")(type "KiCad")(uri "${KIPRJMOD}/Blackbody Footprint.pretty")(options "")(descr ""))
   (lib (name "UTSVT-Conn")(type "KiCad")(uri "${KIPRJMOD}/KiCAD-Sharepoint/UTSVT_Connectors.pretty")(options "")(descr ""))
   (lib (name "MX150")(type "KiCad")(uri "${KIPRJMOD}/footprints.pretty")(options "")(descr ""))
+  (lib (name "Library")(type "KiCad")(uri "${KIPRJMOD}/Blackbody Footprint.pretty/Library.pretty")(options "")(descr ""))
+  (lib (name "UTSVT_Connectors")(type "KiCad")(uri "C:/Users/kellh/Documents/LHR/KiCAD-Sharepoint/UTSVT_Connectors.pretty")(options "")(descr ""))
 )
