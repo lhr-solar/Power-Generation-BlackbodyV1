@@ -542,7 +542,7 @@
 			(pin passive line
 				(at 0 0 0)
 				(length 5.08)
-				(name "GND_1"
+				(name "SYS_GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -578,7 +578,7 @@
 			(pin passive line
 				(at 0 -5.08 0)
 				(length 5.08)
-				(name "GND_2"
+				(name "SYS_GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -614,7 +614,7 @@
 			(pin passive line
 				(at 0 -10.16 0)
 				(length 5.08)
-				(name "GND_3"
+				(name "SYS_GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -650,7 +650,7 @@
 			(pin passive line
 				(at 10.16 -27.94 90)
 				(length 5.08)
-				(name "GND_4"
+				(name "GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -686,7 +686,7 @@
 			(pin passive line
 				(at 12.7 -27.94 90)
 				(length 5.08)
-				(name "GND_5"
+				(name "GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -722,7 +722,7 @@
 			(pin passive line
 				(at 15.24 -27.94 90)
 				(length 5.08)
-				(name "GND_6"
+				(name "VDD"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -740,7 +740,7 @@
 			(pin passive line
 				(at 17.78 17.78 270)
 				(length 5.08)
-				(name "GND_11"
+				(name "GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -758,7 +758,7 @@
 			(pin passive line
 				(at 17.78 -27.94 90)
 				(length 5.08)
-				(name "GND_7"
+				(name "GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -776,7 +776,7 @@
 			(pin passive line
 				(at 20.32 17.78 270)
 				(length 5.08)
-				(name "GND_10"
+				(name "SYS_GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -794,7 +794,7 @@
 			(pin passive line
 				(at 20.32 -27.94 90)
 				(length 5.08)
-				(name "GND_8"
+				(name "GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -866,7 +866,7 @@
 			(pin passive line
 				(at 33.02 -5.08 180)
 				(length 5.08)
-				(name "GND_9"
+				(name "SYS_GND"
 					(effects
 						(font
 							(size 1.27 1.27)
