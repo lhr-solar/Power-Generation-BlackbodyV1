@@ -8812,9 +8812,9 @@
 		(uuid "8243bfe9-5222-4c97-b636-63e32d3a5e60")
 		(at 111.05 116.95)
 		(property "Reference" "J1"
-			(at 6.8 -0.67 270)
+			(at 6.8 -0.67 90)
 			(layer "B.SilkS")
-			(uuid "64f17fd1-9cc3-4fbe-b7d8-ef244d33b59c")
+			(uuid "b131f185-3757-4049-9224-b2cb6db07341")
 			(effects
 				(font
 					(size 1 1)
@@ -8824,9 +8824,9 @@
 			)
 		)
 		(property "Value" "53307-2471"
-			(at 6.5278 5.08 180)
+			(at 6.5278 5.08 0)
 			(layer "B.Fab")
-			(uuid "4a7c2d4c-3405-4ee0-aef2-7b27283fa3a0")
+			(uuid "a32b64e5-4aa9-4f43-b808-180eb5cda8a1")
 			(effects
 				(font
 					(size 1 1)
@@ -8836,10 +8836,10 @@
 			)
 		)
 		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail-pdf/533072471?display=pdf"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "8631ef17-74cc-46c1-8531-8c48979ab7e8")
+			(uuid "2c9dae99-735a-4898-b210-bc99ddb1a533")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8849,10 +8849,10 @@
 			)
 		)
 		(property "Description" "Board-to-board connector for Peripheral SOM daughterboards"
-			(at 0 0 180)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "58a39751-84ae-43f8-9349-ef90d65a11c5")
+			(uuid "b58673ba-e84a-4f9f-afe3-6565e8386d9a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9340,7 +9340,7 @@
 			)
 		)
 		(fp_text user "533072471"
-			(at -5.1816 6.35 180)
+			(at -5.1816 6.35 0)
 			(layer "B.Fab")
 			(uuid "5bd4a5ed-747d-41ea-83a9-963b52e51b70")
 			(effects
@@ -9887,16 +9887,6 @@
 			)
 		)
 	)
-	(gr_line
-		(start 77 67)
-		(end 80 67.017767)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "1158f130-babb-4fc0-b4e2-1f77a6e6f233")
-	)
 	(gr_arc
 		(start 129.482233 118.232233)
 		(mid 128.75 120)
@@ -9907,26 +9897,6 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "2d5083a3-d571-412b-bdae-5f9d7dfbd24d")
-	)
-	(gr_line
-		(start 77.25 120.75104)
-		(end 77.017767 120.751128)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "2f56e6b5-431b-46c2-bd45-b38b7f3dab3c")
-	)
-	(gr_line
-		(start 80 120.75)
-		(end 126.982233 120.732233)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "2fada6aa-0b64-4883-8085-be4ad8807271")
 	)
 	(gr_arc
 		(start 126.982254 67.017755)
@@ -9939,20 +9909,10 @@
 		(layer "Edge.Cuts")
 		(uuid "336b5482-ec66-4cf4-8264-463e856d2f40")
 	)
-	(gr_line
-		(start 74.5 69.5)
-		(end 74.517767 118.25)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "3eb58737-a41c-4521-840c-bd221f37060b")
-	)
 	(gr_arc
-		(start 74.5 69.5)
-		(mid 75.232233 67.732233)
-		(end 77 67)
+		(start 74 69.5)
+		(mid 74.732233 67.732233)
+		(end 76.5 67)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -9971,35 +9931,45 @@
 		(uuid "a228f2b5-6806-4977-902f-84d5af9c7e62")
 	)
 	(gr_line
-		(start 80 67.017767)
-		(end 126.982254 67.017755)
+		(start 126.9822 67.017755)
+		(end 76.5 67)
 		(stroke
 			(width 0.05)
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "a4383620-4713-4791-89f5-50a5d70b257b")
+		(uuid "a58d8903-90d4-4139-80b7-4e49e5a22ee3")
+	)
+	(gr_line
+		(start 76.51779 120.75)
+		(end 126.982233 120.732233)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "b4980d96-c599-4374-881d-3804dd662b06")
+	)
+	(gr_line
+		(start 74 69.5)
+		(end 74.017767 118.25)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "c1d4e0e1-5d20-4fe9-a4ea-1c02845800e4")
 	)
 	(gr_arc
-		(start 77.017767 120.75)
-		(mid 75.25 120.017767)
-		(end 74.517767 118.25)
+		(start 76.517767 120.75)
+		(mid 74.75 120.017767)
+		(end 74.017767 118.25)
 		(stroke
 			(width 0.05)
 			(type default)
 		)
 		(layer "Edge.Cuts")
 		(uuid "ef210d04-ba03-4506-9282-1ed7ff97a60e")
-	)
-	(gr_line
-		(start 80 120.75)
-		(end 77.25 120.75104)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "f255a67a-2776-49dc-a924-33fa82a347fd")
 	)
 	(gr_text "and Isaac"
 		(at 100 71.5 0)
@@ -13527,6 +13497,44 @@
 				(xy 75.74465 67.694462) (xy 75.756946 67.685975) (xy 75.971421 67.556319) (xy 75.98468 67.549361)
 				(xy 76.213219 67.446504) (xy 76.227202 67.441202) (xy 76.466467 67.366643) (xy 76.480995 67.363062)
 				(xy 76.727504 67.317888) (xy 76.742361 67.316084) (xy 76.995832 67.300751) (xy 77.00403 67.300528)
+			)
+		)
+	)
+	(zone
+		(net 37)
+		(net_name "/INT")
+		(layer "B.Cu")
+		(uuid "44de1e16-a622-4282-9f47-d51d1d0b13c6")
+		(name "$teardrop_padvia$")
+		(hatch none 0.1)
+		(priority 30000)
+		(attr
+			(teardrop
+				(type padvia)
+			)
+		)
+		(connect_pads yes
+			(clearance 0)
+		)
+		(min_thickness 0.0254)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 1)
+			(island_area_min 10)
+		)
+		(polygon
+			(pts
+				(xy 98.368253 114.874958) (xy 98.191476 115.051735) (xy 97.611064 114.219905) (xy 96.070707 116.950707)
+				(xy 98.948666 115.706789)
+			)
+		)
+		(filled_polygon
+			(layer "B.Cu")
+			(pts
+				(xy 98.368253 114.874958) (xy 98.191476 115.051735) (xy 97.611064 114.219905) (xy 96.070707 116.950707)
+				(xy 98.948666 115.706789)
 			)
 		)
 	)
