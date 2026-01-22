@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "BlackBody")(type "KiCad")(uri "${KIPRJMOD}/Blackbody Footprint.pretty")(options "")(descr ""))
+  (lib (name "utsvt_connectors")(type "KiCad")(uri "${KIPRJMOD}/../KiCAD-Sharepoint/UTSVT_Connectors.pretty")(options "")(descr ""))
+)
