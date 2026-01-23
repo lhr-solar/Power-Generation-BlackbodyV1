@@ -1831,6 +1831,17 @@
 				(xyz -0 -0 -90)
 			)
 		)
+		(model "C:/Users/kellh/Documents/LHR/BlackBody/Power-Generation-Blackbody/hardware/3D Models/Molex Nanofit 1x5 Connector.stp"
+			(offset
+				(xyz 6.25 -5 2)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 -0 -90)
+			)
+		)
 	)
 	(gr_line
 		(start 120.75 78.75)
