@@ -3802,12 +3802,6 @@
 		(uuid "f2e5dbb5-bbcc-4ee6-b77e-0ace6635de1a")
 	)
 	(junction
-		(at 64.77 91.44)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "09765f3c-b44c-4d21-b730-1a7f550252ad")
-	)
-	(junction
 		(at 185.42 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3856,12 +3850,6 @@
 		(uuid "54c72e3c-bb36-433d-849b-bbb329a6c9e1")
 	)
 	(junction
-		(at 85.09 88.9)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "57aa30c8-b645-466f-a078-5579f1c32969")
-	)
-	(junction
 		(at 180.34 142.24)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3908,12 +3896,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8a764aa4-aa28-4112-b34b-c6cbf2f9465b")
-	)
-	(junction
-		(at 62.23 88.9)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "933c1a22-e4a4-4943-987f-61def13a4188")
 	)
 	(junction
 		(at 120.65 60.96)
@@ -3997,7 +3979,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 88.9) (xy 62.23 87.63)
+			(xy 62.23 87.63) (xy 62.23 92.71)
 		)
 		(stroke
 			(width 0)
@@ -4084,16 +4066,6 @@
 			(type default)
 		)
 		(uuid "0c81932e-5931-498c-a31c-d4ae2c2fe0ce")
-	)
-	(wire
-		(pts
-			(xy 64.77 91.44) (xy 72.39 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "17fc56d3-77a2-4846-85f1-c8903ceed672")
 	)
 	(wire
 		(pts
@@ -4214,16 +4186,6 @@
 			(type default)
 		)
 		(uuid "2e1498eb-5caa-48bc-af07-a9787b604792")
-	)
-	(wire
-		(pts
-			(xy 80.01 88.9) (xy 85.09 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ea94dd1-0d28-4d01-976f-aebf8b372318")
 	)
 	(wire
 		(pts
@@ -4364,16 +4326,6 @@
 			(type default)
 		)
 		(uuid "548d2715-541b-4fa9-b6f3-dcec1c3519c6")
-	)
-	(wire
-		(pts
-			(xy 62.23 88.9) (xy 72.39 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "550163f3-e020-4071-a7eb-c3323c11308e")
 	)
 	(wire
 		(pts
@@ -4537,16 +4489,6 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 92.71) (xy 62.23 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7c9173d1-2548-480c-a5d9-a6d613b0d21e")
-	)
-	(wire
-		(pts
 			(xy 194.31 39.37) (xy 194.31 45.72)
 		)
 		(stroke
@@ -4597,7 +4539,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 92.71) (xy 64.77 91.44)
+			(xy 64.77 87.63) (xy 64.77 92.71)
 		)
 		(stroke
 			(width 0)
@@ -4684,16 +4626,6 @@
 			(type default)
 		)
 		(uuid "8e31356c-7301-4393-a315-3b737d300128")
-	)
-	(wire
-		(pts
-			(xy 85.09 88.9) (xy 85.09 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8f823c53-eee1-4ab0-9f1a-246cb8230e94")
 	)
 	(wire
 		(pts
@@ -4807,16 +4739,6 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 91.44) (xy 64.77 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a428fefa-d03f-4f13-8b82-86a1d9fdafc7")
-	)
-	(wire
-		(pts
 			(xy 110.49 134.62) (xy 113.03 134.62)
 		)
 		(stroke
@@ -4824,16 +4746,6 @@
 			(type default)
 		)
 		(uuid "a5600729-945f-4b2a-950c-e68c60095467")
-	)
-	(wire
-		(pts
-			(xy 80.01 91.44) (xy 85.09 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a6287b90-188e-4435-8d68-4a33494c1b4c")
 	)
 	(wire
 		(pts
@@ -5094,16 +5006,6 @@
 			(type default)
 		)
 		(uuid "eb4b42a3-7d97-4ddb-99a4-7823493828f5")
-	)
-	(wire
-		(pts
-			(xy 85.09 86.36) (xy 85.09 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f002488a-c737-4630-8d66-d46f45f573b6")
 	)
 	(wire
 		(pts
@@ -6074,73 +5976,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 85.09 86.36 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "11b70e2f-cc06-4b83-a24d-ad19660bd7c5")
-		(property "Reference" "#PWR020"
-			(at 85.09 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 87.63 85.0899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 85.09 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 85.09 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 85.09 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c3f30c25-6dca-45bc-b00b-f76c0d77274b")
-		)
-		(instances
-			(project "Black Body"
-				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "#PWR020")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 57.15 40.64 180)
 		(unit 1)
@@ -6662,7 +6497,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "40f1f18a-8e94-486d-bf46-f65b17cc2c52")
-		(property "Reference" "Ra1"
+		(property "Reference" "R11"
 			(at 35.56 90.17 90)
 			(effects
 				(font
@@ -6731,7 +6566,7 @@
 		(instances
 			(project "Black Body A"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "Ra1")
+					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -7049,158 +6884,6 @@
 			(project "Black Body"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
 					(reference "TP_TC_2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 76.2 88.9 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4b2d7ba1-d62d-4054-af36-7673f550272d")
-		(property "Reference" "R11"
-			(at 75.692 85.344 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1.5k"
-			(at 76.2 87.122 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 76.454 87.884 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 76.2 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 76.2 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 76.2 88.9 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c06219ff-9611-4f1e-bae8-f8337fd3e997")
-		)
-		(pin "2"
-			(uuid "d61186a4-b542-485c-a580-e7f1e2dbd380")
-		)
-		(instances
-			(project "Black Body"
-				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "R11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 76.2 91.44 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4b9dc51f-f982-483f-a800-6a0570420ef0")
-		(property "Reference" "R12"
-			(at 76.2 93.218 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1.5k"
-			(at 76.454 94.996 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 76.454 90.424 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 76.2 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 76.2 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 76.2 91.44 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "50629f45-a0fa-4f5b-9032-5b727ec8b796")
-		)
-		(pin "2"
-			(uuid "cd396fcb-5457-470b-8452-1c1c46c1f8ed")
-		)
-		(instances
-			(project "Black Body"
-				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -7653,7 +7336,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "71333d62-5bdb-452a-98b1-70a2da8544ce")
-		(property "Reference" "Rb1"
+		(property "Reference" "R12"
 			(at 48.26 90.17 90)
 			(effects
 				(font
@@ -7722,7 +7405,7 @@
 		(instances
 			(project "Black Body A"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "Rb1")
+					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -9869,7 +9552,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105313-xx04_1x04_P2.50mm_Horizontal"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
 			(at 26.67 124.46 0)
 			(effects
 				(font
