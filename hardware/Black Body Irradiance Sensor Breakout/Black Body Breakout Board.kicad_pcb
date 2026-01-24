@@ -1291,7 +1291,7 @@
 				(checksum "B171C30D850BD99326AB69FA7452ED35")
 			)
 		)
-		(model "${KIPRJMOD}/3D Models/Irrad IC.step"
+		(model "kicad-embed://Irrad IC.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1834,7 +1834,7 @@
 				(checksum "399F61F25E899ADA044D9368CA5AEBD9")
 			)
 		)
-		(model "${KIPRJMOD}/3D Models/Molex Nanofit 1x5 Connector.stp"
+		(model "kicad-embed://Molex Nanofit 1x5 Connector.stp"
 			(offset
 				(xyz 6.25 -5 2)
 			)

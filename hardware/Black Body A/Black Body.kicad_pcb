@@ -1115,7 +1115,7 @@
 				(checksum "AF51696067FF53B7A73F5CBDF0F74724")
 			)
 		)
-		(model "${KIPRJMOD}/3D Models/MCP96L00T-E_MX.stp"
+		(model "kicad-embed://MCP96L00T-E_MX.stp"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7940,7 +7940,7 @@
 				(checksum "53C79EA019B884464838E042FDEEF4AD")
 			)
 		)
-		(model "${KIPRJMOD}/3D Models/Molex Nanofit 2x4 Connector.stp"
+		(model "kicad-embed://Molex Nanofit 2x4 Connector.stp"
 			(offset
 				(xyz 8.75 -3.75 3.5)
 			)
