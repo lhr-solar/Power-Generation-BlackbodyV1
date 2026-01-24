@@ -292,7 +292,7 @@
 		(uuid "6f23c120-59ee-40b8-bea4-875e8c6311ec")
 	)
 	(embedded_fonts no)
-	(model "MCP96L00T-E_MX.stp"
+	(model "${KIPRJMOD}/3D Models/MCP96L00T-E_MX.stp"
 		(offset
 			(xyz 0 0 0)
 		)

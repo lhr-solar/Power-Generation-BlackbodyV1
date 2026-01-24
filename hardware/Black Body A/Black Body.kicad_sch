@@ -5643,6 +5643,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "742792910 "
+			(at 113.03 60.96 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0f9552ac-39c8-4f6f-b239-074c077f381d")
 		)
@@ -5714,6 +5723,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 203.2 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "CRCW06031K00FKEI  "
 			(at 203.2 35.56 0)
 			(effects
 				(font
@@ -5886,6 +5904,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 63.5 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "LS Q976.01-N1Q2-1 "
 			(at 63.5 137.16 0)
 			(effects
 				(font
@@ -6177,6 +6204,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "CRCW0603100RFKEA "
+			(at 101.6 68.58 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "4daab63a-4d31-42b4-8caa-f578976a630d")
 		)
@@ -6312,6 +6348,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 116.84 134.62 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "3557-2 "
 			(at 116.84 134.62 90)
 			(effects
 				(font
@@ -6472,6 +6517,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "LS Q976.01-N1Q2-1 "
+			(at 52.07 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fbefe791-573c-4ab4-8ec8-6b4a1e80488a")
 		)
@@ -6557,6 +6611,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "CRCW060310K0FKEI  "
+			(at 35.56 96.52 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ef490aa3-e40a-4a62-a915-ff73f5d266f6")
 		)
@@ -6627,6 +6690,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 74.93 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "CRCW08051K50FKEA "
 			(at 74.93 128.27 90)
 			(effects
 				(font
@@ -6719,6 +6791,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "CRCW0603100RFKEA "
+			(at 101.6 60.96 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b6f671fb-c8f4-4248-a449-0a9d6676dbec")
 		)
@@ -6759,7 +6840,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105314-xx06_2x03_P2.50mm_Horizontal"
+		(property "Footprint" "utsvt_connectors:105314-1306"
 			(at 127 157.48 0)
 			(effects
 				(font
@@ -6877,6 +6958,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "5015 "
+			(at 120.65 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1cf3c13f-b1bb-4832-a7dd-63bb65c9a99c")
 		)
@@ -6945,6 +7035,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 83.82 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "5015 "
 			(at 83.82 60.96 0)
 			(effects
 				(font
@@ -7087,6 +7186,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 83.82 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "5015 "
 			(at 83.82 68.58 0)
 			(effects
 				(font
@@ -7245,6 +7353,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "LS Q976.01-N1Q2-1 "
+			(at 86.36 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "0eaeea61-d86a-4865-94fa-b29398e061ac")
 		)
@@ -7388,6 +7505,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 48.26 96.52 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "CRCW060343K0FKEI "
 			(at 48.26 96.52 90)
 			(effects
 				(font
@@ -7612,6 +7738,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "742792910 "
+			(at 113.03 68.58 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d1a5adeb-8cbe-41e9-8bbd-9a21b598c9ef")
 		)
@@ -7691,6 +7826,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "5015 "
+			(at 120.65 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3a10ebb3-317a-4c79-9759-c6fdc9dddbfd")
 		)
@@ -7728,7 +7872,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Blackbody Footprint:QFN65P500X500X100-21N-D"
+		(property "Footprint" "BlackBody:QFN65P500X500X100-21N-D"
 			(at 48.26 -14.91 0)
 			(effects
 				(font
@@ -7828,6 +7972,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 77.47 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "MCP96L00T-E/MX "
 			(at 77.47 69.85 0)
 			(effects
 				(font
@@ -7972,6 +8125,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "CRCW06031K00FKEI  "
+			(at 194.31 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d9bad1fe-26e9-4256-a88c-5eb32bfb07a0")
 		)
@@ -8059,6 +8221,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "LS Q976.01-N1Q2-1 "
+			(at 74.93 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1e60ef46-d1ec-4ef9-bc02-214c02951c87")
 		)
@@ -8129,6 +8300,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 222.25 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "TSW-101-07-G-S "
 			(at 222.25 110.49 0)
 			(effects
 				(font
@@ -8212,6 +8392,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "CRCW08051K50FKEA "
+			(at 86.36 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "66a55f06-fd27-4e06-8029-5d90f7388430")
 		)
@@ -8255,7 +8444,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105313-xx02_1x02_P2.50mm_Horizontal"
+		(property "Footprint" "utsvt_connectors:105313-2102"
 			(at 134.62 120.65 0)
 			(effects
 				(font
@@ -8435,6 +8624,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "MLASH168SB7104KTNA01 "
+			(at 96.52 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1970e158-c757-44e5-86ee-ed2a0bfb5615")
 		)
@@ -8506,6 +8704,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 185.42 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "CRCW080510K0FKEA"
 			(at 185.42 35.56 0)
 			(effects
 				(font
@@ -8716,6 +8923,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 220.98 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "TSW-101-07-G-S "
 			(at 220.98 101.6 0)
 			(effects
 				(font
@@ -9098,6 +9314,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "CRCW08051K50FKEA "
+			(at 52.07 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "cf20d559-a7c0-4df3-8dc3-8af497a33e86")
 		)
@@ -9168,6 +9393,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 219.71 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "5015 "
 			(at 219.71 88.9 0)
 			(effects
 				(font
@@ -9448,6 +9682,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "TSW-101-07-G-S "
+			(at 226.06 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "73dc2eac-cc8b-417c-8a3f-0375180d3a68")
 		)
@@ -9672,6 +9915,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "CRCW08051K50FKEA "
+			(at 63.5 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "f908cfc2-e02a-43bb-b374-5b97402b56d2")
 		)
@@ -9757,6 +10009,15 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "CRCW06030000Z0EE "
+			(at 35.56 50.8 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "64a455f4-7a6f-429b-a6dc-36e0d92255ae")
 		)
@@ -9828,6 +10089,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 22.86 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "5015 "
 			(at 22.86 165.1 0)
 			(effects
 				(font
@@ -10112,6 +10382,15 @@
 			)
 		)
 		(property "Sim.Device" ""
+			(at 30.48 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "MLASU168SB5105KTNA01 "
 			(at 30.48 34.29 0)
 			(effects
 				(font
