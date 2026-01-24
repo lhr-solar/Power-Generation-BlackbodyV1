@@ -5167,7 +5167,7 @@
 		)
 		(uuid "474911ae-662b-4672-96c4-5758b22fd025")
 	)
-	(label "temp"
+	(label "+24V"
 		(at 153.67 134.62 0)
 		(effects
 			(font
@@ -5407,7 +5407,7 @@
 		)
 		(uuid "d594f290-9d46-481d-951a-b7a6fe22da07")
 	)
-	(label "temp"
+	(label "+24V"
 		(at 121.92 134.62 0)
 		(effects
 			(font
@@ -6922,7 +6922,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_1.0x1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_Keystone_5005-5009_Compact"
 			(at 115.57 68.58 0)
 			(effects
 				(font
@@ -7007,7 +7007,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_1.0x1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_Keystone_5005-5009_Compact"
 			(at 88.9 60.96 0)
 			(effects
 				(font
@@ -7158,7 +7158,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_1.0x1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_Keystone_5005-5009_Compact"
 			(at 78.74 68.58 0)
 			(effects
 				(font
@@ -7790,7 +7790,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_1.0x1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_Keystone_5005-5009_Compact"
 			(at 125.73 60.96 0)
 			(effects
 				(font
@@ -9365,7 +9365,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_1.0x1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_Keystone_5005-5009_Compact"
 			(at 224.79 88.9 0)
 			(effects
 				(font
@@ -10061,7 +10061,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_1.0x1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_Keystone_5005-5009_Compact"
 			(at 27.94 165.1 0)
 			(effects
 				(font
