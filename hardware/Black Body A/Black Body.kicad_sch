@@ -3844,12 +3844,6 @@
 		(uuid "3a795d49-8411-4f1e-9157-ac75eb9fa268")
 	)
 	(junction
-		(at 110.49 134.62)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "54c72e3c-bb36-433d-849b-bbb329a6c9e1")
-	)
-	(junction
 		(at 180.34 142.24)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3896,6 +3890,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8a764aa4-aa28-4112-b34b-c6cbf2f9465b")
+	)
+	(junction
+		(at 110.49 134.62)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a64ca97a-4df2-4e4a-87b2-f3f4646ba050")
 	)
 	(junction
 		(at 120.65 60.96)
@@ -4036,16 +4036,6 @@
 			(type default)
 		)
 		(uuid "09466dc9-0893-4c62-bb1a-c56f126c74a4")
-	)
-	(wire
-		(pts
-			(xy 110.49 133.35) (xy 110.49 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0b16e81c-8777-4ee4-ae09-cc52511666a3")
 	)
 	(wire
 		(pts
@@ -5167,16 +5157,6 @@
 		)
 		(uuid "474911ae-662b-4672-96c4-5758b22fd025")
 	)
-	(label "+24V"
-		(at 153.67 134.62 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5e7d9611-7c7e-4070-9091-c820befb5431")
-	)
 	(label "INT"
 		(at 24.13 130.81 270)
 		(effects
@@ -5317,6 +5297,16 @@
 		)
 		(uuid "a883a4e2-d975-43a4-b8d8-37ee0d4542a0")
 	)
+	(label "+24V_Ext"
+		(at 153.67 134.62 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ad141beb-d5e2-4423-a56d-67063922333f")
+	)
 	(label "DB_Conn_2"
 		(at 217.17 139.7 0)
 		(effects
@@ -5407,7 +5397,7 @@
 		)
 		(uuid "d594f290-9d46-481d-951a-b7a6fe22da07")
 	)
-	(label "+24V"
+	(label "+24V_Ext"
 		(at 121.92 134.62 0)
 		(effects
 			(font
@@ -7131,6 +7121,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+24V")
+		(at 110.49 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "598fb3bf-4b79-444b-9136-87e75cc74db5")
+		(property "Reference" "#PWR09"
+			(at 110.49 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+24V"
+			(at 110.49 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 110.49 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 110.49 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+24V\""
+			(at 110.49 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "197e3f81-e154-4f9f-80ba-69fd8547e22a")
+		)
+		(instances
+			(project "Black Body"
+				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
+					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:TestPoint")
 		(at 83.82 68.58 180)
 		(unit 1)
@@ -7210,72 +7266,6 @@
 			(project "Black Body"
 				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
 					(reference "TP_TC_F_2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+24V")
-		(at 110.49 133.35 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5eae21a5-4712-4820-92f7-ffa50792615b")
-		(property "Reference" "#PWR013"
-			(at 110.49 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+24V"
-			(at 110.49 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 110.49 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 110.49 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+24V\""
-			(at 110.49 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e0779f99-db6d-4dc2-94ba-26243a0fdff6")
-		)
-		(instances
-			(project "Black Body"
-				(path "/326551d7-59c6-4bc5-b0df-e38f608d8925"
-					(reference "#PWR013")
 					(unit 1)
 				)
 			)
