@@ -101,7 +101,7 @@
 				)
 			)
 		)
-		(property "Value" "1.5k"
+		(property "Value" "10k"
 			(at 0 1.65 90)
 			(layer "F.Fab")
 			(uuid "75e33586-4ad4-4836-90fe-4af93ff43712")
@@ -499,7 +499,7 @@
 				)
 			)
 		)
-		(property "Value" "1.5k"
+		(property "Value" "10k"
 			(at 0 1.65 90)
 			(layer "F.Fab")
 			(uuid "f9a89eac-bea3-4bc4-97cd-e1b4f508d645")
@@ -1901,22 +1901,6 @@
 		(layer "F.Cu")
 		(net 1)
 		(uuid "a3f2af08-f91e-4ce8-8d9c-95bdc88459e2")
-	)
-	(segment
-		(start 130.75 72.75)
-		(end 132.85 72.75)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 1)
-		(uuid "a9628a61-9f88-4fef-980a-fbf4d0341e25")
-	)
-	(segment
-		(start 132.85 72.75)
-		(end 133.75 71.85)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 1)
-		(uuid "f9f671cb-5a7c-4bae-9025-6753ecac9153")
 	)
 	(segment
 		(start 133.25 75.5)
