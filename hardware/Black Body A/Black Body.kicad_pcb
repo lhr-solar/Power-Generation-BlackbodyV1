@@ -111447,7 +111447,7 @@
 	(segment
 		(start 104.125 109.25)
 		(end 105.925 109.25)
-		(width 0.5)
+		(width 0.3)
 		(layer "F.Cu")
 		(net 1)
 		(uuid "3c6acd34-44ea-43c7-8c52-d63bb7324f99")
@@ -111471,7 +111471,7 @@
 	(segment
 		(start 104.125 107.95)
 		(end 105.925 107.95)
-		(width 0.5)
+		(width 0.3)
 		(layer "F.Cu")
 		(net 1)
 		(uuid "550c0234-b583-435f-a3b3-12c2a9c7b15c")
