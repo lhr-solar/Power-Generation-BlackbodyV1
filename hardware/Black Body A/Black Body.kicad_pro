@@ -690,6 +690,12 @@
           "label": "Field8",
           "name": "Field8",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "p/n",
+          "name": "p/n",
+          "show": false
         }
       ],
       "filter_string": "",
