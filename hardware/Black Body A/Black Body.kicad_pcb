@@ -36029,7 +36029,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C45316"
+		(property "LCSC" "C710365"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -108052,7 +108052,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C45316"
+		(property "LCSC" "C710365"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
