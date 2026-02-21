@@ -1,0 +1,323 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : TSL25911FN (TSL2591) I2C bring-up / feedback loop test
+  ******************************************************************************
+  * What this does (every 500 ms):
+  *   1) ACK check at I2C address 0x29
+  *   2) Read and print ID register (expects 0x50)
+  *   3) One-time init:
+  *        - ENABLE: PON + AEN
+  *        - CONTROL: gain + integration time
+  *   4) Wait for integration time
+  *   5) Read STATUS + CH0/CH1 (0x14..0x17) and print counts
+  *
+  * Hardware mapping (from your schematic):
+  *   - VDD = 3.3 V, GND = GND
+  *   - SDA/SCL are pulled up externally (1.5k on breakout; do NOT enable internal pull-ups)
+  *   - INT is pulled up (10k) but not required for this polling test
+  *   - Address is fixed at 0x29
+  *
+  * CubeMX tips:
+  *   - I2C GPIO: Alternate Function Open-Drain, Pull = No Pull
+  *   - I2C speed: 100 kHz or 400 kHz (400 kHz is fine with strong pullups)
+  *   - UART enabled for printf output (USART2 here)
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* HAL uses 8-bit address = (7-bit << 1) */
+#define TSL2591_ADDR_8BIT   (0x29u << 1)
+
+/* Register map */
+#define REG_ENABLE          0x00u
+#define REG_CONTROL         0x01u
+#define REG_ID              0x12u
+#define REG_STATUS          0x13u
+#define REG_C0DATAL         0x14u   /* CH0 low byte; read 4 bytes total */
+
+/* ENABLE bits */
+#define ENABLE_PON          (1u << 0)  /* power on oscillator */
+#define ENABLE_AEN          (1u << 1)  /* ALS enable */
+
+/* STATUS bits */
+#define STATUS_AVALID       (1u << 0)  /* ALS valid flag */
+
+/*
+  COMMAND byte format for TSL2591:
+    bit7 = 1 (CMD)
+    bits6:5 = 01 (normal register access)
+    bits4:0 = register address
+  => base 0xA0, then OR with (reg & 0x1F)
+*/
+#define CMD_NORMAL          0xA0u
+
+/* CONTROL bits (gain + integration time)
+   AGAIN = bits5:4
+   ATIME = bits2:0
+*/
+#define AGAIN_LOW           (0u << 4)
+#define AGAIN_MED           (1u << 4)
+#define AGAIN_HIGH          (2u << 4)
+#define AGAIN_MAX           (3u << 4)
+
+#define ATIME_100MS         (0u)
+#define ATIME_200MS         (1u)
+#define ATIME_300MS         (2u)
+#define ATIME_400MS         (3u)
+#define ATIME_500MS         (4u)
+#define ATIME_600MS         (5u)
+
+/* Pick bring-up defaults */
+#define TSL_DEFAULT_GAIN    AGAIN_MED
+#define TSL_DEFAULT_ATIME   ATIME_200MS
+
+/* Match delay to integration time (+ margin) */
+#define TSL_INTEGRATION_DELAY_MS  250u
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
+UART_HandleTypeDef huart2;
+
+/* USER CODE BEGIN PV */
+static uint8_t g_tsl_initialized = 0;
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_I2C1_Init(void);
+/* USER CODE BEGIN PFP */
+
+static void uart_print(const char *s);
+static void uart_printf(const char *fmt, ...);
+
+static inline uint8_t tsl_cmd(uint8_t reg);
+static HAL_StatusTypeDef tsl_write8(uint8_t reg, uint8_t val);
+static HAL_StatusTypeDef tsl_read8(uint8_t reg, uint8_t *val);
+static HAL_StatusTypeDef tsl_readN(uint8_t startReg, uint8_t *buf, uint16_t len);
+
+static HAL_StatusTypeDef tsl_init_once(void);
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+static void uart_print(const char *s)
+{
+  HAL_UART_Transmit(&huart2, (uint8_t*)s, (uint16_t)strlen(s), HAL_MAX_DELAY);
+}
+
+static void uart_printf(const char *fmt, ...)
+{
+  char out[160];
+  va_list args;
+  va_start(args, fmt);
+  vsnprintf(out, sizeof(out), fmt, args);
+  va_end(args);
+  uart_print(out);
+}
+
+static inline uint8_t tsl_cmd(uint8_t reg)
+{
+  return (uint8_t)(CMD_NORMAL | (reg & 0x1Fu));
+}
+
+static HAL_StatusTypeDef tsl_write8(uint8_t reg, uint8_t val)
+{
+  uint8_t tx[2];
+  tx[0] = tsl_cmd(reg);
+  tx[1] = val;
+  return HAL_I2C_Master_Transmit(&hi2c1, TSL2591_ADDR_8BIT, tx, 2, HAL_MAX_DELAY);
+}
+
+static HAL_StatusTypeDef tsl_read8(uint8_t reg, uint8_t *val)
+{
+  HAL_StatusTypeDef ret;
+  uint8_t cmd = tsl_cmd(reg);
+
+  ret = HAL_I2C_Master_Transmit(&hi2c1, TSL2591_ADDR_8BIT, &cmd, 1, HAL_MAX_DELAY);
+  if (ret != HAL_OK) return ret;
+
+  return HAL_I2C_Master_Receive(&hi2c1, TSL2591_ADDR_8BIT, val, 1, HAL_MAX_DELAY);
+}
+
+static HAL_StatusTypeDef tsl_readN(uint8_t startReg, uint8_t *buf, uint16_t len)
+{
+  HAL_StatusTypeDef ret;
+  uint8_t cmd = tsl_cmd(startReg);
+
+  ret = HAL_I2C_Master_Transmit(&hi2c1, TSL2591_ADDR_8BIT, &cmd, 1, HAL_MAX_DELAY);
+  if (ret != HAL_OK) return ret;
+
+  return HAL_I2C_Master_Receive(&hi2c1, TSL2591_ADDR_8BIT, buf, len, HAL_MAX_DELAY);
+}
+
+static HAL_StatusTypeDef tsl_init_once(void)
+{
+  HAL_StatusTypeDef ret;
+
+  /* 1) Power on oscillator */
+  ret = tsl_write8(REG_ENABLE, ENABLE_PON);
+  if (ret != HAL_OK) return ret;
+  HAL_Delay(5);
+
+  /* 2) Enable ALS engine */
+  ret = tsl_write8(REG_ENABLE, (uint8_t)(ENABLE_PON | ENABLE_AEN));
+  if (ret != HAL_OK) return ret;
+
+  /* 3) Set CONTROL (gain + integration time) */
+  uint8_t control = (uint8_t)(TSL_DEFAULT_GAIN | TSL_DEFAULT_ATIME);
+  ret = tsl_write8(REG_CONTROL, control);
+  if (ret != HAL_OK) return ret;
+
+  /* 4) Wait long enough for first conversion to become valid */
+  HAL_Delay(TSL_INTEGRATION_DELAY_MS);
+
+  g_tsl_initialized = 1;
+  return HAL_OK;
+}
+
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
+  HAL_StatusTypeDef ret;
+  uint8_t id = 0;
+  uint8_t status = 0;
+  uint8_t d[4];
+  /* USER CODE END 1 */
+
+  HAL_Init();
+  SystemClock_Config();
+
+  MX_GPIO_Init();
+  MX_USART2_UART_Init();
+  MX_I2C1_Init();
+
+  /* USER CODE BEGIN 2 */
+  uart_print("\r\n=== TSL25911FN I2C Test ===\r\n");
+
+  /* Basic ACK check once up front */
+  ret = HAL_I2C_IsDeviceReady(&hi2c1, TSL2591_ADDR_8BIT, 3, 100);
+  if (ret != HAL_OK)
+  {
+    uart_printf("NO ACK at 0x%02X (check power, SDA/SCL, pullups, address)\r\n",
+                (unsigned int)(TSL2591_ADDR_8BIT >> 1));
+  }
+  else
+  {
+    uart_printf("ACK OK at 0x%02X\r\n", (unsigned int)(TSL2591_ADDR_8BIT >> 1));
+  }
+
+  /* Read and print ID (expected 0x50) */
+  ret = tsl_read8(REG_ID, &id);
+  if (ret != HAL_OK)
+  {
+    uart_print("Failed to read ID register\r\n");
+  }
+  else
+  {
+    uart_printf("ID = 0x%02X (expected 0x50)\r\n", (unsigned int)id);
+  }
+
+  /* One-time init (ENABLE + CONTROL) */
+  ret = tsl_init_once();
+  if (ret != HAL_OK)
+  {
+    uart_print("TSL init failed (ENABLE/CONTROL write)\r\n");
+  }
+  else
+  {
+    uart_print("TSL init OK\r\n");
+  }
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    /* Keep checking device presence; if it ever disappears, report it */
+    ret = HAL_I2C_IsDeviceReady(&hi2c1, TSL2591_ADDR_8BIT, 1, 50);
+    if (ret != HAL_OK)
+    {
+      uart_print("NO ACK (device missing?)\r\n");
+      HAL_Delay(500);
+      continue;
+    }
+
+    /* Read STATUS (AVALID indicates fresh ALS data) */
+    ret = tsl_read8(REG_STATUS, &status);
+    if (ret != HAL_OK)
+    {
+      uart_print("Error reading STATUS\r\n");
+      HAL_Delay(500);
+      continue;
+    }
+
+    /* Read CH0 + CH1 as 4 bytes from 0x14..0x17 */
+    ret = tsl_readN(REG_C0DATAL, d, 4);
+    if (ret != HAL_OK)
+    {
+      uart_print("Error reading CH0/CH1\r\n");
+      HAL_Delay(500);
+      continue;
+    }
+
+    /* Little-endian assembly */
+    uint16_t ch0 = (uint16_t)((uint16_t)d[0] | ((uint16_t)d[1] << 8));
+    uint16_t ch1 = (uint16_t)((uint16_t)d[2] | ((uint16_t)d[3] << 8));
+
+    /* Quick derived number: visible-ish counts */
+    int32_t vis = (int32_t)ch0 - (int32_t)ch1;
+    if (vis < 0) vis = 0;
+
+    uart_printf("STATUS=0x%02X AVALID=%u | CH0=%u CH1=%u VIS=%ld\r\n",
+                (unsigned int)status,
+                (status & STATUS_AVALID) ? 1u : 0u,
+                (unsigned int)ch0,
+                (unsigned int)ch1,
+                (long)vis);
+
+    HAL_Delay(500);
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+}
+
+/* USER CODE BEGIN 4 */
+/* If you want: add error handler prints or LED blink here */
+/* USER CODE END 4 */
