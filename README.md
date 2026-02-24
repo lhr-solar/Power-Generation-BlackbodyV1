@@ -1,15 +1,11 @@
-# PowerGenerationBlackbody
+# Power Generation Blackbody
 Gathers irradiance and temperature data for telemetry and MPPT algorithmic input.
 
-**Blackbody A:**
-Central board. Gathers irradiance and temperature data from multiple Blackbody Cs and sends it to CarCAN.
+**Blackbody**
+
+Gathers irradiance reading from sensor board and temperature reading from thermocouple. Sends data on telemetry CAN bus.
 
 
-**Blackbody C:**
-Can daisy-chain multiple Blackbody Cs to one blackbody A. Receives data from an irradiance sensor and thermocouple and sends it to Blackbdoy A through I2C. Attached beneath the top shell. 
+**Irradiance Sensor Board**
 
-
-**Sensor Board:**
-Holds the irradiance sensor. Placed on the top shell between solar modules and connected with wires to blackbody C. 
-
-
+Holds the irradiance sensor. Placed on the top shell between solar modules and connected with wires to blackbody
