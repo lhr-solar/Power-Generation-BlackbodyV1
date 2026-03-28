@@ -1,10 +1,14 @@
 #include "stm32xx_hal.h"
+#include <stdio.h>
+#include "UART.h"
+#include "printf.h"
 
 #define TSL25911FN_7BIT_ADDRESS (0x29)
 #define TSL25911FN_8BIT_ADDRESS (0x29 << 1)
 
+#define CMD (0xA0)
 #define REG_ENABLE (0x00) //power on/off
-#define REG_CONFIG (0x01)
+#define REG_CONTROL (0x01)
 
 #define REG_PackID (0x11)
 #define REG_DevID (0x12)
@@ -114,19 +118,61 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
 
+/*Power on Chip*/
+  uint8_t power_enable = 0x03;
+  uint8_t powerread[1];
+  uint8_t ENABLE = REG_ENABLE | 0xA0;
+
+    HAL_I2C_Mem_Write (&hi2c1, TSL25911FN_8BIT_ADDRESS, ENABLE, 1, &power_enable, 1, 100);
+    HAL_I2C_Mem_Read (&hi2c1, TSL25911FN_8BIT_ADDRESS, ENABLE, 1, powerread, 1, 100);
+
+  HAL_Delay(200);
+
+/*Control Register turns on ALS gain and intgeration time*/
+  uint8_t control = 0x00;
+  uint8_t controlread[1];
+  uint8_t CONTROL = REG_CONTROL | 0xA0;
+
+    HAL_I2C_Mem_Write (&hi2c1, TSL25911FN_8BIT_ADDRESS, CONTROL, 1, &control, 1, 100);
+    HAL_I2C_Mem_Read (&hi2c1, TSL25911FN_8BIT_ADDRESS, CONTROL, 1, controlread, 1, 100);
+
+  HAL_Delay(200);
+
+
   /* Infinite loop */
     while (1)
     {
-        uint8_t cmd = 0xA0 | 0x12;
-        uint8_t trashid = 0;
+        uint8_t databuffer[4];
+        uint8_t DATA_START = REG_C0DATAL | CMD;
 
-        HAL_I2C_Master_Transmit(&hi2c1, TSL25911FN_8BIT_ADDRESS, &cmd, 1, 100);
 
-        HAL_I2C_Master_Receive(&hi2c1, TSL25911FN_8BIT_ADDRESS, &trashid, 1, 100);
+        HAL_I2C_Master_Transmit(&hi2c1, TSL25911FN_8BIT_ADDRESS, &DATA_START, 1, 100);
 
-        HAL_Delay(200);
-    
-    }
+        HAL_Delay(50);
+
+        HAL_I2C_Master_Receive(&hi2c1, TSL25911FN_8BIT_ADDRESS, databuffer, 4, 100);
+            
+          uint16_t ch0 = ((uint16_t)databuffer[1] << 8) | databuffer[0];
+          uint16_t ch1 = ((uint16_t)databuffer[3] << 8) | databuffer[2];
+
+        int32_t irrad_white;
+        int32_t irrad_850;
+
+        irrad_white = (int32_t)(((int64_t)ch0 * 9876 << 16) / 6024);
+        irrad_850   = (int32_t)(((int64_t)ch1 * 9876 << 16) / 3474);
+
+        int32_t white_int  = irrad_white >> 16;
+        int32_t white_frac = ((irrad_white & 0xFFFF) * 1000) >> 16;
+
+        int32_t ir_int  = irrad_850 >> 16;
+        int32_t ir_frac = ((irrad_850 & 0xFFFF) * 1000) >> 16;
+
+        printf("CH0: %u  CH1: %u\r\n", ch0, ch1);
+        printf("White Irrad: %ld.%03ld uW/cm^2\r\n", white_int, white_frac);
+        printf("IR Irrad: %ld.%03ld uW/cm^2\r\n\r\n", ir_int, ir_frac);
+
+      HAL_Delay(500);
+  }
 }
 
 /**
@@ -227,7 +273,6 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   __disable_irq();
-  while (1)
-  
+  while (1){}
   
 }
