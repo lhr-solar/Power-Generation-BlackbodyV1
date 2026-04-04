@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "UART.h"
 #include "printf.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "FreeRTOSConfig.h"
 
 #define MCP9600_7BIT_ADDR (0x66)
 #define MCP9600_8BIT_ADDR (MCP9600_7BIT_ADDR << 1)
@@ -15,7 +18,6 @@
 #define Device_Config_REG (0x06) // value 0x20
 
 I2C_HandleTypeDef hi2c2;
-
 
 
 

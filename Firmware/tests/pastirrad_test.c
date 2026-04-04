@@ -1,17 +1,25 @@
-#include "irrad.h"
-#include "FreeRTOS.h"
-#include "task.h"
+#include "stm32xx_hal.h"
+#include <stdio.h>
+#include "UART.h"
+#include "printf.h"
 
-/* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_I2C1_Init(void);
+#define TSL25911FN_7BIT_ADDRESS (0x29)
+#define TSL25911FN_8BIT_ADDRESS (0x29 << 1)
 
-/* Test globals */
-TSL25911FN_HandleTypeDef irrad_handle;
-volatile tsl25911fn_status_t irrad_status = TSL25911FN_OK;
+#define CMD (0xA0)
+#define REG_ENABLE (0x00) //power on/off
+#define REG_CONTROL (0x01)
+
+#define REG_PackID (0x11)
+#define REG_DevID (0x12)
+#define REG_Status (0x13)
+
+#define REG_C0DATAL (0x14)
+#define REG_C0DATAH (0x15)
+#define REG_C1DATAL (0x16)
+#define REG_C1DATAH (0x17)
+
 I2C_HandleTypeDef hi2c1;
-
 
 /**
   * @brief I2C MSP Initialization
@@ -19,11 +27,11 @@ I2C_HandleTypeDef hi2c1;
   * @param hi2c: I2C handle pointer
   * @retval None
   */
-void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
+void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c1)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-  if(hi2c->Instance==I2C1)
+  if(hi2c1->Instance==I2C1)
   {
     /* USER CODE BEGIN I2C1_MspInit 0 */
 
@@ -52,11 +60,6 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 
     /* Peripheral clock enable */
     __HAL_RCC_I2C1_CLK_ENABLE();
-    /* I2C1 interrupt Init */
-    HAL_NVIC_SetPriority(I2C1_EV_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
-    HAL_NVIC_SetPriority(I2C1_ER_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(I2C1_ER_IRQn);
     /* USER CODE BEGIN I2C1_MspInit 1 */
 
     /* USER CODE END I2C1_MspInit 1 */
@@ -71,9 +74,9 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
   * @param hi2c: I2C handle pointer
   * @retval None
   */
-void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
+void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c1)
 {
-  if(hi2c->Instance==I2C1)
+  if(hi2c1->Instance==I2C1)
   {
     /* USER CODE BEGIN I2C1_MspDeInit 0 */
 
@@ -89,9 +92,6 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_7);
 
-    /* I2C1 interrupt DeInit */
-    HAL_NVIC_DisableIRQ(I2C1_EV_IRQn);
-    HAL_NVIC_DisableIRQ(I2C1_ER_IRQn);
     /* USER CODE BEGIN I2C1_MspDeInit 1 */
 
     /* USER CODE END I2C1_MspDeInit 1 */
@@ -100,86 +100,78 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 }
 
 
-/**
-  * @brief This function handles I2C1 event interrupt.
-  */
-void I2C1_EV_IRQHandler(void)
-{
-  HAL_I2C_EV_IRQHandler(&hi2c1);
-}
-
-/**
-  * @brief This function handles I2C1 error interrupt.
-  */
-void I2C1_ER_IRQHandler(void)
-{
-  HAL_I2C_ER_IRQHandler(&hi2c1);
-}
-
-  void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
-{
-    if (hi2c == &hi2c1)
-    {
-        tsl_i2c_tx_done = 1;
-    }
-}
-
-void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
-{
-    if (hi2c == &hi2c1)
-    {
-        tsl_i2c_error = 1;
-    }
-}
-
-
+/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
+
 
 int main(void)
 {
 
   HAL_Init();
+
+  /* Configure the system clock */
   SystemClock_Config();
+
+  /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C1_Init();
 
-  irrad_handle.device_id = TSL25911FN_7BIT_ADDRESS;
-  irrad_handle.hi2c = &hi2c1;
-  irrad_handle.gain = TSL25911FN_GAIN_MED;
-  irrad_handle.time = TSL25911FN_TIME_100MS;
-  irrad_handle.control = irrad_handle.gain | irrad_handle.time;
+/*Power on Chip*/
+  uint8_t power_enable = 0x03;
+  uint8_t powerread[1];
+  uint8_t ENABLE = REG_ENABLE | 0xA0;
 
-  tsl_i2c_tx_done = 0;
-  tsl_i2c_error = 0;
+    HAL_I2C_Mem_Write (&hi2c1, TSL25911FN_8BIT_ADDRESS, ENABLE, 1, &power_enable, 1, 100);
+    HAL_I2C_Mem_Read (&hi2c1, TSL25911FN_8BIT_ADDRESS, ENABLE, 1, powerread, 1, 100);
 
-  irrad_status = tsl25911fn_write_reg(&irrad_handle, 
-                                        TSL25911FN_REG_ENABLE, 
-                                        0x03, 
-                                        0);
+  HAL_Delay(200);
 
-    while(1){
-    if (tsl_i2c_tx_done)
+/*Control Register turns on ALS gain and intgeration time*/
+  uint8_t control = 0x00;
+  uint8_t controlread[1];
+  uint8_t CONTROL = REG_CONTROL | 0xA0;
+
+    HAL_I2C_Mem_Write (&hi2c1, TSL25911FN_8BIT_ADDRESS, CONTROL, 1, &control, 1, 100);
+    HAL_I2C_Mem_Read (&hi2c1, TSL25911FN_8BIT_ADDRESS, CONTROL, 1, controlread, 1, 100);
+
+  HAL_Delay(200);
+
+
+  /* Infinite loop */
+    while (1)
     {
+        uint8_t databuffer[4];
+        uint8_t DATA_START = REG_C0DATAL | CMD;
 
-      tsl_i2c_tx_done = 0;
 
-      while (1)
-      {
-      }
-    }
+        HAL_I2C_Master_Transmit(&hi2c1, TSL25911FN_8BIT_ADDRESS, &DATA_START, 1, 100);
 
-    if (tsl_i2c_error)
-    {
-      /* write failed */
-      tsl_i2c_error = 0;
+        HAL_Delay(50);
 
-      /* optional: stay here for debugger */
-      while (1)
-      {
-      }
-    }
+        HAL_I2C_Master_Receive(&hi2c1, TSL25911FN_8BIT_ADDRESS, databuffer, 4, 100);
+            
+          uint16_t ch0 = ((uint16_t)databuffer[1] << 8) | databuffer[0];
+          uint16_t ch1 = ((uint16_t)databuffer[3] << 8) | databuffer[2];
+
+        int32_t irrad_white;
+        int32_t irrad_850;
+
+        irrad_white = (int32_t)(((int64_t)ch0 * 9876 << 16) / 6024);
+        irrad_850   = (int32_t)(((int64_t)ch1 * 9876 << 16) / 3474);
+
+        int32_t white_int  = irrad_white >> 16;
+        int32_t white_frac = ((irrad_white & 0xFFFF) * 1000) >> 16;
+
+        int32_t ir_int  = irrad_850 >> 16;
+        int32_t ir_frac = ((irrad_850 & 0xFFFF) * 1000) >> 16;
+
+        printf("CH0: %u  CH1: %u\r\n", ch0, ch1);
+        printf("White Irrad: %ld.%03ld uW/cm^2\r\n", white_int, white_frac);
+        printf("IR Irrad: %ld.%03ld uW/cm^2\r\n\r\n", ir_int, ir_frac);
+
+      HAL_Delay(500);
   }
 }
 
@@ -235,13 +227,6 @@ void SystemClock_Config(void)
 static void MX_I2C1_Init(void)
 {
 
-  /* USER CODE BEGIN I2C1_Init 0 */
-
-  /* USER CODE END I2C1_Init 0 */
-
-  /* USER CODE BEGIN I2C1_Init 1 */
-
-  /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
   hi2c1.Init.Timing = 0x00100D14;
   hi2c1.Init.OwnAddress1 = 0;
@@ -269,10 +254,6 @@ static void MX_I2C1_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN I2C1_Init 2 */
-
-  /* USER CODE END I2C1_Init 2 */
-
 }
 
 /**
@@ -282,49 +263,16 @@ static void MX_I2C1_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
-  /* USER CODE BEGIN MX_GPIO_Init_1 */
-
-  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-  /* USER CODE BEGIN MX_GPIO_Init_2 */
-
-  /* USER CODE END MX_GPIO_Init_2 */
 }
 
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
-
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
-  while (1)
-  {
-  }
-  /* USER CODE END Error_Handler_Debug */
+  while (1){}
+  
 }
-#ifdef USE_FULL_ASSERT
-/**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t *file, uint32_t line)
-{
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
-}
-#endif /* USE_FULL_ASSERT */
