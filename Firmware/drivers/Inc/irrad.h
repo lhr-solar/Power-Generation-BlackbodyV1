@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "FreeRTOS.h"
 #include "semphr.h"
+#include <stdint.h>
 
 #define TSL25911FN_7BIT_ADDRESS (0x29)
 #define TSL25911FN_8BIT_ADDRESS (0x29 << 1)
@@ -10,6 +11,8 @@
 #define TSL25911FN_REG_CMD (0xA0)
 #define TSL25911FN_REG_ENABLE (0x00) //power on/off
 #define TSL25911FN_REG_CONTROL (0x01)
+#define TSL25911FN_ENABLE_POWER_ON (TSL25911FN_BIT_PON | TSL25911FN_BIT_AEN)
+#define TSL25911FN_ENABLE_POWER_OFF (0x00)
 
 #define TSL25911FN_REG_PACKID (0x11) //Device Package ID
 #define TSL25911FN_REG_DEVID (0x12)
@@ -34,7 +37,7 @@
 
 #define TSL25911FN_BIT_PON (1 << 0) //power on
 #define TSL25911FN_BIT_AEN (1 << 1) //Ambient Light Sensor enabled
-#define TSL25911FN_BIT_AVAILD (1 << 0 ) //Checks if ALS valid in Status Reg
+#define TSL25911FN_BIT_AVALID (1 << 0 ) //Checks if ALS valid in Status Reg
 
 typedef enum {
     TSL25911FN_OK,
@@ -58,7 +61,7 @@ typedef enum {
     TSL25911FN_TIME_400MS = 0x03,
     TSL25911FN_TIME_500MS = 0x04,
     TSL25911FN_TIME_600MS = 0x05
-} tsl25911fn_atime_t;
+} tsl25911fn_time_t;
 
 typedef struct {
     uint8_t device_id;
@@ -80,12 +83,14 @@ tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle, I2C_Handle
 tsl25911fn_status_t tsl25911fn_power_on(TSL25911FN_HandleTypeDef *handle, TickType_t delay);
 tsl25911fn_status_t tsl25911fn_power_off(TSL25911FN_HandleTypeDef *handle, TickType_t delay);
 tsl25911fn_status_t tsl25911fn_set_control(TSL25911FN_HandleTypeDef *handle, uint8_t control, TickType_t delay);
-tsl25911fn_status_t tsl25911fn_read_reg(TSL25911FN_HandleTypeDef *handle, uint8_t reg, uint8_t *value, TickType_t delay);
+tsl25911fn_status_t tsl25911fn_read_reg(TSL25911FN_HandleTypeDef *handle, uint8_t reg, volatile uint8_t *value, TickType_t delay);
 tsl25911fn_status_t tsl25911fn_write_reg(TSL25911FN_HandleTypeDef *handle, uint8_t reg, uint8_t value, TickType_t delay);
 tsl25911fn_status_t tsl25911fn_read_channels(TSL25911FN_HandleTypeDef *handle, uint16_t *ch0, uint16_t *ch1, TickType_t delay);
 tsl25911fn_status_t tsl25911fn_read_data(TSL25911FN_HandleTypeDef *handle, TSL25911FN_data_t *data, TickType_t delay);
 
 extern volatile uint8_t tsl_i2c_tx_done;
 extern volatile uint8_t tsl_i2c_error;
+
+
 
 

@@ -16,10 +16,16 @@ tsl25911fn_status_t tsl25911fn_write_reg(TSL25911FN_HandleTypeDef *handle,
         return TSL25911FN_INIT_FAIL;
     }
 
+    tsl_i2c_tx_done = 0;
+    tsl_i2c_error = 0;
+
     cmd_reg = TSL25911FN_REG_CMD | reg;
 
     payload[0]=cmd_reg;
     payload[1]=value;
+    TickType_t start;
+
+
 
     if (HAL_I2C_Master_Transmit_IT(handle->hi2c,
                             (handle->device_id << 1),
@@ -29,17 +35,25 @@ tsl25911fn_status_t tsl25911fn_write_reg(TSL25911FN_HandleTypeDef *handle,
         return TSL25911FN_WRITE_FAIL;
     }
 
-    if (delay > 0)
+    start = xTaskGetTickCount();
+
+    while(!tsl_i2c_tx_done && !tsl_i2c_error){
+        if((xTaskGetTickCount() - start) >=delay){
+            return TSL25911FN_WRITE_FAIL;
+        }
+    }
+
+    if (tsl_i2c_error)
     {
-        vTaskDelay(delay);
+        return TSL25911FN_WRITE_FAIL;
     }
 
     return TSL25911FN_OK;
 }
 
 tsl25911fn_status_t tsl25911fn_read_reg(TSL25911FN_HandleTypeDef *handle,
-                                         uint8_t reg,
-                                         uint8_t *value,
+                                        uint8_t reg,
+                                        volatile uint8_t *value,
                                         TickType_t delay)
 {
     uint8_t cmd_reg;
@@ -54,7 +68,7 @@ tsl25911fn_status_t tsl25911fn_read_reg(TSL25911FN_HandleTypeDef *handle,
                             (handle->device_id << 1),
                             cmd_reg,
                             I2C_MEMADD_SIZE_8BIT,
-                            value,
+                            (uint8_t *)value,
                             1,
                             HAL_MAX_DELAY) != HAL_OK)
     
@@ -65,6 +79,110 @@ tsl25911fn_status_t tsl25911fn_read_reg(TSL25911FN_HandleTypeDef *handle,
     return TSL25911FN_OK;
 }
 
+
+
+tsl25911fn_status_t tsl25911fn_power_on(TSL25911FN_HandleTypeDef *handle, 
+                                        TickType_t delay)
+{
+    
+    if (handle == 0 || handle->hi2c == 0){
+        return TSL25911FN_INIT_FAIL;
+    }
+
+    return tsl25911fn_write_reg(handle, 
+                                TSL25911FN_REG_ENABLE, 
+                                TSL25911FN_ENABLE_POWER_ON, 
+                                delay);
+
+
+}
+
+tsl25911fn_status_t tsl25911fn_power_off(TSL25911FN_HandleTypeDef *handle, 
+                                        TickType_t delay)
+{
+    
+    if (handle == 0 || handle->hi2c == 0){
+        return TSL25911FN_INIT_FAIL;
+    }
+
+    return tsl25911fn_write_reg(handle, 
+                                TSL25911FN_REG_ENABLE, 
+                                TSL25911FN_ENABLE_POWER_OFF, 
+                                delay);
+
+
+}
+
+
+tsl25911fn_status_t tsl25911fn_set_control(TSL25911FN_HandleTypeDef *handle, 
+                                        uint8_t control, 
+                                        TickType_t delay)
+{
+    if (handle == 0 || handle->hi2c == 0){
+        return TSL25911FN_INIT_FAIL;
+    }
+
+    handle->control = control;
+
+    return tsl25911fn_write_reg(handle, 
+                                TSL25911FN_REG_CONTROL, 
+                                handle->control, 
+                                delay);
+}
+
+tsl25911fn_status_t tsl25911fn_read_channels(TSL25911FN_HandleTypeDef *handle, 
+                                uint16_t *ch0, 
+                                uint16_t *ch1, 
+                                TickType_t delay)
+{
+    uint8_t c0l, c0h, c1l, c1h;
+    tsl25911fn_status_t status;
+
+    if (handle == 0 || handle->hi2c == 0 || ch0 == 0 || ch1 == 0) {
+        return TSL25911FN_INIT_FAIL;
+    }
+
+    status = tsl25911fn_read_reg(handle, TSL25911FN_REG_C0DATAL, &c0l, delay);
+    if (status != TSL25911FN_OK) return status;
+
+    status = tsl25911fn_read_reg(handle, TSL25911FN_REG_C0DATAH, &c0h, delay);
+    if (status != TSL25911FN_OK) return status;
+
+    status = tsl25911fn_read_reg(handle, TSL25911FN_REG_C1DATAL, &c1l, delay);
+    if (status != TSL25911FN_OK) return status;
+
+    status = tsl25911fn_read_reg(handle, TSL25911FN_REG_C1DATAH, &c1h, delay);
+    if (status != TSL25911FN_OK) return status;
+
+    *ch0 = ((uint16_t)c0h << 8) | c0l;
+    *ch1 = ((uint16_t)c1h << 8) | c1l;
+
+    return TSL25911FN_OK;
+}
+
+tsl25911fn_status_t tsl25911fn_read_data(TSL25911FN_HandleTypeDef *handle, 
+                                        TSL25911FN_data_t *data, 
+                                        TickType_t delay)
+{
+    tsl25911fn_status_t status;
+
+    if (handle == 0 || handle->hi2c == 0 || data == 0) {
+        return TSL25911FN_INIT_FAIL;
+    }
+
+    status = tsl25911fn_read_channels(handle, &data->ch0, &data->ch1, delay);
+    if (status != TSL25911FN_OK) {
+        return status;
+    }
+
+    data->irrad_whitelight_q16 = (int32_t)(((int64_t)data->ch0 * 9876 << 16) / 6024);
+
+    data->irrad_infrared_q16 = (int32_t)(((int64_t)data->ch1 * 9876 << 16) / 3474);
+
+    return TSL25911FN_OK;
+}
+
+        
 
 
 
