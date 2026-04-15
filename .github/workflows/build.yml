@@ -1,0 +1,23 @@
+cat > .github/workflows/build.yml <<'EOF'
+name: Build Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install ARM toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-none-eabi make
+
+      - name: Build main firmware
+        run: make -C Firmware/Embedded-Sharepoint all -j
+EOF
