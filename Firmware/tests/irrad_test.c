@@ -11,7 +11,7 @@
 #define PRINTF_NVIC_PRIO      configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY + 3
 
 /* Private function prototypes -----------------------------------------------*/
-// void SystemClock_Config(void);
+void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void HeartbeatTask(void *argument);
@@ -171,7 +171,7 @@ static void HeartbeatTask(void *argument)
 
     while (1)
     {
-        
+        HAL_GPIO_TogglePin(PSOM_HEARTBEAT_LED_PORT, PSOM_HEARTBEAT_LED_PIN);
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
@@ -187,19 +187,12 @@ void IrradTask(void *argument){
     husart1->Init.OverSampling = UART_OVERSAMPLING_16;
 
     printf_init(husart1);
-  
-  while(1) {
-    printf("UART OK \n \r");
-    HAL_GPIO_TogglePin(PSOM_HEARTBEAT_LED_PORT, PSOM_HEARTBEAT_LED_PIN);
-    vTaskDelay(pdMS_TO_TICKS(1000));
-  }
-}
 
-/*  TSL25911FN_data_t sensor_data = {0};
+  TSL25911FN_data_t sensor_data = {0};
 
   irrad_handle.device_id = TSL25911FN_7BIT_ADDRESS;
   irrad_handle.hi2c = &hi2c1;
-  irrad_handle.gain = TSL25911FN_GAIN_MED;
+  irrad_handle.gain = TSL25911FN_GAIN_LOW;
   irrad_handle.time = TSL25911FN_TIME_100MS;
   irrad_handle.control = irrad_handle.gain | irrad_handle.time;
 
@@ -240,13 +233,13 @@ void IrradTask(void *argument){
     while (1){}
   }
     {
-      int32_t white_int  = sensor_data.irrad_whitelight_q16 >> 16;
-      int32_t white_frac = ((sensor_data.irrad_whitelight_q16 & 0xFFFF) * 1000) >> 16;
+      uint32_t white_int  = sensor_data.irrad_whitelight_q16 >> 16;
+      uint32_t white_frac = ((sensor_data.irrad_whitelight_q16 & 0xFFFF) * 1000) >> 16;
 
-      int32_t ir_int  = sensor_data.irrad_infrared_q16 >> 16;
-      int32_t ir_frac = ((sensor_data.irrad_infrared_q16 & 0xFFFF) * 1000) >> 16;
+      uint32_t ir_int  = sensor_data.irrad_infrared_q16 >> 16;
+      uint32_t ir_frac = ((sensor_data.irrad_infrared_q16 & 0xFFFF) * 1000) >> 16;
 
-      printf("CH0:%4u CH1:%4u | White:%ld.%03ld IR:%ld.%03ld\r\n",
+      printf("CH0:%4u CH1:%4u | White:%lu.%03lu IR:%lu.%03lu \r\n",
              sensor_data.ch0,
              sensor_data.ch1,
              white_int, white_frac,
@@ -256,13 +249,12 @@ void IrradTask(void *argument){
     vTaskDelay(pdMS_TO_TICKS(1000));
   }
 }
-*/
+
 
 int main(void)
 {
   HAL_Init();
   SystemClock_Config();
-  
   MX_GPIO_Init();
   MX_I2C1_Init();
 
@@ -289,7 +281,49 @@ int main(void)
   }
 }
 
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+// void SystemClock_Config(void)
+// {
+//   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+//   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
+//   /** Configure the main internal regulator output voltage
+//   */
+//   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+//   {
+//     Error_Handler();
+//   }
+
+//   /** Initializes the RCC Oscillators according to the specified parameters
+//   * in the RCC_OscInitTypeDef structure.
+//   */
+//   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+//   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+//   RCC_OscInitStruct.MSICalibrationValue = 0;
+//   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+//   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+//   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+//   {
+//     Error_Handler();
+//   }
+
+//   /** Initializes the CPU, AHB and APB buses clocks
+//   */
+//   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+//                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+//   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+//   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+//   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+//   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+//   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+//   {
+//     Error_Handler();
+//   }
+// }
 
 /**
   * @brief I2C1 Initialization Function
@@ -362,3 +396,34 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 }
 
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  __disable_irq();
+  while (1)
+  {
+  }
+  /* USER CODE END Error_Handler_Debug */
+}
+#ifdef USE_FULL_ASSERT
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* USER CODE BEGIN 6 */
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* USER CODE END 6 */
+}
+#endif /* USE_FULL_ASSERT */
