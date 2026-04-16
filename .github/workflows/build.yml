@@ -1,21 +1,36 @@
-name: Build Check
+name: Build Production & Tests
 
 on:
   push:
-  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Initialize Submodules
+        run: git submodule update --init Firmware/Embedded-Sharepoint
 
-      - name: Install ARM toolchain
+      - name: Cache Nix
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/nix
+          key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
+          restore-keys: |
+            nix-${{ runner.os }}-
+
+      - name: Install Nix Action
+        uses: cachix/install-nix-action@v31
+
+      - name: Test Production Build
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-arm-none-eabi make
-
-      - name: Build main firmware
-        run: make -C Firmware/Embedded-Sharepoint all -j
+          nix develop ./Firmware/Embedded-Sharepoint --accept-flake-config --command bash -c "
+            cd Firmware/ && make clean && make
+          "
+      - name: Clean & Build tests
+        run: |
+          nix develop ./Firmware/Embedded-Sharepoint --accept-flake-config --command bash -c "
+            cd Firmware/ && make clean && python tests/makeAllTests.py
+          "

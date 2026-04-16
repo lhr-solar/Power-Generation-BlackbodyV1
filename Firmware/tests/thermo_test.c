@@ -14,7 +14,7 @@
 #define Thermo_Change_REG (0x01)
 #define Thermo_Chip_Temp_REG (0x02)
 
-#define Sensor_Config_REG (0x05)  //vlaue 0x01
+#define Sensor_Config_REG (0x05)  //value 0x01
 #define Device_Config_REG (0x06) // value 0x20
 
 I2C_HandleTypeDef hi2c2;
