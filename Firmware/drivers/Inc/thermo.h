@@ -28,7 +28,17 @@
 #define MCP9600_SENSOR_CONFIG_REG (0x05)  //controls how chip measures tempurature
 #define MCP9600_DEVICE_CONFIG_REG (0x06)  //controls device level settings
 
-#define MCP9600_ALERT_1_REG (0x10)
-#define MCP9600_ALERT_2_REG (0x11)
-#define MCP9600_ALERT_3_REG (0x12)
-#define MCP9600_ALERT_4_REG (0x13)
+#define MCP9600_ALERT_1_TEMP_REG (0x10) //temp that alert should trigger
+#define MCP9600_ALERT_2_TEMP_REG (0x11)
+#define MCP9600_ALERT_3_TEMP_REG (0x12)
+#define MCP9600_ALERT_4_TEMP_REG (0x13)
+
+#define MCP9600_ALERT_1_HYSTERESIS_REG (0x0C) //sets range that alert toggles "buffer for alert"
+#define MCP9600_ALERT_2_HYSTERESIS_REG (0x0D) 
+#define MCP9600_ALERT_3_HYSTERESIS_REG (0x0E) 
+#define MCP9600_ALERT_4_HYSTERESIS_REG (0x0F) 
+
+#define MCP9600_ALERT_1_CONFIG_REG (0x08) //configures how the alert behaves 
+#define MCP9600_ALERT_2_CONFIG_REG (0x09)
+#define MCP9600_ALERT_3_CONFIG_REG (0x0A)
+#define MCP9600_ALERT_4_CONFIG_REG (0x0B)
