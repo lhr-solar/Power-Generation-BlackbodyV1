@@ -1,44 +1,38 @@
-#include "stm32xx_hal.h"
-#include <stdio.h>
-#include "UART.h"
-#include "printf.h"
+#include "thermo.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "FreeRTOSConfig.h"
+#include "pinDefs.h"
+#include "UART.h"
+#include "projdefs.h"
+#include "stm32xx_hal.h"
+#include "printf.h"
 
-#define MCP9600_7BIT_ADDR (0x66)
-#define MCP9600_8BIT_ADDR (MCP9600_7BIT_ADDR << 1)
+#define PRINTF_NVIC_PRIO      configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY + 3
 
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_I2C2_Init(void);
+static void HeartbeatTask(void *argument);
+static void ThermoTask(void *argument);
+static void Heartbeat_Clock_Init(void);
 
-#define Thermo_Temp_REG (0x00)
-#define Thermo_Change_REG (0x01)
-#define Thermo_Chip_Temp_REG (0x02)
+StaticTask_t thermoTaskTCB;
+StackType_t thermoTaskStack[1024];
 
-#define Sensor_Config_REG (0x05)  //value 0x01
-#define Device_Config_REG (0x06) // value 0x20
+StaticTask_t heartbeatTaskTCB;
+StackType_t heartbeatTaskStack[256];
 
+MCP9600_HandleTypeDef thermo_handle;
+volatile mcp9600_status_t thermo_status = MCP9600_OK;
 I2C_HandleTypeDef hi2c2;
 
-
-
-/**
-  * @brief I2C MSP Initialization
-  * This function configures the hardware resources used in this example
-  * @param hi2c2: I2C handle pointer
-  * @retval None
-  */
-void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c2)
+void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-  if(hi2c2->Instance==I2C2)
+
+  if(hi2c->Instance==I2C2)
   {
-    /* USER CODE BEGIN I2C2_MspInit 0 */
-
-    /* USER CODE END I2C2_MspInit 0 */
-
-  /** Initializes the peripherals clock
-  */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C2;
     PeriphClkInit.I2c2ClockSelection = RCC_I2C2CLKSOURCE_PCLK1;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
@@ -47,10 +41,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c2)
     }
 
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    /**I2C2 GPIO Configuration
-    PB10     ------> I2C2_SCL
-    PB14     ------> I2C2_SDA
-    */
+
     GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_14;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -58,25 +49,29 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c2)
     GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-    /* Peripheral clock enable */
     __HAL_RCC_I2C2_CLK_ENABLE();
-    /* USER CODE BEGIN I2C2_MspInit 1 */
-
-    /* USER CODE END I2C2_MspInit 1 */
-
   }
-
 }
 
-/**
-  * @brief I2C MSP De-Initialization
-  * This function freeze the hardware resources used in this example
-  * @param hi2c2: I2C handle pointer
-  * @retval None
-  */
-void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c2)
+void Heartbeat_Clock_Init(void)
 {
-  if(hi2c2->Instance==I2C2)
+  switch ((uint32_t)PSOM_HEARTBEAT_LED_PORT)
+  {
+    case (uint32_t)GPIOA:
+      __HAL_RCC_GPIOA_CLK_ENABLE();
+      break;
+    case (uint32_t)GPIOB:
+      __HAL_RCC_GPIOB_CLK_ENABLE();
+      break;
+    case (uint32_t)GPIOC:
+      __HAL_RCC_GPIOC_CLK_ENABLE();
+      break;
+  }
+}
+
+void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
+{
+  if(hi2c->Instance==I2C2)
   {
     /* USER CODE BEGIN I2C2_MspDeInit 0 */
 
@@ -92,6 +87,9 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c2)
 
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_14);
 
+    /* I2C2 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(I2C2_EV_IRQn);
+    HAL_NVIC_DisableIRQ(I2C2_ER_IRQn);
     /* USER CODE BEGIN I2C2_MspDeInit 1 */
 
     /* USER CODE END I2C2_MspDeInit 1 */
@@ -99,121 +97,138 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c2)
 
 }
 
-/* USER CODE BEGIN 1 */
-
-/* USER CODE END 1 */
-
-/* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_I2C2_Init(void);
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
+  * @brief This function handles I2C2 event interrupt.
   */
+void I2C2_EV_IRQHandler(void)
+{
+  HAL_I2C_EV_IRQHandler(&hi2c2);
+}
+
+/**
+  * @brief This function handles I2C2 error interrupt.
+  */
+void I2C2_ER_IRQHandler(void)
+{
+  HAL_I2C_ER_IRQHandler(&hi2c2);
+}
+
+  void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+    if (hi2c == &hi2c2)
+    {
+        mcp_i2c_tx_done = 1;
+    }
+}
+
+void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
+{
+    if (hi2c == &hi2c2)
+    {
+        mcp_i2c_error = 1;
+    }
+}
+
+static void HeartbeatTask(void *argument)
+{
+  (void)argument;
+
+  while (1)
+  {
+    HAL_GPIO_TogglePin(PSOM_HEARTBEAT_LED_PORT, PSOM_HEARTBEAT_LED_PIN);
+    vTaskDelay(pdMS_TO_TICKS(500));
+  }
+}
+
+static void ThermoTask(void *argument){
+  husart1->Instance = USART1;
+  husart1->Init.BaudRate = 115200;
+  husart1->Init.WordLength = UART_WORDLENGTH_8B;
+  husart1->Init.StopBits = UART_STOPBITS_1;
+  husart1->Init.Parity = UART_PARITY_NONE;
+  husart1->Init.Mode = UART_MODE_TX_RX;
+  husart1->Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  husart1->Init.OverSampling = UART_OVERSAMPLING_16;
+
+  printf_init(husart1);
+
+  thermo_handle.device_addr = MCP9600_7BIT_ADDR_6;
+  thermo_handle.hi2c = &hi2c2;
+  thermo_handle.thermocouple_type = MCP9600_THERMOCOUPLE_TYPE_K;
+  thermo_handle.filter = MCP9600_FILTER_0;
+  thermo_handle.adc_resolution = MCP9600_ADC_RESOLUTION_18BIT;
+
+
+  mcp_i2c_tx_done = 0;
+  mcp_i2c_error = 0;
+
+  int32_t temp_int = 0;
+  int32_t temp_frac = 0;
+
+  thermo_status = mcp9600_init(&thermo_handle,
+                               &hi2c2,
+                               MCP9600_7BIT_ADDR_6);
+
+  if (thermo_status != MCP9600_OK)
+  {
+    printf("MCP9600 init failed\r\n");
+    while (1){}
+  }
+  
+  printf("MCP9600 Ready\r\n");
+
+  while (1)
+  {
+    thermo_status = mcp9600_read_hot_junction(&thermo_handle,
+                                              &temp_int,
+                                              &temp_frac,
+                                              pdMS_TO_TICKS(100));
+
+    if (thermo_status != MCP9600_OK)
+    {
+      printf("Thermo Read Failed\r\n");
+      while (1){}
+    }
+
+    printf("Temperature: %ld.%04ld C\r\n", temp_int, temp_frac);
+
+    vTaskDelay(pdMS_TO_TICKS(1000));
+  }
+}
+
 int main(void)
 {
-
   HAL_Init();
-
-  /* Configure the system clock */
   SystemClock_Config();
-
-  /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C2_Init();
 
+  xTaskCreateStatic(HeartbeatTask,
+                    "Heartbeat",
+                    256,
+                    NULL,
+                    tskIDLE_PRIORITY + 1,
+                    heartbeatTaskStack,
+                    &heartbeatTaskTCB);
 
+  xTaskCreateStatic(ThermoTask,
+                    "Thermo",
+                    1024,
+                    NULL,
+                    tskIDLE_PRIORITY + 2,
+                    thermoTaskStack,
+                    &thermoTaskTCB);
 
- 
-    /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+  vTaskStartScheduler();
+
   while (1)
   {
-    uint8_t tempread[2];
-    HAL_I2C_Mem_Read (&hi2c2, MCP9600_8BIT_ADDR, 0x00, 1, tempread, 2, HAL_MAX_DELAY);
-
-    int16_t temp_fixed = (int16_t)((tempread[0] << 8) | tempread[1]);
-    int32_t temp_int = temp_fixed / 16;
-    int32_t temp_frac = (temp_fixed % 16) * 625;
-    
-    printf("Temperature: %ld.%04ld C\r\n", temp_int, temp_frac);
-
-    
-       
-    HAL_Delay(100);
-    
   }
 }
 
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
-void SystemClock_Config(void)
-{
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-
-  /** Configure the main internal regulator output voltage
-  */
-  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.MSIState = RCC_MSI_ON;
-  RCC_OscInitStruct.MSICalibrationValue = 0;
-  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
-  {
-    Error_Handler();
-  }
-}
-
-/**
-  * @brief I2C2 Initialization Function
-  * @param None
-  * @retval None
-  */
 static void MX_I2C2_Init(void)
 {
-
-  /* USER CODE BEGIN I2C2_Init 0 */
-
-  /* USER CODE END I2C2_Init 0 */
-
-  /* USER CODE BEGIN I2C2_Init 1 */
-
-  /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
   hi2c2.Init.Timing = 0x00100D14;
   hi2c2.Init.OwnAddress1 = 0;
@@ -223,64 +238,51 @@ static void MX_I2C2_Init(void)
   hi2c2.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
   hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+
   if (HAL_I2C_Init(&hi2c2) != HAL_OK)
   {
     Error_Handler();
   }
 
-  /** Configure Analogue filter
-  */
   if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
   {
     Error_Handler();
   }
 
-  /** Configure Digital filter
-  */
   if (HAL_I2CEx_ConfigDigitalFilter(&hi2c2, 0) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN I2C2_Init 2 */
-
-  /* USER CODE END I2C2_Init 2 */
-
 }
 
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
 static void MX_GPIO_Init(void)
 {
-  /* USER CODE BEGIN MX_GPIO_Init_1 */
+  GPIO_InitTypeDef led_config = {0};
 
-  /* USER CODE END MX_GPIO_Init_1 */
+  Heartbeat_Clock_Init();
 
-  /* GPIO Ports Clock Enable */
+  led_config.Mode = GPIO_MODE_OUTPUT_PP;
+  led_config.Pull = GPIO_NOPULL;
+  led_config.Pin = PSOM_HEARTBEAT_LED_PIN;
+  led_config.Speed = GPIO_SPEED_FREQ_LOW;
+
+  HAL_GPIO_Init(PSOM_HEARTBEAT_LED_PORT, &led_config);
+
+  HAL_GPIO_WritePin(PSOM_HEARTBEAT_LED_PORT, PSOM_HEARTBEAT_LED_PIN, GPIO_PIN_RESET);
+
   __HAL_RCC_GPIOB_CLK_ENABLE();
-
-  /* USER CODE BEGIN MX_GPIO_Init_2 */
-
-  /* USER CODE END MX_GPIO_Init_2 */
 }
 
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
-
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
 void Error_Handler(void)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
   {
   }
-  /* USER CODE END Error_Handler_Debug */
 }
+
+#ifdef USE_FULL_ASSERT
+void assert_failed(uint8_t *file, uint32_t line)
+{
+}
+#endif

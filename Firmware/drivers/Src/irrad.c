@@ -28,7 +28,7 @@ tsl25911fn_status_t tsl25911fn_write_reg(TSL25911FN_HandleTypeDef *handle,
 
 
     if (HAL_I2C_Master_Transmit_IT(handle->hi2c,
-                            (handle->device_id << 1),
+                            (handle->device_addr << 1),
                             payload,
                             2) != HAL_OK)
     {
@@ -65,7 +65,7 @@ tsl25911fn_status_t tsl25911fn_read_reg(TSL25911FN_HandleTypeDef *handle,
     cmd_reg = TSL25911FN_REG_CMD | reg;
 
     if(HAL_I2C_Mem_Read(handle->hi2c,
-                            (handle->device_id << 1),
+                            (handle->device_addr << 1),
                             cmd_reg,
                             I2C_MEMADD_SIZE_8BIT,
                             (uint8_t *)value,

@@ -171,13 +171,13 @@ static void HeartbeatTask(void *argument)
 
     while (1)
     {
-        HAL_GPIO_TogglePin(PSOM_HEARTBEAT_LED_PORT, PSOM_HEARTBEAT_LED_PIN);
-        vTaskDelay(pdMS_TO_TICKS(500));
+      HAL_GPIO_TogglePin(PSOM_HEARTBEAT_LED_PORT, PSOM_HEARTBEAT_LED_PIN);
+      vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
 
 void IrradTask(void *argument){
-  husart1->Instance = USART1;
+    husart1->Instance = USART1;
     husart1->Init.BaudRate = 115200;
     husart1->Init.WordLength = UART_WORDLENGTH_8B;
     husart1->Init.StopBits = UART_STOPBITS_1;
@@ -190,7 +190,7 @@ void IrradTask(void *argument){
 
   TSL25911FN_data_t sensor_data = {0};
 
-  irrad_handle.device_id = TSL25911FN_7BIT_ADDRESS;
+  irrad_handle.device_addr = TSL25911FN_7BIT_ADDRESS;
   irrad_handle.hi2c = &hi2c1;
   irrad_handle.gain = TSL25911FN_GAIN_LOW;
   irrad_handle.time = TSL25911FN_TIME_100MS;

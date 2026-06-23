@@ -48,10 +48,10 @@ typedef enum {
 } tsl25911fn_status_t;
 
 typedef enum {
-    TSL25911FN_GAIN_LOW = 0x00,
-    TSL25911FN_GAIN_MED = 0x10,
+    TSL25911FN_GAIN_LOW  = 0x00,
+    TSL25911FN_GAIN_MED  = 0x10,
     TSL25911FN_GAIN_HIGH = 0x20,
-    TSL25911FN_GAIN_MAX = 0x30
+    TSL25911FN_GAIN_MAX  = 0x30
 } tsl25911fn_gain_t;
 
 typedef enum {
@@ -64,7 +64,7 @@ typedef enum {
 } tsl25911fn_time_t;
 
 typedef struct {
-    uint8_t device_id;
+    uint8_t device_addr;
     I2C_HandleTypeDef *hi2c;
     uint8_t gain;
     uint8_t time;

@@ -114,12 +114,12 @@ def main():
     ####
 
     ####
-    tests_dir = Path("firmware/tests")
+    tests_dir = Path("Firmware/tests")
     ####
     tests = find_tests(git_dir / tests_dir)
 
     ####
-    makefile_dir = Path("firmware")
+    makefile_dir = Path("Firmware")
     ####
     script_dir = git_dir / makefile_dir
 
