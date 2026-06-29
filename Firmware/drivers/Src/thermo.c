@@ -1,6 +1,7 @@
 #include "thermo.h"
 
 volatile uint8_t mcp_i2c_tx_done = 0;
+volatile uint8_t mcp_i2c_rx_done = 0;
 volatile uint8_t mcp_i2c_error = 0;
 
 mcp9600_status_t mcp9600_init(MCP9600_HandleTypeDef *handle,
