@@ -50,6 +50,12 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     __HAL_RCC_I2C2_CLK_ENABLE();
+
+    HAL_NVIC_SetPriority(I2C2_EV_IRQn, PRINTF_NVIC_PRIO, 0);
+    HAL_NVIC_EnableIRQ(I2C2_EV_IRQn);
+
+    HAL_NVIC_SetPriority(I2C2_ER_IRQn, PRINTF_NVIC_PRIO, 0);
+    HAL_NVIC_EnableIRQ(I2C2_ER_IRQn);
   }
 }
 
@@ -114,11 +120,35 @@ void I2C2_ER_IRQHandler(void)
   HAL_I2C_ER_IRQHandler(&hi2c2);
 }
 
-  void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
     if (hi2c == &hi2c2)
     {
         mcp_i2c_tx_done = 1;
+    }
+}
+
+void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+    if (hi2c == &hi2c2)
+    {
+        mcp_i2c_rx_done = 1;
+    }
+}
+
+void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+    if (hi2c == &hi2c2)
+    {
+        mcp_i2c_tx_done = 1;
+    }
+}
+
+void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+    if (hi2c == &hi2c2)
+    {
+        mcp_i2c_rx_done = 1;
     }
 }
 
@@ -161,6 +191,7 @@ static void ThermoTask(void *argument){
 
 
   mcp_i2c_tx_done = 0;
+  mcp_i2c_rx_done = 0;
   mcp_i2c_error = 0;
 
   int32_t temp_int = 0;
