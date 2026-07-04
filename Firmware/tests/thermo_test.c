@@ -219,7 +219,6 @@ static void ThermoTask(void *argument){
     if (thermo_status != MCP9600_OK)
     {
       printf("Thermo Read Failed\r\n");
-      while (1){}
     }
 
     printf("Temperature: %ld.%04ld C\r\n", temp_int, temp_frac);
