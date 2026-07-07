@@ -122,7 +122,7 @@ void I2C2_ER_IRQHandler(void)
 
 void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
-    if (hi2c == &hi2c2)
+    if (hi2c->Instance == I2C2)
     {
         mcp_i2c_tx_done = 1;
     }
@@ -130,7 +130,7 @@ void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
 
 void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
-    if (hi2c == &hi2c2)
+    if (hi2c->Instance == I2C2)
     {
         mcp_i2c_rx_done = 1;
     }
@@ -138,7 +138,7 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
 
 void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
-    if (hi2c == &hi2c2)
+    if (hi2c->Instance == I2C2)
     {
         mcp_i2c_tx_done = 1;
     }
@@ -146,7 +146,7 @@ void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c)
 
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
-    if (hi2c == &hi2c2)
+    if (hi2c->Instance == I2C2)
     {
         mcp_i2c_rx_done = 1;
     }
@@ -154,7 +154,7 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 
 void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
 {
-    if (hi2c == &hi2c2)
+    if (hi2c->Instance == I2C2)
     {
         mcp_i2c_error = 1;
     }
