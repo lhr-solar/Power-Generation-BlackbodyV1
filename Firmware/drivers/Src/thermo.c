@@ -118,46 +118,5 @@ mcp9600_status_t mcp9600_read_hot_junction(MCP9600_HandleTypeDef *handle,
         printf("I2C ret=%d err=0x%08lx\r\n", ret, err);
         return MCP9600_READ_FAIL;
     }
-
-    while ((mcp_i2c_rx_done == 0) && (mcp_i2c_error == 0))
-    {
-        if ((xTaskGetTickCount() - start_tick) >= delay)
-        {
-            printf("rx timeout state=0x%lx err=0x%08lx rx=%u error=%u\r\n",
-                   (unsigned long)HAL_I2C_GetState(handle->hi2c),
-                   (unsigned long)HAL_I2C_GetError(handle->hi2c),
-                   (unsigned int)mcp_i2c_rx_done,
-                   (unsigned int)mcp_i2c_error);
-
-            HAL_I2C_Master_Abort_IT(handle->hi2c, handle->device_addr << 1);
-
-            return MCP9600_READ_FAIL;
-        }
-
-        vTaskDelay(pdMS_TO_TICKS(1));
-    }
-
-    if(mcp_i2c_rx_done != 0)
-    {
-        int16_t temp_fixed = (int16_t)((tempread[0] << 8) | tempread[1]);
-
-        *temp_int = temp_fixed / 16;
-        *temp_frac = (temp_fixed % 16) * 625;
-
-        if (*temp_frac < 0)
-        {
-            *temp_frac = -(*temp_frac);
-        }
-
-        return MCP9600_OK;
-    }
-
-    if (mcp_i2c_error != 0)
-    {
-        uint32_t err = HAL_I2C_GetError(handle->hi2c);
-        printf("I2C rx err=0x%08lx\r\n", (unsigned long)err);
-        return MCP9600_READ_FAIL;
-    }
-
     return MCP9600_READ_FAIL;
 }
