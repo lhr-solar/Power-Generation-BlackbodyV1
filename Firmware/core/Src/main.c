@@ -8,6 +8,8 @@
 #include "UART.h"
 #include "stm32xx_hal.h"
 
+#define QUEUE_LENGTH 50
+
 StaticTask_t heartbeatTaskTCB;
 StackType_t heartbeatTaskStack[256];
 
@@ -19,6 +21,10 @@ StackType_t thermoTaskStack[1024];
 
 StaticTask_t CANTaskTCB;
 StackType_t CANTaskStack[1024];
+
+static QueueHandle_t IrradQueue;
+static StaticQueue_t IrradQueueBuffer;
+static uint32_t IrradQueueStorage[QUEUE_LENGTH];
 
 TSL25911FN_HandleTypeDef irrad_handle;
 I2C_HandleTypeDef hi2c1;
@@ -72,21 +78,47 @@ void IrradTask(void *argument){
         printf("White Light Irradiance %ld \r\n" , irrad_data.irrad_whitelight_q16);
         printf("Infared Light Irradiance %ld \r\n" , irrad_data.irrad_infrared_q16);
 
+        uint32_t irrad_packed = (irrad_data.irrad_infrared_q16 << 16) + irrad_data.irrad_whitelight_q16;
+
+        if (uxQueueSpacesAvailable(IrradQueue) > 0){
+            xQueueSend(
+            IrradQueue,
+            &irrad_packed,
+            200);
+        }
+
         //integration time for the sensor is 100ms on max gain
         vTaskDelay(pdMS_TO_TICKS(200)); 
         
     }
 }
+
+
 void ThermoTask(void *argument){
         while (1){
                 //maybe 80ms for reading idfk thou just a guess
                 vTaskDelay(pdMS_TO_TICKS(200));
         }
 }
+
 void CANTask(void *argument){
+
+        uint32_t irrad_recieved;
         while (1){
-                //matched both tasks for data collection
-                vTaskDelay(pdMS_TO_TICKS(200));
+        
+            if (uxQueueMessagesWaiting(IrradQueue) != 0){
+                if (xQueueReceive(
+                        IrradQueue,
+                        &irrad_recieved,
+                        200) == pdPASS)
+                {
+                    printf("Hi \r\n");
+                    //can send
+                }
+            }
+
+            //matched both tasks for data collection
+            vTaskDelay(pdMS_TO_TICKS(200));
         }
 }
 
@@ -109,6 +141,13 @@ int main() {
     HAL_Init();
     SystemClock_Config();
     printfstart();
+
+    IrradQueue = xQueueCreateStatic(
+        QUEUE_LENGTH,
+        sizeof(uint32_t),
+        (uint8_t *)IrradQueueStorage,
+        &IrradQueueBuffer
+    );
 
 
     xTaskCreateStatic(HeartbeatTask,
