@@ -69,6 +69,9 @@ void IrradTask(void *argument){
                                             &irrad_data,
                                             pdMS_TO_TICKS(10)); 
 
+        printf("White Light Irradiance %ld \r\n" , irrad_data.irrad_whitelight_q16);
+        printf("Infared Light Irradiance %ld \r\n" , irrad_data.irrad_infrared_q16);
+
         //integration time for the sensor is 100ms on max gain
         vTaskDelay(pdMS_TO_TICKS(200)); 
         
