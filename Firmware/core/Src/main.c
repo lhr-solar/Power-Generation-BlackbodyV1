@@ -21,6 +21,7 @@ StaticTask_t CANTaskTCB;
 StackType_t CANTaskStack[1024];
 
 TSL25911FN_HandleTypeDef irrad_handle;
+I2C_HandleTypeDef hi2c1;
 
 void HeartbeatTask(void *argument)
 {
@@ -46,7 +47,7 @@ void HeartbeatTask(void *argument)
 void IrradTask(void *argument){
     tsl25911fn_status_t irrad_status;
     TSL25911FN_data_t irrad_data = {0};
-    irrad_status = tsl25911fn_init(&irrad_handle);
+    irrad_status = tsl25911fn_init(&irrad_handle, &hi2c1);
 
     if(irrad_status != TSL25911FN_WRITE_FAIL){
         printf("status %d \n\r" , irrad_status);

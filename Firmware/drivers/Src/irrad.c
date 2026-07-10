@@ -56,29 +56,31 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 
 }
 
-tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle){
+tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle, I2C_HandleTypeDef *hi2c){
 
-    handle->hi2c->Instance = I2C1;
-    handle->hi2c->Init.Timing = 0x00100D14;
-    handle->hi2c->Init.OwnAddress1 = 0;
-    handle->hi2c->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-    handle->hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-    handle->hi2c->Init.OwnAddress2 = 0;
-    handle->hi2c->Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-    handle->hi2c->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-    handle->hi2c->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+    hi2c->Instance = I2C1;
+    hi2c->Init.Timing = 0x00100D14;
+    hi2c->Init.OwnAddress1 = 0;
+    hi2c->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+    hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    hi2c->Init.OwnAddress2 = 0;
+    hi2c->Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+    hi2c->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    hi2c->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
 
-    if (HAL_I2C_Init(handle->hi2c) != HAL_OK)
+    handle->hi2c = hi2c;
+
+    if (HAL_I2C_Init(hi2c) != HAL_OK)
     {
         return TSL25911FN_INIT_FAIL;
     }
 
-    if (HAL_I2CEx_ConfigAnalogFilter(handle->hi2c, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+    if (HAL_I2CEx_ConfigAnalogFilter(hi2c, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
     {
         return TSL25911FN_WRITE_FAIL;
     }
 
-    if (HAL_I2CEx_ConfigDigitalFilter(handle->hi2c, 0) != HAL_OK)
+    if (HAL_I2CEx_ConfigDigitalFilter(hi2c, 0) != HAL_OK)
     {
         return TSL25911FN_WRITE_FAIL;
     }
