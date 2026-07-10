@@ -79,7 +79,7 @@ typedef struct{
     int32_t irrad_infrared_q16;
 } TSL25911FN_data_t;
 
-tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle, I2C_HandleTypeDef *hi2c);
+tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle);
 tsl25911fn_status_t tsl25911fn_power_on(TSL25911FN_HandleTypeDef *handle, TickType_t delay);
 tsl25911fn_status_t tsl25911fn_power_off(TSL25911FN_HandleTypeDef *handle, TickType_t delay);
 tsl25911fn_status_t tsl25911fn_set_control(TSL25911FN_HandleTypeDef *handle, uint8_t control, TickType_t delay);

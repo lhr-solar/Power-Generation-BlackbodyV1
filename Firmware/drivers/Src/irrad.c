@@ -4,6 +4,94 @@
 volatile uint8_t tsl_i2c_tx_done = 0;
 volatile uint8_t tsl_i2c_error = 0;
 
+/**
+  * @brief I2C MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param hi2c: I2C handle pointer
+  * @retval None
+  */
+void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  if(hi2c->Instance==I2C1)
+  {
+    /* USER CODE BEGIN I2C1_MspInit 0 */
+
+    /* USER CODE END I2C1_MspInit 0 */
+
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C1;
+    PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    /**I2C1 GPIO Configuration
+    PB6     ------> I2C1_SCL
+    PB7     ------> I2C1_SDA
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    /* Peripheral clock enable */
+    __HAL_RCC_I2C1_CLK_ENABLE();
+    /* I2C1 interrupt Init */
+    HAL_NVIC_SetPriority(I2C1_EV_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
+    HAL_NVIC_SetPriority(I2C1_ER_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C1_ER_IRQn);
+    /* USER CODE BEGIN I2C1_MspInit 1 */
+
+    /* USER CODE END I2C1_MspInit 1 */
+
+  }
+
+}
+
+tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle){
+
+    handle->hi2c->Instance = I2C1;
+    handle->hi2c->Init.Timing = 0x00100D14;
+    handle->hi2c->Init.OwnAddress1 = 0;
+    handle->hi2c->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+    handle->hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    handle->hi2c->Init.OwnAddress2 = 0;
+    handle->hi2c->Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+    handle->hi2c->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    handle->hi2c->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+
+    if (HAL_I2C_Init(handle->hi2c) != HAL_OK)
+    {
+        return TSL25911FN_INIT_FAIL;
+    }
+
+    if (HAL_I2CEx_ConfigAnalogFilter(handle->hi2c, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+    {
+        return TSL25911FN_WRITE_FAIL;
+    }
+
+    if (HAL_I2CEx_ConfigDigitalFilter(handle->hi2c, 0) != HAL_OK)
+    {
+        return TSL25911FN_WRITE_FAIL;
+    }
+
+    handle->device_addr = TSL25911FN_7BIT_ADDRESS;
+    handle->gain = TSL25911FN_GAIN_MAX;
+    handle->time = TSL25911FN_TIME_100MS;
+    handle->control = handle->gain | handle->time;
+
+    return TSL25911FN_OK;
+}
+
+
 tsl25911fn_status_t tsl25911fn_write_reg(TSL25911FN_HandleTypeDef *handle,
                                          uint8_t reg,
                                          uint8_t value,
@@ -27,10 +115,11 @@ tsl25911fn_status_t tsl25911fn_write_reg(TSL25911FN_HandleTypeDef *handle,
 
 
 
-    if (HAL_I2C_Master_Transmit_IT(handle->hi2c,
+    if (HAL_I2C_Master_Transmit(handle->hi2c,
                             (handle->device_addr << 1),
                             payload,
-                            2) != HAL_OK)
+                            2,
+                            100) != HAL_OK)
     {
         return TSL25911FN_WRITE_FAIL;
     }
@@ -181,15 +270,3 @@ tsl25911fn_status_t tsl25911fn_read_data(TSL25911FN_HandleTypeDef *handle,
 
     return TSL25911FN_OK;
 }
-
-        
-
-
-
-
-
-        
-
-
-
-

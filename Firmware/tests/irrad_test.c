@@ -192,7 +192,7 @@ void IrradTask(void *argument){
 
   irrad_handle.device_addr = TSL25911FN_7BIT_ADDRESS;
   irrad_handle.hi2c = &hi2c1;
-  irrad_handle.gain = TSL25911FN_GAIN_LOW;
+  irrad_handle.gain = TSL25911FN_GAIN_MAX;
   irrad_handle.time = TSL25911FN_TIME_100MS;
   irrad_handle.control = irrad_handle.gain | irrad_handle.time;
 
