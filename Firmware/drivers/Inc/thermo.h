@@ -215,7 +215,7 @@ mcp9600_status_t mcp9600_alert_enable(MCP9600_HandleTypeDef *handle, uint8_t ale
 mcp9600_status_t mcp9600_read_reg(MCP9600_HandleTypeDef *handle, uint8_t reg, volatile uint8_t *value, TickType_t delay);
 mcp9600_status_t mcp9600_write_reg(MCP9600_HandleTypeDef *handle, uint8_t reg, uint8_t value, TickType_t delay);
 
-mcp9600_status_t mcp9600_read_hot_junction(MCP9600_HandleTypeDef *handle, int32_t *temp_int, int32_t *temp_frac, TickType_t delay);
+mcp9600_status_t mcp9600_read_hot_junction(MCP9600_HandleTypeDef *handle, int32_t *temp_int, int32_t *temp_frac, int16_t *raw_temperature, TickType_t delay);
 
 extern volatile uint8_t mcp_i2c_tx_done;
 extern volatile uint8_t mcp_i2c_rx_done;

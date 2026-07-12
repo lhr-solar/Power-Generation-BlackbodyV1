@@ -27,9 +27,9 @@ static QueueHandle_t IrradQueue;
 static StaticQueue_t IrradQueueBuffer;
 static uint32_t IrradQueueStorage[QUEUE_LENGTH];
 
-// static QueueHandle_t ThermoQueue;
-// static StaticQueue_t ThermoQueueBuffer;
-// static uint32_t ThermoQueueStorage[QUEUE_LENGTH];
+static QueueHandle_t ThermoQueue;
+static StaticQueue_t ThermoQueueBuffer;
+static uint32_t ThermoQueueStorage[QUEUE_LENGTH];
 
 TSL25911FN_HandleTypeDef irrad_handle;
 MCP9600_HandleTypeDef thermo_handle;
@@ -62,6 +62,13 @@ void HeartbeatTask(void *argument)
 void IrradTask(void *argument){
     tsl25911fn_status_t irrad_status;
     TSL25911FN_data_t irrad_data = {0};
+
+    uint32_t white_int;
+    uint32_t white_frac;
+    uint32_t infrared_int;
+    uint32_t infrared_frac;
+
+
     irrad_status = tsl25911fn_init(&irrad_handle, &hi2c1);
 
     if(irrad_status != TSL25911FN_WRITE_FAIL){
@@ -84,10 +91,39 @@ void IrradTask(void *argument){
                                             &irrad_data,
                                             pdMS_TO_TICKS(10)); 
 
-        printf("White Light Irradiance %ld \r\n" , irrad_data.irrad_whitelight_q16);
-        printf("Infared Light Irradiance %ld \r\n" , irrad_data.irrad_infrared_q16);
+        if (irrad_status == TSL25911FN_OK)
+        {
+            white_int =(uint32_t)(irrad_data.irrad_whitelight_q16 >> 16);
 
-        uint32_t irrad_packed = (irrad_data.irrad_infrared_q16 << 16) + irrad_data.irrad_whitelight_q16;
+            white_frac = (uint32_t)(((irrad_data.irrad_whitelight_q16 & 0xFFFFULL) * 10000ULL) >> 16);
+
+            infrared_int = (uint32_t)(irrad_data.irrad_infrared_q16 >> 16);
+
+            infrared_frac = (uint32_t)(((irrad_data.irrad_infrared_q16 & 0xFFFFULL) * 10000ULL) >> 16);
+
+            if (irrad_data.ch0 >= 36000 || irrad_data.ch1 >= 36000)
+                {
+                    printf("Sensor saturated\r\n");
+                }
+
+            printf("CH0: %u CH1: %u\r\n",
+                   irrad_data.ch0,
+                   irrad_data.ch1);
+
+            printf("White Light Irradiance: %lu.%04lu\r\n",
+                   white_int,
+                   white_frac);
+
+            printf("Infrared Light Irradiance: %lu.%04lu\r\n",
+                   infrared_int,
+                   infrared_frac);
+        }
+        else
+        {
+            printf("Irradiance read failed\r\n");
+        }
+
+        uint32_t irrad_packed = ((uint16_t)irrad_data.ch1 << 16) | (uint16_t)irrad_data.ch0;
 
         if (uxQueueSpacesAvailable(IrradQueue) > 0){
             xQueueSend(
@@ -112,15 +148,27 @@ void ThermoTask(void *argument){
                     
     int32_t temp_int = 0;
     int32_t temp_frac = 0;
+    int16_t raw_temperature = 0;
 
         while (1){
             thermo_status = mcp9600_read_hot_junction(&thermo_handle,
                                             &temp_int,
                                             &temp_frac,
+                                            &raw_temperature,
                                             pdMS_TO_TICKS(100));
             
             printf("Temperature: %ld.%04ld C\r\n", temp_int, temp_frac);
             //maybe 80ms for reading idfk thou just a guess
+
+        int16_t thermo_packed = raw_temperature;
+
+        if (uxQueueSpacesAvailable(ThermoQueue) > 0){
+            xQueueSend(
+            ThermoQueue,
+            &thermo_packed,
+            200);
+        }
+
             vTaskDelay(pdMS_TO_TICKS(200));
         }
 }
@@ -128,18 +176,19 @@ void ThermoTask(void *argument){
 void CANTask(void *argument){
 
         uint32_t irrad_recieved;
-        CAN_TxHeaderTypeDef tx_header = {0};   
-        tx_header.StdId = 0x1;
-        tx_header.RTR = CAN_RTR_DATA;
-        tx_header.IDE = CAN_ID_STD;
-        tx_header.DLC = 2;
-        tx_header.TransmitGlobalTime = DISABLE;
+        int16_t thermo_recieved;
+        // CAN_TxHeaderTypeDef tx_header = {0};   
+        // tx_header.StdId = 0x1;
+        // tx_header.RTR = CAN_RTR_DATA;
+        // tx_header.IDE = CAN_ID_STD;
+        // tx_header.DLC = 2;
+        // tx_header.TransmitGlobalTime = DISABLE;
 
-        uint8_t tx_data[8] = {0};
-        tx_data[0] = 0x01;
-        tx_data[1] = 0x00;
+        // uint8_t tx_data[8] = {0};
+        // tx_data[0] = 0x01;
+        // tx_data[1] = 0x00;
 
-        if (can_send(hcan1, &tx_header, tx_data, portMAX_DELAY) != CAN_OK) printf("can error %ld\n\r", hcan1->ErrorCode);
+        // if (can_send(hcan1, &tx_header, tx_data, portMAX_DELAY) != CAN_OK) printf("can error %ld\n\r", hcan1->ErrorCode);
         while (1){
         
             if (uxQueueMessagesWaiting(IrradQueue) != 0){
@@ -149,7 +198,19 @@ void CANTask(void *argument){
                         200) == pdPASS)
                 {
                     
-                    printf("Hi \r\n");
+                    printf("Irrad recieved \r\n");
+                    
+                }
+            }
+
+            if (uxQueueMessagesWaiting(IrradQueue) != 0){
+                if (xQueueReceive(
+                        ThermoQueue,
+                        &thermo_recieved,
+                        200) == pdPASS)
+                {
+                    
+                    printf("Thermo recieved \r\n");
                     
                 }
 
@@ -213,7 +274,7 @@ int main() {
     HAL_Init();
     SystemClock_Config();
     printfstart();
-    canstart();
+    // canstart();
 
     IrradQueue = xQueueCreateStatic(
         QUEUE_LENGTH,
@@ -222,6 +283,12 @@ int main() {
         &IrradQueueBuffer
     );
 
+    ThermoQueue = xQueueCreateStatic(
+        QUEUE_LENGTH,
+        sizeof(int16_t),
+        (uint8_t *)ThermoQueueStorage,
+        &ThermoQueueBuffer
+    );
 
     xTaskCreateStatic(HeartbeatTask,
                         "Heartbeat",

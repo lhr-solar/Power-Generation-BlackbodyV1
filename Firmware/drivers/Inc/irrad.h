@@ -75,8 +75,8 @@ typedef struct {
 typedef struct{
     uint16_t ch0;
     uint16_t ch1;
-    int32_t irrad_whitelight_q16;
-    int32_t irrad_infrared_q16;
+    int64_t irrad_whitelight_q16;
+    int64_t irrad_infrared_q16;
 } TSL25911FN_data_t;
 
 tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle, I2C_HandleTypeDef *hi2c);

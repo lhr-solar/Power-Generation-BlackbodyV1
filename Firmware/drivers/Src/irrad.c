@@ -35,7 +35,7 @@ tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle, I2C_Handle
     }
 
     handle->device_addr = TSL25911FN_7BIT_ADDRESS;
-    handle->gain = TSL25911FN_GAIN_MAX;
+    handle->gain = TSL25911FN_GAIN_LOW;
     handle->time = TSL25911FN_TIME_100MS;
     handle->control = handle->gain | handle->time;
 
@@ -211,13 +211,14 @@ tsl25911fn_status_t tsl25911fn_read_data(TSL25911FN_HandleTypeDef *handle,
     }
 
     status = tsl25911fn_read_channels(handle, &data->ch0, &data->ch1, delay);
+
     if (status != TSL25911FN_OK) {
         return status;
     }
 
-    data->irrad_whitelight_q16 = (int32_t)(((int64_t)data->ch0 * 9876 << 16) / 6024);
+        data->irrad_whitelight_q16 = (((uint64_t)data->ch0 * 4000000ULL) << 16) / 2641000ULL; //math for low
 
-    data->irrad_infrared_q16 = (int32_t)(((int64_t)data->ch1 * 9876 << 16) / 3474);
+        data->irrad_infrared_q16 = (((uint64_t)data->ch1 * 4000000ULL) << 16) / 1541000ULL; //math for low
 
     return TSL25911FN_OK;
 }
