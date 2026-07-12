@@ -5,6 +5,9 @@
 #include "UART.h"
 #include "projdefs.h"
 #include "stm32xx_hal.h"
+
+#define PRINTF_NVIC_PRIO configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY + 3
+
 #include "printf.h"
 
 void SystemClock_Config(void);
@@ -102,6 +105,7 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 }
 
 
+
 static void HeartbeatTask(void *argument)
 {
   (void)argument;
@@ -138,13 +142,13 @@ static void ThermoTask(void *argument){
                                &hi2c2,
                                MCP9600_7BIT_ADDR_6);
 
-  if (thermo_status != MCP9600_OK)
-  {
-    printf("MCP9600 init failed\r\n");
-    while (1){}
-  }
+  // if (thermo_status != MCP9600_OK)
+  // {
+  //   printf("MCP9600 init failed\r\n");
+  //   while (1){}
+  // }
   
-  printf("MCP9600 Ready\r\n");
+  // printf("MCP9600 Ready\r\n");
 
   while (1)
   {
@@ -153,15 +157,16 @@ static void ThermoTask(void *argument){
                                               &temp_frac,
                                               pdMS_TO_TICKS(100));
 
-    if (thermo_status != MCP9600_OK)
-    {
-      printf("Thermo Read Failed\r\n");
-    }
+    // if (thermo_status != MCP9600_OK)
+    // {
+    //   printf("Thermo Read Failed\r\n");
+    // }
 
-    printf("Temperature: %ld.%04ld C\r\n", temp_int, temp_frac);
+    // printf("Lemperature: %ld.%04ld C\r\n", temp_int, temp_frac);
 
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    vTaskDelay(pdMS_TO_TICKS(100));
   }
+
 }
 
 int main(void)
@@ -218,7 +223,15 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE; //PLL ON in weak
+
+  // RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
+  // RCC_OscInitStruct.PLL.PLLM = 1;
+  // RCC_OscInitStruct.PLL.PLLN = 40;
+  // RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
+  // RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  // RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -228,12 +241,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI; //RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0/* 4 in weak*/) != HAL_OK)
   {
     Error_Handler();
   }
@@ -294,8 +307,8 @@ void Error_Handler(void)
   }
 }
 
-// #ifdef USE_FULL_ASSERT
-// void assert_failed(uint8_t *file, uint32_t line)
-// {
-// }
-// #endif
+#ifdef USE_FULL_ASSERT
+void assert_failed(uint8_t *file, uint32_t line)
+{
+}
+#endif
