@@ -27,8 +27,16 @@ static QueueHandle_t IrradQueue;
 static StaticQueue_t IrradQueueBuffer;
 static uint32_t IrradQueueStorage[QUEUE_LENGTH];
 
+// static QueueHandle_t ThermoQueue;
+// static StaticQueue_t ThermoQueueBuffer;
+// static uint32_t ThermoQueueStorage[QUEUE_LENGTH];
+
 TSL25911FN_HandleTypeDef irrad_handle;
+MCP9600_HandleTypeDef thermo_handle;
+
 I2C_HandleTypeDef hi2c1;
+I2C_HandleTypeDef hi2c2;
+
 
 void HeartbeatTask(void *argument)
 {
@@ -96,9 +104,24 @@ void IrradTask(void *argument){
 
 
 void ThermoTask(void *argument){
+    mcp9600_status_t thermo_status;
+    thermo_status = mcp9600_init(&thermo_handle,
+                                &hi2c2,
+                                MCP9600_7BIT_ADDR_6);
+    UNUSED(thermo_status);
+                    
+    int32_t temp_int = 0;
+    int32_t temp_frac = 0;
+
         while (1){
-                //maybe 80ms for reading idfk thou just a guess
-                vTaskDelay(pdMS_TO_TICKS(200));
+            thermo_status = mcp9600_read_hot_junction(&thermo_handle,
+                                            &temp_int,
+                                            &temp_frac,
+                                            pdMS_TO_TICKS(100));
+            
+            printf("Lemperature: %ld.%04ld C\r\n", temp_int, temp_frac);
+            //maybe 80ms for reading idfk thou just a guess
+            vTaskDelay(pdMS_TO_TICKS(200));
         }
 }
 
@@ -239,48 +262,73 @@ int main() {
 
 }
 
-// void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan) {
-//   GPIO_InitTypeDef GPIO_InitStruct = {0};
-//   if(hcan->Instance==CAN1) {
-//     /* Peripheral clock enable */
-//     __HAL_RCC_CAN1_CLK_ENABLE();
 
-//     __HAL_RCC_GPIOB_CLK_ENABLE();
-//     /**CAN1 GPIO Configuration
-//     PB8     ------> CAN1_RX
-//     PB9     ------> CAN1_TX
-//     */
-//     GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9;
-//     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-//     GPIO_InitStruct.Pull = GPIO_NOPULL;
-//     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-//     GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
-//     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+/**
+  * @brief I2C MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param hi2c: I2C handle pointer
+  * @retval None
+  */
+void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  if(hi2c->Instance==I2C1)
+  {
+    /* USER CODE BEGIN I2C1_MspInit 0 */
 
-//     /* CAN1 interrupt Init */
-//     HAL_NVIC_SetPriority(CAN1_TX_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY, 0);
-//     HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
-//     HAL_NVIC_SetPriority(CAN1_RX0_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY, 0);
-//     HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
-//   }
-// }
+    /* USER CODE END I2C1_MspInit 0 */
 
-// void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan) {
-//   if(hcan->Instance==CAN1) {
-//     /* Peripheral clock disable */
-//     __HAL_RCC_CAN1_CLK_DISABLE();
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C1;
+    PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      Error_Handler();
+    }
 
-//     /**CAN1 GPIO Configuration
-//     PB8     ------> CAN1_RX
-//     PB9     ------> CAN1_TX
-//     */
-//     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8|GPIO_PIN_9);
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    /**I2C1 GPIO Configuration
+    PB6     ------> I2C1_SCL
+    PB7     ------> I2C1_SDA
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-//     /* CAN1 interrupt DeInit */
-//     HAL_NVIC_DisableIRQ(CAN1_TX_IRQn);
-//     HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
-//   }
-// }
+    /* Peripheral clock enable */
+    __HAL_RCC_I2C1_CLK_ENABLE();
+  }
+
+    //MSP Init for Thermo Code
+    GPIO_InitTypeDef GPIO_InitStruct2 = {0};
+    RCC_PeriphCLKInitTypeDef PeriphClkInit2 = {0};
+    if(hi2c->Instance==I2C2)
+    {
+        PeriphClkInit2.PeriphClockSelection = RCC_PERIPHCLK_I2C2;
+        PeriphClkInit2.I2c2ClockSelection = RCC_I2C2CLKSOURCE_PCLK1;
+        if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit2) != HAL_OK)
+        {
+        Error_Handler();
+        }
+
+        __HAL_RCC_GPIOB_CLK_ENABLE();
+
+        GPIO_InitStruct2.Pin = GPIO_PIN_10|GPIO_PIN_14;
+        GPIO_InitStruct2.Mode = GPIO_MODE_AF_OD;
+        GPIO_InitStruct2.Pull = GPIO_NOPULL;
+        GPIO_InitStruct2.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+        GPIO_InitStruct2.Alternate = GPIO_AF4_I2C2;
+        HAL_GPIO_Init(GPIOB, &GPIO_InitStruct2);
+
+        __HAL_RCC_I2C2_CLK_ENABLE();
+    }
+
+}
 
 
 
