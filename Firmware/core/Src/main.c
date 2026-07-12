@@ -148,7 +148,7 @@ void ThermoTask(void *argument){
                     
     int32_t temp_int = 0;
     int32_t temp_frac = 0;
-    int16_t raw_temperature = 0;
+    uint16_t raw_temperature = 0;
 
         while (1){
             thermo_status = mcp9600_read_hot_junction(&thermo_handle,
@@ -160,7 +160,7 @@ void ThermoTask(void *argument){
             printf("Temperature: %ld.%04ld C\r\n", temp_int, temp_frac);
             //maybe 80ms for reading idfk thou just a guess
 
-        int16_t thermo_packed = raw_temperature;
+        uint16_t thermo_packed = raw_temperature;
 
         if (uxQueueSpacesAvailable(ThermoQueue) > 0){
             xQueueSend(
@@ -176,19 +176,19 @@ void ThermoTask(void *argument){
 void CANTask(void *argument){
 
         uint32_t irrad_recieved;
-        int16_t thermo_recieved;
-        // CAN_TxHeaderTypeDef tx_header = {0};   
-        // tx_header.StdId = 0x1;
-        // tx_header.RTR = CAN_RTR_DATA;
-        // tx_header.IDE = CAN_ID_STD;
-        // tx_header.DLC = 2;
-        // tx_header.TransmitGlobalTime = DISABLE;
+        uint16_t thermo_recieved;
+        // // CAN_TxHeaderTypeDef tx_header = {0};   
+        // // tx_header.StdId = 0x1;
+        // // tx_header.RTR = CAN_RTR_DATA;
+        // // tx_header.IDE = CAN_ID_STD;
+        // // tx_header.DLC = 2;
+        // // tx_header.TransmitGlobalTime = DISABLE;
 
-        // uint8_t tx_data[8] = {0};
-        // tx_data[0] = 0x01;
-        // tx_data[1] = 0x00;
+        // // uint8_t tx_data[8] = {0};
+        // // tx_data[0] = 0x01;
+        // // tx_data[1] = 0x00;
 
-        // if (can_send(hcan1, &tx_header, tx_data, portMAX_DELAY) != CAN_OK) printf("can error %ld\n\r", hcan1->ErrorCode);
+        // // if (can_send(hcan1, &tx_header, tx_data, portMAX_DELAY) != CAN_OK) printf("can error %ld\n\r", hcan1->ErrorCode);
         while (1){
         
             if (uxQueueMessagesWaiting(IrradQueue) != 0){
@@ -203,7 +203,7 @@ void CANTask(void *argument){
                 }
             }
 
-            if (uxQueueMessagesWaiting(IrradQueue) != 0){
+            if (uxQueueMessagesWaiting(ThermoQueue) != 0){
                 if (xQueueReceive(
                         ThermoQueue,
                         &thermo_recieved,
@@ -214,10 +214,10 @@ void CANTask(void *argument){
                     
                 }
 
+            }
             //matched both tasks for data collection
             vTaskDelay(pdMS_TO_TICKS(200));
         }
-    }
 }
 
 void printfstart(void){
@@ -285,7 +285,7 @@ int main() {
 
     ThermoQueue = xQueueCreateStatic(
         QUEUE_LENGTH,
-        sizeof(int16_t),
+        sizeof(uint16_t),
         (uint8_t *)ThermoQueueStorage,
         &ThermoQueueBuffer
     );
@@ -314,13 +314,13 @@ int main() {
                         thermoTaskStack,
                         &thermoTaskTCB);
 
-    // xTaskCreateStatic(CANTask,
-    //                     "CAN",
-    //                     1024,
-    //                     NULL,
-    //                     tskIDLE_PRIORITY + 3,
-    //                     CANTaskStack,
-    //                     &CANTaskTCB);
+    xTaskCreateStatic(CANTask,
+                        "CAN",
+                        1024,
+                        NULL,
+                        tskIDLE_PRIORITY + 3,
+                        CANTaskStack,
+                        &CANTaskTCB);
   
 
     vTaskStartScheduler();

@@ -49,7 +49,7 @@ mcp9600_status_t mcp9600_init(MCP9600_HandleTypeDef *handle,
 mcp9600_status_t mcp9600_read_hot_junction(MCP9600_HandleTypeDef *handle,
                                             int32_t *temp_int,
                                             int32_t *temp_frac,
-                                            int16_t *raw_temperature,
+                                            uint16_t *raw_temperature,
                                             TickType_t delay)
 
 {
@@ -66,7 +66,7 @@ mcp9600_status_t mcp9600_read_hot_junction(MCP9600_HandleTypeDef *handle,
 
     UNUSED(ret);
 
-    *raw_temperature = (int16_t)(((uint16_t)tempread[0] << 8) | (uint16_t)tempread[1]);
+    *raw_temperature = (((uint16_t)tempread[0] << 8) | (uint16_t)tempread[1]);
 
     temperature_x10000 = (int32_t)*raw_temperature * 625;
 
