@@ -9,8 +9,14 @@
 #include "UART.h"
 #include "CAN.h"
 
-
 #define QUEUE_LENGTH 50
+
+#define ARRAY_FRONT_RIGHT_ID 0x600
+#define ARRAY_FRONT_LEFT_ID 0x620
+#define ARRAY_MIDDLE_RIGHT_ID 0x630
+#define ARRAY_MIDDLE_LEFT_ID 0x650
+#define ARRAY_BACK_RIGHT_ID 0x660
+#define ARRAY_BACK_LEFT_ID 0x680
 
 StaticTask_t heartbeatTaskTCB;
 StackType_t heartbeatTaskStack[256];
@@ -107,9 +113,9 @@ void IrradTask(void *argument){
                     printf("Sensor saturated\r\n");
                 }
 
-            // printf("CH0: %u CH1: %u\r\n",
-            //        irrad_data.ch0,
-            //        irrad_data.ch1);
+            printf("CH0: %u CH1: %u\r\n",
+                   irrad_data.ch0,
+                   irrad_data.ch1);
 
             printf("White Light Irradiance: %lu.%04lu\r\n",
                    white_int,
@@ -132,6 +138,7 @@ void IrradTask(void *argument){
             &irrad_packed,
             200);
         }
+        printf("Irrad Packed %ld\r\n", irrad_packed);
 
         //integration time for the sensor is 100ms on max gain
         vTaskDelay(pdMS_TO_TICKS(200)); 
@@ -169,6 +176,7 @@ void ThermoTask(void *argument){
             &thermo_packed,
             200);
         }
+        printf("Thermo Packed %d\r\n", thermo_packed);
 
             vTaskDelay(pdMS_TO_TICKS(200));
         }
@@ -179,15 +187,24 @@ void CANTask(void *argument){
         uint32_t irrad_recieved;
         uint16_t thermo_recieved;
         CAN_TxHeaderTypeDef tx_header = {0};   
-        tx_header.StdId = 0x1;
+        tx_header.StdId = ARRAY_FRONT_RIGHT_ID; //EDIT THIS FOR EACH BB
         tx_header.RTR = CAN_RTR_DATA;
         tx_header.IDE = CAN_ID_STD;
-        tx_header.DLC = 2;
+        tx_header.DLC = 6;
         tx_header.TransmitGlobalTime = DISABLE;
 
         uint8_t tx_data[8] = {0};
-        tx_data[0] = 0x01;
+        //White Light Irrad
+        tx_data[0] = 0x00;
         tx_data[1] = 0x00;
+
+        //Infared Irrad
+        tx_data[2] = 0x00;
+        tx_data[3] = 0x00;
+
+        //Thermo Temp
+        tx_data[4] = 0x00;
+        tx_data[5] = 0x00;
 
         while (1){
         
@@ -197,8 +214,12 @@ void CANTask(void *argument){
                         &irrad_recieved,
                         200) == pdPASS)
                 {
-                    
-                    printf("Irrad recieved \r\n");
+
+                    printf("Irrad recieved %ld\r\n" , irrad_recieved);
+                    tx_data[0] = irrad_recieved & 0x000000FF;
+                    tx_data[1] = (irrad_recieved & 0x0000FF00) >> 8;
+                    tx_data[2] = (irrad_recieved & 0x00FF0000) >> 16;
+                    tx_data[3] = (irrad_recieved & 0xFF000000) >> 24;
                     
                 }
             }
@@ -210,8 +231,9 @@ void CANTask(void *argument){
                         200) == pdPASS)
                 {
                     
-                    printf("Thermo recieved \r\n");
-                    
+                    printf("Thermo recieved %d\r\n", thermo_recieved);
+                    tx_data[4] = thermo_recieved & 0x00FF;
+                    tx_data[5] = (thermo_recieved & 0xFF00) >> 8;
                 }
 
             }
