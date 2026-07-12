@@ -119,7 +119,7 @@ void ThermoTask(void *argument){
                                             &temp_frac,
                                             pdMS_TO_TICKS(100));
             
-            printf("Lemperature: %ld.%04ld C\r\n", temp_int, temp_frac);
+            printf("Temperature: %ld.%04ld C\r\n", temp_int, temp_frac);
             //maybe 80ms for reading idfk thou just a guess
             vTaskDelay(pdMS_TO_TICKS(200));
         }

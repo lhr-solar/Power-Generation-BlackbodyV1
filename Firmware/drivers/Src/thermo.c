@@ -52,7 +52,9 @@ mcp9600_status_t mcp9600_read_hot_junction(MCP9600_HandleTypeDef *handle,
                                             TickType_t delay)
 
 {
-    uint8_t tempread[2];
+    uint8_t tempread[2] = {0};
+    int16_t raw_temperature;
+    int32_t temperature_x10000;
 
     HAL_StatusTypeDef ret = HAL_I2C_Mem_Read (handle->hi2c, 
                                             handle->device_addr << 1, 
@@ -63,6 +65,18 @@ mcp9600_status_t mcp9600_read_hot_junction(MCP9600_HandleTypeDef *handle,
                                             HAL_MAX_DELAY);
 
     UNUSED(ret);
+
+    raw_temperature = (int16_t)(((uint16_t)tempread[0] << 8) | (uint16_t)tempread[1]);
+
+    temperature_x10000 = (int32_t)raw_temperature * 625;
+
+    *temp_int = temperature_x10000 / 10000;
+    *temp_frac = temperature_x10000 % 10000;
+
+    if (*temp_frac < 0)
+    {
+        *temp_frac = -*temp_frac;
+    }
 
     return MCP9600_READ_FAIL;
 }
