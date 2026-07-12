@@ -106,9 +106,9 @@ void IrradTask(void *argument){
                     printf("Sensor saturated\r\n");
                 }
 
-            printf("CH0: %u CH1: %u\r\n",
-                   irrad_data.ch0,
-                   irrad_data.ch1);
+            // printf("CH0: %u CH1: %u\r\n",
+            //        irrad_data.ch0,
+            //        irrad_data.ch1);
 
             printf("White Light Irradiance: %lu.%04lu\r\n",
                    white_int,
@@ -177,18 +177,23 @@ void CANTask(void *argument){
 
         uint32_t irrad_recieved;
         uint16_t thermo_recieved;
-        // // CAN_TxHeaderTypeDef tx_header = {0};   
-        // // tx_header.StdId = 0x1;
-        // // tx_header.RTR = CAN_RTR_DATA;
-        // // tx_header.IDE = CAN_ID_STD;
-        // // tx_header.DLC = 2;
-        // // tx_header.TransmitGlobalTime = DISABLE;
+        CAN_TxHeaderTypeDef tx_header = {0};   
+        tx_header.StdId = 0x1;
+        tx_header.RTR = CAN_RTR_DATA;
+        tx_header.IDE = CAN_ID_STD;
+        tx_header.DLC = 2;
+        tx_header.TransmitGlobalTime = DISABLE;
 
-        // // uint8_t tx_data[8] = {0};
-        // // tx_data[0] = 0x01;
-        // // tx_data[1] = 0x00;
+        uint8_t tx_data[8] = {0};
+        tx_data[0] = 0x01;
+        tx_data[1] = 0x00;
 
-        // // if (can_send(hcan1, &tx_header, tx_data, portMAX_DELAY) != CAN_OK) printf("can error %ld\n\r", hcan1->ErrorCode);
+        if (can_send(hcan1, &tx_header, tx_data, 200) != CAN_OK){
+
+            // printf("can okay %ld\n\r", hcan1->ErrorCode);
+            HAL_GPIO_WritePin(PSOM_LED3_PORT, PSOM_LED3_PIN, GPIO_PIN_SET);
+        }
+        
         while (1){
         
             if (uxQueueMessagesWaiting(IrradQueue) != 0){
@@ -273,8 +278,21 @@ void canstart(void){
 int main() {
     HAL_Init();
     SystemClock_Config();
+
+
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    GPIO_InitTypeDef led_config = {0};
+    led_config.Mode = GPIO_MODE_OUTPUT_PP;
+    led_config.Pull = GPIO_NOPULL;
+    led_config.Pin = PSOM_HEARTBEAT_LED_PIN;
+    led_config.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(PSOM_HEARTBEAT_LED_PORT, &led_config);
+    HAL_GPIO_WritePin(PSOM_HEARTBEAT_LED_PORT, PSOM_HEARTBEAT_LED_PIN, GPIO_PIN_SET);
+
     printfstart();
     // canstart();
+
+    HAL_GPIO_WritePin(PSOM_HEARTBEAT_LED_PORT, PSOM_HEARTBEAT_LED_PIN, 0);
 
     IrradQueue = xQueueCreateStatic(
         QUEUE_LENGTH,
@@ -314,14 +332,13 @@ int main() {
                         thermoTaskStack,
                         &thermoTaskTCB);
 
-    xTaskCreateStatic(CANTask,
-                        "CAN",
-                        1024,
-                        NULL,
-                        tskIDLE_PRIORITY + 3,
-                        CANTaskStack,
-                        &CANTaskTCB);
-  
+    // xTaskCreateStatic(CANTask,
+    //                     "CAN",
+    //                     1024,
+    //                     NULL,
+    //                     tskIDLE_PRIORITY + 3,
+    //                     CANTaskStack,
+    //                     &CANTaskTCB);
 
     vTaskStartScheduler();
 
