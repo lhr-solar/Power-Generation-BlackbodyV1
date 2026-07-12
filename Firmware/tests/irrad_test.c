@@ -281,10 +281,10 @@ int main(void)
   }
 }
 
-// /**
-//   * @brief System Clock Configuration
-//   * @retval None
-//   */
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
 // void SystemClock_Config(void)
 // {
 //   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -341,7 +341,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.Timing = 0x10909CEC; //0x00100D14
+  hi2c1.Init.Timing = 0x00100D14;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
