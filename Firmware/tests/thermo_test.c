@@ -7,8 +7,6 @@
 #include "stm32xx_hal.h"
 #include "printf.h"
 
-#define PRINTF_NVIC_PRIO      configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY + 3
-
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C2_Init(void);
@@ -104,23 +102,6 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 }
 
 
-/**
-  * @brief This function handles I2C2 event interrupt.
-  */
-void I2C2_EV_IRQHandler(void)
-{
-  HAL_I2C_EV_IRQHandler(&hi2c2);
-}
-
-/**
-  * @brief This function handles I2C2 error interrupt.
-  */
-void I2C2_ER_IRQHandler(void)
-{
-  HAL_I2C_ER_IRQHandler(&hi2c2);
-}
-
-
 static void HeartbeatTask(void *argument)
 {
   (void)argument;
@@ -149,11 +130,6 @@ static void ThermoTask(void *argument){
   thermo_handle.thermocouple_type = MCP9600_THERMOCOUPLE_TYPE_K;
   thermo_handle.filter = MCP9600_FILTER_0;
   thermo_handle.adc_resolution = MCP9600_ADC_RESOLUTION_18BIT;
-
-
-  mcp_i2c_tx_done = 0;
-  mcp_i2c_rx_done = 0;
-  mcp_i2c_error = 0;
 
   int32_t temp_int = 0;
   int32_t temp_frac = 0;
@@ -218,6 +194,51 @@ int main(void)
   }
 }
 
+
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+  /** Configure the main internal regulator output voltage
+  */
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+  RCC_OscInitStruct.MSICalibrationValue = 0;
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
 static void MX_I2C2_Init(void)
 {
   hi2c2.Instance = I2C2;
@@ -246,49 +267,6 @@ static void MX_I2C2_Init(void)
   }
 }
 
-// /**
-//   * @brief System Clock Configuration
-//   * @retval None
-//   */
-// void SystemClock_Config(void)
-// {
-//   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-//   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-
-//   /** Configure the main internal regulator output voltage
-//   */
-//   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
-//   {
-//     Error_Handler();
-//   }
-
-//   /** Initializes the RCC Oscillators according to the specified parameters
-//   * in the RCC_OscInitTypeDef structure.
-//   */
-//   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
-//   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
-//   RCC_OscInitStruct.MSICalibrationValue = 0;
-//   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
-//   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-//   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-//   {
-//     Error_Handler();
-//   }
-
-//   /** Initializes the CPU, AHB and APB buses clocks
-//   */
-//   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-//                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-//   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
-//   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-//   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-//   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-
-//   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
-//   {
-//     Error_Handler();
-//   }
-// }
 
 static void MX_GPIO_Init(void)
 {
@@ -316,8 +294,8 @@ void Error_Handler(void)
   }
 }
 
-#ifdef USE_FULL_ASSERT
-void assert_failed(uint8_t *file, uint32_t line)
-{
-}
-#endif
+// #ifdef USE_FULL_ASSERT
+// void assert_failed(uint8_t *file, uint32_t line)
+// {
+// }
+// #endif

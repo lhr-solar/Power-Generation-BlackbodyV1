@@ -27,17 +27,16 @@ mcp9600_status_t mcp9600_read_hot_junction(MCP9600_HandleTypeDef *handle,
                                             TickType_t delay)
 
 {
-    uint8_t final_temp_reg = MCP9600_FINAL_TEMP_REG;
-    
-    mcp_i2c_tx_done = 0;
-    mcp_i2c_rx_done = 0;
-    mcp_i2c_error = 0;
+    uint8_t tempread[2];
 
+    HAL_StatusTypeDef ret = HAL_I2C_Mem_Read (handle->hi2c, 
+                                            handle->device_addr << 1, 
+                                            0x00, 
+                                            1, 
+                                            tempread, 
+                                            2, 
+                                            HAL_MAX_DELAY);
 
-    HAL_StatusTypeDef ret = HAL_I2C_Master_Transmit_IT(handle->hi2c,
-                                                        handle->device_addr << 1,
-                                                        &final_temp_reg,
-                                                        1);
     UNUSED(ret);
 
     return MCP9600_READ_FAIL;
