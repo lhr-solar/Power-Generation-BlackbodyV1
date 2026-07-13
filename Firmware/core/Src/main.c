@@ -187,7 +187,7 @@ void CANTask(void *argument){
         uint32_t irrad_recieved;
         uint16_t thermo_recieved;
         CAN_TxHeaderTypeDef tx_header = {0};   
-        tx_header.StdId = ARRAY_FRONT_RIGHT_ID; //EDIT THIS FOR EACH BB
+        tx_header.StdId = ARRAY_MIDDLE_RIGHT_ID; //EDIT THIS FOR EACH BB
         tx_header.RTR = CAN_RTR_DATA;
         tx_header.IDE = CAN_ID_STD;
         tx_header.DLC = 6;
@@ -283,7 +283,7 @@ void canstart(void){
   hcan1->Init.SyncJumpWidth = CAN_SJW_1TQ;
   hcan1->Init.TimeSeg1 = CAN_BS1_13TQ;
   hcan1->Init.TimeSeg2 = CAN_BS2_2TQ;
-  hcan1->Init.Mode = CAN_MODE_LOOPBACK;
+  hcan1->Init.Mode = CAN_MODE_NORMAL;
   hcan1->Init.TimeTriggeredMode = DISABLE;
   hcan1->Init.AutoBusOff = ENABLE;
   hcan1->Init.AutoWakeUp = DISABLE;
