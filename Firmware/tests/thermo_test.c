@@ -155,6 +155,7 @@ static void ThermoTask(void *argument){
     thermo_status = mcp9600_read_hot_junction(&thermo_handle,
                                               &temp_int,
                                               &temp_frac,
+                                              &raw_temperature,
                                               pdMS_TO_TICKS(100));
 
     // if (thermo_status != MCP9600_OK)
