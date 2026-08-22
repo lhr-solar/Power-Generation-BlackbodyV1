@@ -137,6 +137,7 @@ static void ThermoTask(void *argument){
 
   int32_t temp_int = 0;
   int32_t temp_frac = 0;
+  uint16_t raw_temperature = 0;
 
   thermo_status = mcp9600_init(&thermo_handle,
                                &hi2c2,
