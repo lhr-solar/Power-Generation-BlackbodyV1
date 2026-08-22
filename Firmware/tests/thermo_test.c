@@ -80,26 +80,18 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 {
   if(hi2c->Instance==I2C2)
   {
-    /* USER CODE BEGIN I2C2_MspDeInit 0 */
-
-    /* USER CODE END I2C2_MspDeInit 0 */
-    /* Peripheral clock disable */
     __HAL_RCC_I2C2_CLK_DISABLE();
 
     /**I2C2 GPIO Configuration
     PB10     ------> I2C2_SCL
     PB14     ------> I2C2_SDA
     */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_10);
 
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_10);
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_14);
 
-    /* I2C2 interrupt DeInit */
     HAL_NVIC_DisableIRQ(I2C2_EV_IRQn);
     HAL_NVIC_DisableIRQ(I2C2_ER_IRQn);
-    /* USER CODE BEGIN I2C2_MspDeInit 1 */
-
-    /* USER CODE END I2C2_MspDeInit 1 */
   }
 
 }
@@ -159,12 +151,7 @@ static void ThermoTask(void *argument){
                                               &raw_temperature,
                                               pdMS_TO_TICKS(100));
 
-    // if (thermo_status != MCP9600_OK)
-    // {
-    //   printf("Thermo Read Failed\r\n");
-    // }
-
-    // printf("Lemperature: %ld.%04ld C\r\n", temp_int, temp_frac);
+    printf("Temperature: %ld.%04ld C\r\n", temp_int, temp_frac);
 
     vTaskDelay(pdMS_TO_TICKS(100));
   }
@@ -201,58 +188,6 @@ int main(void)
   }
 }
 
-
-// /**
-//   * @brief System Clock Configuration
-//   * @retval None
-//   */
-// void SystemClock_Config(void)
-// {
-//   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-//   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-
-//   /** Configure the main internal regulator output voltage
-//   */
-//   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
-//   {
-//     Error_Handler();
-//   }
-
-//   /** Initializes the RCC Oscillators according to the specified parameters
-//   * in the RCC_OscInitTypeDef structure.
-//   */
-//   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
-//   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
-//   RCC_OscInitStruct.MSICalibrationValue = 0;
-//   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
-//   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE; //PLL ON in weak
-
-//   // RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
-//   // RCC_OscInitStruct.PLL.PLLM = 1;
-//   // RCC_OscInitStruct.PLL.PLLN = 40;
-//   // RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
-//   // RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
-//   // RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
-
-//   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-//   {
-//     Error_Handler();
-//   }
-
-//   /** Initializes the CPU, AHB and APB buses clocks
-//   */
-//   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-//                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-//   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI; //RCC_SYSCLKSOURCE_PLLCLK;
-//   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-//   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-//   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-
-//   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0/* 4 in weak*/) != HAL_OK)
-//   {
-//     Error_Handler();
-//   }
-// }
 
 static void MX_I2C2_Init(void)
 {

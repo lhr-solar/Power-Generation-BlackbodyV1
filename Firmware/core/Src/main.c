@@ -380,32 +380,20 @@ int main() {
 }
 
 
-/**
-  * @brief I2C MSP Initialization
-  * This function configures the hardware resources used in this example
-  * @param hi2c: I2C handle pointer
-  * @retval None
-  */
 void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
   if(hi2c->Instance==I2C1)
   {
-    /* USER CODE BEGIN I2C1_MspInit 0 */
-
-    /* USER CODE END I2C1_MspInit 0 */
-
-  /** Initializes the peripherals clock
-  */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C1;
     PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
     {
       Error_Handler();
     }
-
     __HAL_RCC_GPIOB_CLK_ENABLE();
+
     /**I2C1 GPIO Configuration
     PB6     ------> I2C1_SCL
     PB7     ------> I2C1_SDA
@@ -473,11 +461,6 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan) {
   }
 }
 
-/**
-* @brief CAN MSP De-Initialization for PSOM.
-* @param hcan: CAN handle pointer
-* @retval None
-*/
 void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan) {
   if(hcan->Instance==CAN1) {
     /* Peripheral clock disable */

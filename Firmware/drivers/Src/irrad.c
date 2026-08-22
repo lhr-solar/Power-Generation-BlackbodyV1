@@ -4,6 +4,9 @@
 volatile uint8_t tsl_i2c_tx_done = 0;
 volatile uint8_t tsl_i2c_error = 0;
 
+uint32_t gain_ch0;
+uint32_t gain_ch1;
+
 
 tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle, I2C_HandleTypeDef *hi2c){
 
@@ -38,6 +41,26 @@ tsl25911fn_status_t tsl25911fn_init(TSL25911FN_HandleTypeDef *handle, I2C_Handle
     handle->gain = TSL25911FN_GAIN_LOW;
     handle->time = TSL25911FN_TIME_100MS;
     handle->control = handle->gain | handle->time;
+
+    switch(handle->gain){
+        case TSL25911FN_GAIN_LOW:
+            gain_ch0 = TSL25911FN_GAIN_LOW_MULTI_CH0;
+            gain_ch1 = TSL25911FN_GAIN_LOW_MULTI_CH1;
+            break;
+        case TSL25911FN_GAIN_MED:
+            gain_ch0 = TSL25911FN_GAIN_MED_MULTI_CH0;
+            gain_ch1 = TSL25911FN_GAIN_MED_MULTI_CH1;
+            break;
+        case TSL25911FN_GAIN_HIGH: 
+            gain_ch0 = TSL25911FN_GAIN_HIGH_MULTI_CH0;
+            gain_ch1 = TSL25911FN_GAIN_HIGH_MULTI_CH1;
+            break;
+        case TSL25911FN_GAIN_MAX:
+            gain_ch0 = TSL25911FN_GAIN_MAX_MULTI_CH0;
+            gain_ch1 = TSL25911FN_GAIN_MAX_MULTI_CH1;
+            break;
+
+    }
 
     return TSL25911FN_OK;
 }
@@ -216,9 +239,9 @@ tsl25911fn_status_t tsl25911fn_read_data(TSL25911FN_HandleTypeDef *handle,
         return status;
     }
 
-        data->irrad_whitelight_q16 = (((uint64_t)data->ch0 * 4000000ULL) << 16) / 2641000ULL; //math for low
+        data->irrad_whitelight_q16 = (((uint64_t)data->ch0 * 4000000ULL * 10ULL) << 16) / (2641000ULL * gain_ch0); //math for low
 
-        data->irrad_infrared_q16 = (((uint64_t)data->ch1 * 4000000ULL) << 16) / 1541000ULL; //math for low
+        data->irrad_infrared_q16 = (((uint64_t)data->ch1 * 4000000ULL * 10ULL) << 16) / (1541000ULL * gain_ch1); //math for low
 
     return TSL25911FN_OK;
 }

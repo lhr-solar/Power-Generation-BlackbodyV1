@@ -55,6 +55,17 @@ typedef enum {
 } tsl25911fn_gain_t;
 
 typedef enum {
+    TSL25911FN_GAIN_LOW_MULTI_CH0 = 10, //*10 for all
+    TSL25911FN_GAIN_LOW_MULTI_CH1 = 10,
+    TSL25911FN_GAIN_MED_MULTI_CH0 = 245,
+    TSL25911FN_GAIN_MED_MULTI_CH1 = 245,
+    TSL25911FN_GAIN_HIGH_MULTI_CH0 = 4000,
+    TSL25911FN_GAIN_HIGH_MULTI_CH1 = 4000,
+    TSL25911FN_GAIN_MAX_MULTI_CH0 = 92000,
+    TSL25911FN_GAIN_MAX_MULTI_CH1 = 99000,
+} tsl25911fn_gain_multi_t;
+
+typedef enum {
     TSL25911FN_TIME_100MS = 0x00,
     TSL25911FN_TIME_200MS = 0x01,
     TSL25911FN_TIME_300MS = 0x02,
@@ -90,6 +101,9 @@ tsl25911fn_status_t tsl25911fn_read_data(TSL25911FN_HandleTypeDef *handle, TSL25
 
 extern volatile uint8_t tsl_i2c_tx_done;
 extern volatile uint8_t tsl_i2c_error;
+
+extern uint32_t gain_ch0;
+extern uint32_t gain_ch1;
 
 
 
